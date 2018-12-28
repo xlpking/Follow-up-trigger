@@ -34,7 +34,7 @@ class FollowUp:
     followUpUrl = "http://10.0.10.236:9995/gwebend/otFollowUp.action"
     
     def __init__(self,ra,dec,expTime,filter,frameCount,otName='',telescope='1',
-                 priority=40,epoch="2000",imageType = "LIGHT", userName='gwac',
+                 priority=41,epoch="2000",imageType = "LIGHT", userName='gwac',
                  triggerType='0',begineTime='',endTime='',followName=''):
         
         self.userName = userName
