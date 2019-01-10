@@ -643,17 +643,17 @@ class GWACAutoFollowup:
                                     else:
                                         print("magDiffk is small")
                                         fupRecordTime  =  fupRecordN[2]
-                                        #fupRecordTimeNk = fupRecordNk[2]
-                                        fupRecordTimeN1 = fupRecordN1[2]
+                                        fupRecordTimeNk = fupRecordNk[2]
+                                        #fupRecordTimeN1 = fupRecordN1[2]
                                         #ot2time = ot2[2]
                                         #stageNTriggerDelay4 = (1+self.deltaT) * (fupRecordTime - ot2time).total_seconds()/60.0
-                                       # stageNTriggerDelay4 = (1+self.deltaT) * ((fupRecordTime - fupRecordTimeNk).total_seconds()/60.0)
-                                        stageNTriggerDelay4 = (1+self.deltaT) * ((fupRecordTime - fupRecordTimeN1).total_seconds()/60.0)
+                                        stageNTriggerDelay4 = (1+self.deltaT) * ((fupRecordTime - fupRecordTimeNk).total_seconds()/60.0)
+                                        #stageNTriggerDelay4 = (1+self.deltaT) * ((fupRecordTime - fupRecordTimeN1).total_seconds()/60.0)
                                         if stageNTriggerDelay4>=self.delayTime_max:
                                             stageNTriggerDelay4 = self.delayTime_max    #max delay time is self.delayTime_max
                                         if triggerStatus == status:
                                             self.sendTriggerMsg005("The %s %s %s Stage%d, magDiff: %.2f during the last two epochs \n"\
-                                                                "The delay time is %.2f, estimated by %s and %s \n"%(OTFlag, sciObj[1],sciObj[11],status, magDiffK,stageNTriggerDelay4,fupRecordTime, fupRecordTimeN1 ))
+                                                                "The delay time is %.2f, estimated by %s and %s \n"%(OTFlag, sciObj[1],sciObj[11],status, magDiffK,stageNTriggerDelay4,fupRecordTime, fupRecordTimeNk ))
                                             self.updateSciObjTriggerStatus(sciObj[0], status+1)  
                                        
                                         if diffMinutes>stageNTriggerDelay4:
