@@ -63,9 +63,10 @@ class GWACAutoFollowup:
     QOT2 = "SELECT ot_id, mag, found_time_utc from ot_level2 where name='%s'"
     
     maxExpTime = 150
+    maxExpTimeFilter = 100
     maxMonitorTime = 180 #minute, max is 5 hours
     
-    BjtimeStart = 8
+    BjtimeStart = 8  
     BjtimeEnd = 17
     
     stage2TriggerDelay = 2.0 #minute  #2
@@ -277,17 +278,23 @@ class GWACAutoFollowup:
                 #print(tobs)
                 tfilters = tobs['filter']
                 print("tfilters=%s"%(tfilters))
-                if lastExpTime>0 and magdiff>0:
+                if lastExpTime>0 and magdiff>=0:
                     if lastExpTime<self.maxExpTime:
                         expTime = int(lastExpTime * math.exp(0.4*magdiff))
                         if expTime>self.maxExpTime:
                             expTime = self.maxExpTime
+
                     else: # if expTime exceed maxExpTime, return false and stop observation   #is it volid? xlp
                         return True
                 elif lastExpTime == self.maxExpTime and magdiff == -1:
                     return True
                 else:
                     expTime = tobs['expTime']
+                    
+                
+                if expTime>self.maxExpTimeFilter:   
+                    tfilters = ['R']
+                    
                 frameCount = tobs['frameCount']
                 print("again tfilters=%s"%(tfilters))
                 for tf in tfilters:
@@ -353,6 +360,7 @@ class GWACAutoFollowup:
             a3 = sciObj[3] # DEC deg 
             a4 = sciObj[4] # R mag
             a11 = sciObj[11]
+            a9 = sciObj[9]
             print(a0)
             print(a1)
             print(a2)
@@ -369,25 +377,30 @@ class GWACAutoFollowup:
                 
             print("OTFlag=%s"%(OTFlag))
             print("Fdiffmag=%.2f"%(Fdiffmag))
+            print("obstime=%s"%(a9))
             print("=======")
             status = sciObj[5] #status=1
             triggerStatus = sciObj[6] #trigger_status=1
             
+            
+            foundTime = sciObj[9]
+            curDateTime = datetime.utcnow()
+            diffMinutes = (curDateTime - foundTime).total_seconds()/60.0 
             ot2Name = sciObj[1]
+            if diffMinutes > self.maxMonitorTime:
+                print("Time is out")
+                self.closeSciObjAutoObservation(sciObj[0])
+                self.log.warning("%s, %.2f exceed max monitor time(%dminutes), close monitor."%(ot2Name, diffMinutes, self.maxMonitorTime))
+            
+            
+           
             tsql = self.QOT2%(ot2Name)
             ot2s = self.getDataFromDB(tsql)
             if len(ot2s)==0:
                 self.log.debug("cannot find ot2 %s"%(ot2Name))
                 #self.closeSciObjAutoObservation(sciObj[0])
-                #return
-                foundTime = sciObj[9]
-                curDateTime = datetime.utcnow()
-                diffMinutes = (curDateTime - foundTime).total_seconds()/60.0 
-                if diffMinutes > self.maxMonitorTime:
-                    print("Time is out")
-                    self.closeSciObjAutoObservation(sciObj[0])
-                    self.log.warning("%s, %.2f exceed max monitor time(%dminutes), close monitor."%(ot2Name, diffMinutes, self.maxMonitorTime))
-                continue
+                continue 
+            print("hahahhahahha")
             ot2=ot2s[0]
             
             self.log.debug("ot2: %s, status: %d, triggerStatus: %d"%(ot2Name, status, triggerStatus))
@@ -463,7 +476,7 @@ class GWACAutoFollowup:
                 fupObserves = self.getDataFromDB(tsql)
                 if len(fupObserves)==0:
                     self.log.debug("cannot find fupObserves %s"%(ot2Name))
-                    return
+                    continue
                 print(fupObserves)
                 lastLimitMag = fupObserves[0][0]
                 processResult = fupObserves[0][3]
@@ -516,10 +529,13 @@ class GWACAutoFollowup:
                         magDiff = math.fabs(fupRecordN[1]-fupRecordN1[1])
                         magDiffTotalslope  = math.fabs(fupRecordN[1]-sciObj[4])/status
                         observeTime = fupRecordN[2]
+                        foundTime = sciObj[9]
                         #curDateTime = datetime.now()
                         curDateTime = datetime.utcnow()
                         #curDateTime.replace(hour=curDateTime.hour-8)
+                        #diffMinutes = (curDateTime - foundTime).total_seconds()/60.0
                         diffMinutes = (curDateTime - observeTime).total_seconds()/60.0
+                        
                         print("3 diffMinutes=%.2f"%(diffMinutes))
                         if diffMinutes < self.maxMonitorTime:         
                             if status == 2:
@@ -642,12 +658,15 @@ class GWACAutoFollowup:
                                         break
                                     else:
                                         print("magDiffk is small")
+                                        print("fupRecordNk=%s"%(fupRecordNk))
                                         fupRecordTime  =  fupRecordN[2]
-                                        fupRecordTimeNk = fupRecordNk[2]
+                                        fupRecordTimeNk = fupRecordNk[0][2]
+                                        print("fupRecordTimeNk=%s"%(fupRecordTimeNk))
                                         #fupRecordTimeN1 = fupRecordN1[2]
                                         #ot2time = ot2[2]
                                         #stageNTriggerDelay4 = (1+self.deltaT) * (fupRecordTime - ot2time).total_seconds()/60.0
                                         stageNTriggerDelay4 = (1+self.deltaT) * ((fupRecordTime - fupRecordTimeNk).total_seconds()/60.0)
+                                        
                                         #stageNTriggerDelay4 = (1+self.deltaT) * ((fupRecordTime - fupRecordTimeN1).total_seconds()/60.0)
                                         if stageNTriggerDelay4>=self.delayTime_max:
                                             stageNTriggerDelay4 = self.delayTime_max    #max delay time is self.delayTime_max
@@ -728,9 +747,9 @@ class GWACAutoFollowup:
 
     def start(self):
         
-        #ot2Name = 'G190101_C17639'
+        #ot2Name = 'G190110_C09266'
         #self.initSciObj(ot2Name)
-        #ot2Name = 'G181224_C05977'
+        #ot2Name = 'G190110_C00142'
         #self.initSciObj(ot2Name)
         #ot2Name = 'G181224_C06024'
         #self.initSciObj(ot2Name)
