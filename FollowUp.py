@@ -91,6 +91,6 @@ class FollowUp:
         
 if __name__ == '__main__':
     
-    fup = FollowUp(10,20.1,31,'R|B',1,'G181214_C08444')
+    fup = FollowUp(10,20.1,31,'R|B',1,'G181214_C08444',1,41)
     print(fup.getFollowUpString())
     fup.uploadFollowUpCommond()

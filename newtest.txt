@@ -1,0 +1,30 @@
+#  
+#   VizieR Astronomical Server vizier.u-strasbg.fr
+#    Date: 2019-01-11T18:07:13 [V1.99+ (14-Oct-2013)]
+#   In case of problem, please report to: cds-question@unistra.fr
+# 
+#   
+#Coosys J2000: eq_FK5 J2000 
+#INFO votable-version=1.99+ (14-Oct-2013) 
+#INFO -ref=VOTx27708 
+#INFO -out.max=100 
+#INFO queryParameters=5 
+#-oc.form=D.
+#-source=I/345/gaia2
+#-c=151.973000+10.057700
+#-c.rs=2.000000
+#-out.max=100
+#
+#INFO -c=151.973000+10.057700,rs=2. 
+#
+
+#RESOURCE=yCat_1345
+#Name: I/345
+#Title: Gaia DR2 (Gaia Collaboration, 2018)
+#Coosys H_2015.500: ICRS     
+#Table I_345_gaia2:
+#Name: I/345/gaia2
+#Title: GaiaSource DR2 data
+#---Details of Columns:
+#END#  -ref=VOTx27708 ===========================================
+

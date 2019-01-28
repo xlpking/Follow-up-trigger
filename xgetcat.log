@@ -1,0 +1,903 @@
+=============
+no source in the Gaia dr2 for G190111_C04611
+=============
+================
+have source in the Gaia dr2 for G190111_C04509
+#  
+#   VizieR Astronomical Server vizier.u-strasbg.fr
+#    Date: 2019-01-11T16:16:04 [V1.99+ (14-Oct-2013)]
+#   In case of problem, please report to: cds-question@unistra.fr
+# 
+#   
+#Coosys J2000: eq_FK5 J2000 
+#INFO votable-version=1.99+ (14-Oct-2013) 
+#INFO -ref=VOTx5507 
+#INFO -out.max=100 
+#INFO queryParameters=5 
+#-oc.form=D.
+#-source=I/345/gaia2
+#-c=145.85698+19.86116
+#-c.rs=2.000000
+#-out.max=100
+#
+#INFO -c=145.856980+19.861160,rs=2. 
+#
+
+#RESOURCE=yCat_1345
+#Name: I/345
+#Title: Gaia DR2 (Gaia Collaboration, 2018)
+#Coosys H_2015.500: ICRS     
+#Table I_345_gaia2:
+#Name: I/345/gaia2
+#Title: GaiaSource DR2 data
+#---Details of Columns:
+    RA_ICRS (deg)   (F15.11) Barycentric right ascension (ICRS) at Ep=2015.5 (ra) [ucd=pos.eq.ra;meta.main]
+    e_RA_ICRS (mas) (F7.4)  Standard error of right ascension (e_RA*cosDE) (ra_error) [ucd=stat.error;pos.eq.ra]
+    DE_ICRS (deg)   (F15.11) Barycentric declination (ICRS) at Ep=2015.5 (dec) [ucd=pos.eq.dec;meta.main]
+    e_DE_ICRS (mas) (F7.4)  Standard error of declination (dec_error) [ucd=stat.error;pos.eq.dec]
+    Source          (I19)   Unique source identifier (unique within a particular Data Release) (source_id) (G2) [ucd=meta.id;meta.main]
+    Plx (mas)       (F10.4) ? Absolute stellar parallax (parallax) [ucd=pos.parallax]
+    e_Plx (mas)     (F7.4)  ? Standard error of parallax (parallax_error) [ucd=stat.error;pos.parallax]
+    pmRA (mas/yr)   (F9.3)  ? Proper motion in right ascension direction (pmRA*cosDE) (pmra) (3) [ucd=pos.pm;pos.eq.ra]
+    e_pmRA (mas/yr) (F6.3)  ? Standard error of proper motion in right ascension direction (pmra_error) [ucd=stat.error;pos.pm;pos.eq.ra]
+    pmDE (mas/yr)   (F9.3)  ? Proper motion in declination direction (pmdec) (4) [ucd=pos.pm;pos.eq.dec]
+    e_pmDE (mas/yr) (F6.3)  ? Standard error of proper motion in declination direction (pmdec_error) [ucd=stat.error;pos.pm;pos.eq.dec]
+    Dup             (I1)    [0/1] Source with duplicate sources (duplicated_source) (21) [ucd=meta.code.status]
+    FG (e-/s)       (E11.4) G-band mean flux (phot_g_mean_flux) [ucd=phot.flux;stat.mean;em.opt]
+    e_FG (e-/s)     (E11.4) Error on G-band mean flux (phot_g_mean_flux_error) [ucd=stat.error;phot.flux;stat.mean]
+    Gmag (mag)      (F7.4)  G-band mean magnitude (Vega) (phot_g_mean_mag) (23) [ucd=phot.mag;stat.mean;em.opt]
+    e_Gmag (mag)    (F6.4)  Standard error of G-band mean magnitude (Vega) (added by CDS) (phot_g_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FBP (e-/s)      (E11.4) ? Mean flux in the integrated BP band (phot_bp_mean_flux) [ucd=phot.flux;stat.mean;em.opt.B]
+    e_FBP (e-/s)    (E11.4) ? Error on the integrated BP mean flux (phot_bp_mean_flux_error) (25) [ucd=stat.error;phot.flux;stat.mean]
+    BPmag (mag)     (F7.4)  ? Integrated BP mean magnitude (Vega) (phot_bp_mean_mag) (26) [ucd=phot.mag;stat.mean;em.opt.B]
+    e_BPmag (mag)   (F6.4)  ? Standard error of BP mean magnitude (Vega) (added by CDS) (phot_bp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FRP (e-/s)      (E11.4) ? Mean flux in the integrated RP band (phot_rp_mean_flux) [ucd=phot.flux.density;em.opt.R]
+    e_FRP (e-/s)    (E11.4) ? Error on the integrated RP mean flux (phot_rp_mean_flux_error) (28) [ucd=stat.error;phot.flux;stat.mean]
+    RPmag (mag)     (F7.4)  ? Integrated RP mean magnitude (Vega) (phot_rp_mean_mag) (29) [ucd=phot.mag;stat.mean;em.opt.R]
+    e_RPmag (mag)   (F6.4)  ? Standard error of RP mean magnitude (Vega) (added by CDS) (phot_rp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    BP-RP (mag)     (F7.4)  ? BP-RP colour (photBpMeanMag-photRMeanMag) (bp_rp) [ucd=phot.color;em.opt.B;em.opt.R]
+    RV (km/s)       (F7.2)  ? Spectroscopic radial velocity in the solar barycentric reference frame (radial_velocity) [ucd=spect.dopplerVeloc.opt;pos.barycenter]
+    e_RV (km/s)     (F5.2)  ? Radial velocity error (radial_velocity_error) (30) [ucd=stat.error;spect.dopplerVeloc.opt;pos.barycenter]
+    Teff (K)        (F7.2)  ? Stellar effective temperature (estimate from Apsis-Priam) (teff_val) [ucd=phys.temperature.effective]
+    AG (mag)        (F7.4)  ? Estimate of extinction in the G band from Apsis-Priam (a_g_val) [ucd=phys.absorption.gal]
+    E(BP-RP) (mag)  (F7.4)  ? Estimate of redenning E(BP-RP) from Apsis-Priam (e_bp_min_rp_val) [ucd=phot.color.excess]
+    Rad (solRad)    (F6.2)  ? Estimate of radius from Apsis-FLAME (radius_val) [ucd=phys.size.radius]
+    Lum (solLum)    (F9.3)  ? Esimate of luminosity from Apsis-FLAME (lum_val) [ucd=phys.luminosity]
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+                e                       e                                                        e_p              e_p    D                                                                        e                                      e                      e                                             
+                _RA_ICR                 _DE_ICR                                e_Pl    pmRA      mRA (m pmDE      mDE (m u                         Gma     e_Gmag             e           BPma    _BPmag             e           RPma    _RPmag BP-R    RV      _RV ( T       A       E(BP-RP Rad (s Lum      
+RA_ICRS (deg)   S (mas) DE_ICRS (deg)   S (mas) Source              Plx (mas)  x (mas) (mas/yr)  as/yr) (mas/yr)  as/yr) p FG (e-/s)   e_FG (e-/s) g (mag) (mag)  FBP (e-/s)  _FBP (e-/s) g (mag) (mag)  FRP (e-/s)  _FRP (e-/s) g (mag) (mag)  P (mag) (km/s)  km/s) eff (K) G (mag) ) (mag) olRad) (solLum) 
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+145.85689722929  0.2008 +19.86108782384  0.1055  639582718422207488    -0.0014  0.2420    -6.698  0.243     4.271  0.228 1  7.3235e+05  1.0023e+04 11.0266 0.0149  2.1087e+04  2.2869e+03 14.5414 0.1178  1.2234e+06  3.0573e+04  9.5430 0.0271  4.9984               3299.00                        
+
+#END#  -ref=VOTx5507 ================================================================================================================================================================================================================================================================================
+
+=============
+=============
+no source in the Gaia dr2 for G190111_C04611
+=============
+================
+have source in the Gaia dr2 for G190111_C04509
+#  
+#   VizieR Astronomical Server vizier.u-strasbg.fr
+#    Date: 2019-01-11T16:17:21 [V1.99+ (14-Oct-2013)]
+#   In case of problem, please report to: cds-question@unistra.fr
+# 
+#   
+#Coosys J2000: eq_FK5 J2000 
+#INFO votable-version=1.99+ (14-Oct-2013) 
+#INFO -ref=VOTx8832 
+#INFO -out.max=100 
+#INFO queryParameters=5 
+#-oc.form=D.
+#-source=I/345/gaia2
+#-c=145.85698+19.86116
+#-c.rs=2.000000
+#-out.max=100
+#
+#INFO -c=145.856980+19.861160,rs=2. 
+#
+
+#RESOURCE=yCat_1345
+#Name: I/345
+#Title: Gaia DR2 (Gaia Collaboration, 2018)
+#Coosys H_2015.500: ICRS     
+#Table I_345_gaia2:
+#Name: I/345/gaia2
+#Title: GaiaSource DR2 data
+#---Details of Columns:
+    RA_ICRS (deg)   (F15.11) Barycentric right ascension (ICRS) at Ep=2015.5 (ra) [ucd=pos.eq.ra;meta.main]
+    e_RA_ICRS (mas) (F7.4)  Standard error of right ascension (e_RA*cosDE) (ra_error) [ucd=stat.error;pos.eq.ra]
+    DE_ICRS (deg)   (F15.11) Barycentric declination (ICRS) at Ep=2015.5 (dec) [ucd=pos.eq.dec;meta.main]
+    e_DE_ICRS (mas) (F7.4)  Standard error of declination (dec_error) [ucd=stat.error;pos.eq.dec]
+    Source          (I19)   Unique source identifier (unique within a particular Data Release) (source_id) (G2) [ucd=meta.id;meta.main]
+    Plx (mas)       (F10.4) ? Absolute stellar parallax (parallax) [ucd=pos.parallax]
+    e_Plx (mas)     (F7.4)  ? Standard error of parallax (parallax_error) [ucd=stat.error;pos.parallax]
+    pmRA (mas/yr)   (F9.3)  ? Proper motion in right ascension direction (pmRA*cosDE) (pmra) (3) [ucd=pos.pm;pos.eq.ra]
+    e_pmRA (mas/yr) (F6.3)  ? Standard error of proper motion in right ascension direction (pmra_error) [ucd=stat.error;pos.pm;pos.eq.ra]
+    pmDE (mas/yr)   (F9.3)  ? Proper motion in declination direction (pmdec) (4) [ucd=pos.pm;pos.eq.dec]
+    e_pmDE (mas/yr) (F6.3)  ? Standard error of proper motion in declination direction (pmdec_error) [ucd=stat.error;pos.pm;pos.eq.dec]
+    Dup             (I1)    [0/1] Source with duplicate sources (duplicated_source) (21) [ucd=meta.code.status]
+    FG (e-/s)       (E11.4) G-band mean flux (phot_g_mean_flux) [ucd=phot.flux;stat.mean;em.opt]
+    e_FG (e-/s)     (E11.4) Error on G-band mean flux (phot_g_mean_flux_error) [ucd=stat.error;phot.flux;stat.mean]
+    Gmag (mag)      (F7.4)  G-band mean magnitude (Vega) (phot_g_mean_mag) (23) [ucd=phot.mag;stat.mean;em.opt]
+    e_Gmag (mag)    (F6.4)  Standard error of G-band mean magnitude (Vega) (added by CDS) (phot_g_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FBP (e-/s)      (E11.4) ? Mean flux in the integrated BP band (phot_bp_mean_flux) [ucd=phot.flux;stat.mean;em.opt.B]
+    e_FBP (e-/s)    (E11.4) ? Error on the integrated BP mean flux (phot_bp_mean_flux_error) (25) [ucd=stat.error;phot.flux;stat.mean]
+    BPmag (mag)     (F7.4)  ? Integrated BP mean magnitude (Vega) (phot_bp_mean_mag) (26) [ucd=phot.mag;stat.mean;em.opt.B]
+    e_BPmag (mag)   (F6.4)  ? Standard error of BP mean magnitude (Vega) (added by CDS) (phot_bp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FRP (e-/s)      (E11.4) ? Mean flux in the integrated RP band (phot_rp_mean_flux) [ucd=phot.flux.density;em.opt.R]
+    e_FRP (e-/s)    (E11.4) ? Error on the integrated RP mean flux (phot_rp_mean_flux_error) (28) [ucd=stat.error;phot.flux;stat.mean]
+    RPmag (mag)     (F7.4)  ? Integrated RP mean magnitude (Vega) (phot_rp_mean_mag) (29) [ucd=phot.mag;stat.mean;em.opt.R]
+    e_RPmag (mag)   (F6.4)  ? Standard error of RP mean magnitude (Vega) (added by CDS) (phot_rp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    BP-RP (mag)     (F7.4)  ? BP-RP colour (photBpMeanMag-photRMeanMag) (bp_rp) [ucd=phot.color;em.opt.B;em.opt.R]
+    RV (km/s)       (F7.2)  ? Spectroscopic radial velocity in the solar barycentric reference frame (radial_velocity) [ucd=spect.dopplerVeloc.opt;pos.barycenter]
+    e_RV (km/s)     (F5.2)  ? Radial velocity error (radial_velocity_error) (30) [ucd=stat.error;spect.dopplerVeloc.opt;pos.barycenter]
+    Teff (K)        (F7.2)  ? Stellar effective temperature (estimate from Apsis-Priam) (teff_val) [ucd=phys.temperature.effective]
+    AG (mag)        (F7.4)  ? Estimate of extinction in the G band from Apsis-Priam (a_g_val) [ucd=phys.absorption.gal]
+    E(BP-RP) (mag)  (F7.4)  ? Estimate of redenning E(BP-RP) from Apsis-Priam (e_bp_min_rp_val) [ucd=phot.color.excess]
+    Rad (solRad)    (F6.2)  ? Estimate of radius from Apsis-FLAME (radius_val) [ucd=phys.size.radius]
+    Lum (solLum)    (F9.3)  ? Esimate of luminosity from Apsis-FLAME (lum_val) [ucd=phys.luminosity]
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+                e                       e                                                        e_p              e_p    D                                                                        e                                      e                      e                                             
+                _RA_ICR                 _DE_ICR                                e_Pl    pmRA      mRA (m pmDE      mDE (m u                         Gma     e_Gmag             e           BPma    _BPmag             e           RPma    _RPmag BP-R    RV      _RV ( T       A       E(BP-RP Rad (s Lum      
+RA_ICRS (deg)   S (mas) DE_ICRS (deg)   S (mas) Source              Plx (mas)  x (mas) (mas/yr)  as/yr) (mas/yr)  as/yr) p FG (e-/s)   e_FG (e-/s) g (mag) (mag)  FBP (e-/s)  _FBP (e-/s) g (mag) (mag)  FRP (e-/s)  _FRP (e-/s) g (mag) (mag)  P (mag) (km/s)  km/s) eff (K) G (mag) ) (mag) olRad) (solLum) 
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+145.85689722929  0.2008 +19.86108782384  0.1055  639582718422207488    -0.0014  0.2420    -6.698  0.243     4.271  0.228 1  7.3235e+05  1.0023e+04 11.0266 0.0149  2.1087e+04  2.2869e+03 14.5414 0.1178  1.2234e+06  3.0573e+04  9.5430 0.0271  4.9984               3299.00                        
+
+#END#  -ref=VOTx8832 ================================================================================================================================================================================================================================================================================
+
+=============
+=============
+no source in the Gaia dr2 for G190111_C04611
+=============
+================
+have source in the Gaia dr2 for G190111_C04509
+#  
+#   VizieR Astronomical Server vizier.u-strasbg.fr
+#    Date: 2019-01-11T16:19:51 [V1.99+ (14-Oct-2013)]
+#   In case of problem, please report to: cds-question@unistra.fr
+# 
+#   
+#Coosys J2000: eq_FK5 J2000 
+#INFO votable-version=1.99+ (14-Oct-2013) 
+#INFO -ref=VOTx14980 
+#INFO -out.max=100 
+#INFO queryParameters=5 
+#-oc.form=D.
+#-source=I/345/gaia2
+#-c=145.85698+19.86116
+#-c.rs=2.000000
+#-out.max=100
+#
+#INFO -c=145.856980+19.861160,rs=2. 
+#
+
+#RESOURCE=yCat_1345
+#Name: I/345
+#Title: Gaia DR2 (Gaia Collaboration, 2018)
+#Coosys H_2015.500: ICRS     
+#Table I_345_gaia2:
+#Name: I/345/gaia2
+#Title: GaiaSource DR2 data
+#---Details of Columns:
+    RA_ICRS (deg)   (F15.11) Barycentric right ascension (ICRS) at Ep=2015.5 (ra) [ucd=pos.eq.ra;meta.main]
+    e_RA_ICRS (mas) (F7.4)  Standard error of right ascension (e_RA*cosDE) (ra_error) [ucd=stat.error;pos.eq.ra]
+    DE_ICRS (deg)   (F15.11) Barycentric declination (ICRS) at Ep=2015.5 (dec) [ucd=pos.eq.dec;meta.main]
+    e_DE_ICRS (mas) (F7.4)  Standard error of declination (dec_error) [ucd=stat.error;pos.eq.dec]
+    Source          (I19)   Unique source identifier (unique within a particular Data Release) (source_id) (G2) [ucd=meta.id;meta.main]
+    Plx (mas)       (F10.4) ? Absolute stellar parallax (parallax) [ucd=pos.parallax]
+    e_Plx (mas)     (F7.4)  ? Standard error of parallax (parallax_error) [ucd=stat.error;pos.parallax]
+    pmRA (mas/yr)   (F9.3)  ? Proper motion in right ascension direction (pmRA*cosDE) (pmra) (3) [ucd=pos.pm;pos.eq.ra]
+    e_pmRA (mas/yr) (F6.3)  ? Standard error of proper motion in right ascension direction (pmra_error) [ucd=stat.error;pos.pm;pos.eq.ra]
+    pmDE (mas/yr)   (F9.3)  ? Proper motion in declination direction (pmdec) (4) [ucd=pos.pm;pos.eq.dec]
+    e_pmDE (mas/yr) (F6.3)  ? Standard error of proper motion in declination direction (pmdec_error) [ucd=stat.error;pos.pm;pos.eq.dec]
+    Dup             (I1)    [0/1] Source with duplicate sources (duplicated_source) (21) [ucd=meta.code.status]
+    FG (e-/s)       (E11.4) G-band mean flux (phot_g_mean_flux) [ucd=phot.flux;stat.mean;em.opt]
+    e_FG (e-/s)     (E11.4) Error on G-band mean flux (phot_g_mean_flux_error) [ucd=stat.error;phot.flux;stat.mean]
+    Gmag (mag)      (F7.4)  G-band mean magnitude (Vega) (phot_g_mean_mag) (23) [ucd=phot.mag;stat.mean;em.opt]
+    e_Gmag (mag)    (F6.4)  Standard error of G-band mean magnitude (Vega) (added by CDS) (phot_g_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FBP (e-/s)      (E11.4) ? Mean flux in the integrated BP band (phot_bp_mean_flux) [ucd=phot.flux;stat.mean;em.opt.B]
+    e_FBP (e-/s)    (E11.4) ? Error on the integrated BP mean flux (phot_bp_mean_flux_error) (25) [ucd=stat.error;phot.flux;stat.mean]
+    BPmag (mag)     (F7.4)  ? Integrated BP mean magnitude (Vega) (phot_bp_mean_mag) (26) [ucd=phot.mag;stat.mean;em.opt.B]
+    e_BPmag (mag)   (F6.4)  ? Standard error of BP mean magnitude (Vega) (added by CDS) (phot_bp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FRP (e-/s)      (E11.4) ? Mean flux in the integrated RP band (phot_rp_mean_flux) [ucd=phot.flux.density;em.opt.R]
+    e_FRP (e-/s)    (E11.4) ? Error on the integrated RP mean flux (phot_rp_mean_flux_error) (28) [ucd=stat.error;phot.flux;stat.mean]
+    RPmag (mag)     (F7.4)  ? Integrated RP mean magnitude (Vega) (phot_rp_mean_mag) (29) [ucd=phot.mag;stat.mean;em.opt.R]
+    e_RPmag (mag)   (F6.4)  ? Standard error of RP mean magnitude (Vega) (added by CDS) (phot_rp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    BP-RP (mag)     (F7.4)  ? BP-RP colour (photBpMeanMag-photRMeanMag) (bp_rp) [ucd=phot.color;em.opt.B;em.opt.R]
+    RV (km/s)       (F7.2)  ? Spectroscopic radial velocity in the solar barycentric reference frame (radial_velocity) [ucd=spect.dopplerVeloc.opt;pos.barycenter]
+    e_RV (km/s)     (F5.2)  ? Radial velocity error (radial_velocity_error) (30) [ucd=stat.error;spect.dopplerVeloc.opt;pos.barycenter]
+    Teff (K)        (F7.2)  ? Stellar effective temperature (estimate from Apsis-Priam) (teff_val) [ucd=phys.temperature.effective]
+    AG (mag)        (F7.4)  ? Estimate of extinction in the G band from Apsis-Priam (a_g_val) [ucd=phys.absorption.gal]
+    E(BP-RP) (mag)  (F7.4)  ? Estimate of redenning E(BP-RP) from Apsis-Priam (e_bp_min_rp_val) [ucd=phot.color.excess]
+    Rad (solRad)    (F6.2)  ? Estimate of radius from Apsis-FLAME (radius_val) [ucd=phys.size.radius]
+    Lum (solLum)    (F9.3)  ? Esimate of luminosity from Apsis-FLAME (lum_val) [ucd=phys.luminosity]
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+                e                       e                                                        e_p              e_p    D                                                                        e                                      e                      e                                             
+                _RA_ICR                 _DE_ICR                                e_Pl    pmRA      mRA (m pmDE      mDE (m u                         Gma     e_Gmag             e           BPma    _BPmag             e           RPma    _RPmag BP-R    RV      _RV ( T       A       E(BP-RP Rad (s Lum      
+RA_ICRS (deg)   S (mas) DE_ICRS (deg)   S (mas) Source              Plx (mas)  x (mas) (mas/yr)  as/yr) (mas/yr)  as/yr) p FG (e-/s)   e_FG (e-/s) g (mag) (mag)  FBP (e-/s)  _FBP (e-/s) g (mag) (mag)  FRP (e-/s)  _FRP (e-/s) g (mag) (mag)  P (mag) (km/s)  km/s) eff (K) G (mag) ) (mag) olRad) (solLum) 
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+145.85689722929  0.2008 +19.86108782384  0.1055  639582718422207488    -0.0014  0.2420    -6.698  0.243     4.271  0.228 1  7.3235e+05  1.0023e+04 11.0266 0.0149  2.1087e+04  2.2869e+03 14.5414 0.1178  1.2234e+06  3.0573e+04  9.5430 0.0271  4.9984               3299.00                        
+
+#END#  -ref=VOTx14980 ===============================================================================================================================================================================================================================================================================
+
+=============
+=============
+no source in the Gaia dr2 for G190111_C04611
+=============
+================
+have source in the Gaia dr2 for G190111_C04509
+#  
+#   VizieR Astronomical Server vizier.u-strasbg.fr
+#    Date: 2019-01-11T16:21:48 [V1.99+ (14-Oct-2013)]
+#   In case of problem, please report to: cds-question@unistra.fr
+# 
+#   
+#Coosys J2000: eq_FK5 J2000 
+#INFO votable-version=1.99+ (14-Oct-2013) 
+#INFO -ref=VOTx21254 
+#INFO -out.max=100 
+#INFO queryParameters=5 
+#-oc.form=D.
+#-source=I/345/gaia2
+#-c=145.85698+19.86116
+#-c.rs=2.000000
+#-out.max=100
+#
+#INFO -c=145.856980+19.861160,rs=2. 
+#
+
+#RESOURCE=yCat_1345
+#Name: I/345
+#Title: Gaia DR2 (Gaia Collaboration, 2018)
+#Coosys H_2015.500: ICRS     
+#Table I_345_gaia2:
+#Name: I/345/gaia2
+#Title: GaiaSource DR2 data
+#---Details of Columns:
+    RA_ICRS (deg)   (F15.11) Barycentric right ascension (ICRS) at Ep=2015.5 (ra) [ucd=pos.eq.ra;meta.main]
+    e_RA_ICRS (mas) (F7.4)  Standard error of right ascension (e_RA*cosDE) (ra_error) [ucd=stat.error;pos.eq.ra]
+    DE_ICRS (deg)   (F15.11) Barycentric declination (ICRS) at Ep=2015.5 (dec) [ucd=pos.eq.dec;meta.main]
+    e_DE_ICRS (mas) (F7.4)  Standard error of declination (dec_error) [ucd=stat.error;pos.eq.dec]
+    Source          (I19)   Unique source identifier (unique within a particular Data Release) (source_id) (G2) [ucd=meta.id;meta.main]
+    Plx (mas)       (F10.4) ? Absolute stellar parallax (parallax) [ucd=pos.parallax]
+    e_Plx (mas)     (F7.4)  ? Standard error of parallax (parallax_error) [ucd=stat.error;pos.parallax]
+    pmRA (mas/yr)   (F9.3)  ? Proper motion in right ascension direction (pmRA*cosDE) (pmra) (3) [ucd=pos.pm;pos.eq.ra]
+    e_pmRA (mas/yr) (F6.3)  ? Standard error of proper motion in right ascension direction (pmra_error) [ucd=stat.error;pos.pm;pos.eq.ra]
+    pmDE (mas/yr)   (F9.3)  ? Proper motion in declination direction (pmdec) (4) [ucd=pos.pm;pos.eq.dec]
+    e_pmDE (mas/yr) (F6.3)  ? Standard error of proper motion in declination direction (pmdec_error) [ucd=stat.error;pos.pm;pos.eq.dec]
+    Dup             (I1)    [0/1] Source with duplicate sources (duplicated_source) (21) [ucd=meta.code.status]
+    FG (e-/s)       (E11.4) G-band mean flux (phot_g_mean_flux) [ucd=phot.flux;stat.mean;em.opt]
+    e_FG (e-/s)     (E11.4) Error on G-band mean flux (phot_g_mean_flux_error) [ucd=stat.error;phot.flux;stat.mean]
+    Gmag (mag)      (F7.4)  G-band mean magnitude (Vega) (phot_g_mean_mag) (23) [ucd=phot.mag;stat.mean;em.opt]
+    e_Gmag (mag)    (F6.4)  Standard error of G-band mean magnitude (Vega) (added by CDS) (phot_g_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FBP (e-/s)      (E11.4) ? Mean flux in the integrated BP band (phot_bp_mean_flux) [ucd=phot.flux;stat.mean;em.opt.B]
+    e_FBP (e-/s)    (E11.4) ? Error on the integrated BP mean flux (phot_bp_mean_flux_error) (25) [ucd=stat.error;phot.flux;stat.mean]
+    BPmag (mag)     (F7.4)  ? Integrated BP mean magnitude (Vega) (phot_bp_mean_mag) (26) [ucd=phot.mag;stat.mean;em.opt.B]
+    e_BPmag (mag)   (F6.4)  ? Standard error of BP mean magnitude (Vega) (added by CDS) (phot_bp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FRP (e-/s)      (E11.4) ? Mean flux in the integrated RP band (phot_rp_mean_flux) [ucd=phot.flux.density;em.opt.R]
+    e_FRP (e-/s)    (E11.4) ? Error on the integrated RP mean flux (phot_rp_mean_flux_error) (28) [ucd=stat.error;phot.flux;stat.mean]
+    RPmag (mag)     (F7.4)  ? Integrated RP mean magnitude (Vega) (phot_rp_mean_mag) (29) [ucd=phot.mag;stat.mean;em.opt.R]
+    e_RPmag (mag)   (F6.4)  ? Standard error of RP mean magnitude (Vega) (added by CDS) (phot_rp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    BP-RP (mag)     (F7.4)  ? BP-RP colour (photBpMeanMag-photRMeanMag) (bp_rp) [ucd=phot.color;em.opt.B;em.opt.R]
+    RV (km/s)       (F7.2)  ? Spectroscopic radial velocity in the solar barycentric reference frame (radial_velocity) [ucd=spect.dopplerVeloc.opt;pos.barycenter]
+    e_RV (km/s)     (F5.2)  ? Radial velocity error (radial_velocity_error) (30) [ucd=stat.error;spect.dopplerVeloc.opt;pos.barycenter]
+    Teff (K)        (F7.2)  ? Stellar effective temperature (estimate from Apsis-Priam) (teff_val) [ucd=phys.temperature.effective]
+    AG (mag)        (F7.4)  ? Estimate of extinction in the G band from Apsis-Priam (a_g_val) [ucd=phys.absorption.gal]
+    E(BP-RP) (mag)  (F7.4)  ? Estimate of redenning E(BP-RP) from Apsis-Priam (e_bp_min_rp_val) [ucd=phot.color.excess]
+    Rad (solRad)    (F6.2)  ? Estimate of radius from Apsis-FLAME (radius_val) [ucd=phys.size.radius]
+    Lum (solLum)    (F9.3)  ? Esimate of luminosity from Apsis-FLAME (lum_val) [ucd=phys.luminosity]
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+                e                       e                                                        e_p              e_p    D                                                                        e                                      e                      e                                             
+                _RA_ICR                 _DE_ICR                                e_Pl    pmRA      mRA (m pmDE      mDE (m u                         Gma     e_Gmag             e           BPma    _BPmag             e           RPma    _RPmag BP-R    RV      _RV ( T       A       E(BP-RP Rad (s Lum      
+RA_ICRS (deg)   S (mas) DE_ICRS (deg)   S (mas) Source              Plx (mas)  x (mas) (mas/yr)  as/yr) (mas/yr)  as/yr) p FG (e-/s)   e_FG (e-/s) g (mag) (mag)  FBP (e-/s)  _FBP (e-/s) g (mag) (mag)  FRP (e-/s)  _FRP (e-/s) g (mag) (mag)  P (mag) (km/s)  km/s) eff (K) G (mag) ) (mag) olRad) (solLum) 
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+145.85689722929  0.2008 +19.86108782384  0.1055  639582718422207488    -0.0014  0.2420    -6.698  0.243     4.271  0.228 1  7.3235e+05  1.0023e+04 11.0266 0.0149  2.1087e+04  2.2869e+03 14.5414 0.1178  1.2234e+06  3.0573e+04  9.5430 0.0271  4.9984               3299.00                        
+
+#END#  -ref=VOTx21254 ===============================================================================================================================================================================================================================================================================
+
+=============
+=============
+no source in the Gaia dr2 for G190111_C04611
+=============
+================
+have source in the Gaia dr2 for G190111_C04509
+#  
+#   VizieR Astronomical Server vizier.u-strasbg.fr
+#    Date: 2019-01-11T16:24:22 [V1.99+ (14-Oct-2013)]
+#   In case of problem, please report to: cds-question@unistra.fr
+# 
+#   
+#Coosys J2000: eq_FK5 J2000 
+#INFO votable-version=1.99+ (14-Oct-2013) 
+#INFO -ref=VOTx29108 
+#INFO -out.max=100 
+#INFO queryParameters=5 
+#-oc.form=D.
+#-source=I/345/gaia2
+#-c=145.85698+19.86116
+#-c.rs=2.000000
+#-out.max=100
+#
+#INFO -c=145.856980+19.861160,rs=2. 
+#
+
+#RESOURCE=yCat_1345
+#Name: I/345
+#Title: Gaia DR2 (Gaia Collaboration, 2018)
+#Coosys H_2015.500: ICRS     
+#Table I_345_gaia2:
+#Name: I/345/gaia2
+#Title: GaiaSource DR2 data
+#---Details of Columns:
+    RA_ICRS (deg)   (F15.11) Barycentric right ascension (ICRS) at Ep=2015.5 (ra) [ucd=pos.eq.ra;meta.main]
+    e_RA_ICRS (mas) (F7.4)  Standard error of right ascension (e_RA*cosDE) (ra_error) [ucd=stat.error;pos.eq.ra]
+    DE_ICRS (deg)   (F15.11) Barycentric declination (ICRS) at Ep=2015.5 (dec) [ucd=pos.eq.dec;meta.main]
+    e_DE_ICRS (mas) (F7.4)  Standard error of declination (dec_error) [ucd=stat.error;pos.eq.dec]
+    Source          (I19)   Unique source identifier (unique within a particular Data Release) (source_id) (G2) [ucd=meta.id;meta.main]
+    Plx (mas)       (F10.4) ? Absolute stellar parallax (parallax) [ucd=pos.parallax]
+    e_Plx (mas)     (F7.4)  ? Standard error of parallax (parallax_error) [ucd=stat.error;pos.parallax]
+    pmRA (mas/yr)   (F9.3)  ? Proper motion in right ascension direction (pmRA*cosDE) (pmra) (3) [ucd=pos.pm;pos.eq.ra]
+    e_pmRA (mas/yr) (F6.3)  ? Standard error of proper motion in right ascension direction (pmra_error) [ucd=stat.error;pos.pm;pos.eq.ra]
+    pmDE (mas/yr)   (F9.3)  ? Proper motion in declination direction (pmdec) (4) [ucd=pos.pm;pos.eq.dec]
+    e_pmDE (mas/yr) (F6.3)  ? Standard error of proper motion in declination direction (pmdec_error) [ucd=stat.error;pos.pm;pos.eq.dec]
+    Dup             (I1)    [0/1] Source with duplicate sources (duplicated_source) (21) [ucd=meta.code.status]
+    FG (e-/s)       (E11.4) G-band mean flux (phot_g_mean_flux) [ucd=phot.flux;stat.mean;em.opt]
+    e_FG (e-/s)     (E11.4) Error on G-band mean flux (phot_g_mean_flux_error) [ucd=stat.error;phot.flux;stat.mean]
+    Gmag (mag)      (F7.4)  G-band mean magnitude (Vega) (phot_g_mean_mag) (23) [ucd=phot.mag;stat.mean;em.opt]
+    e_Gmag (mag)    (F6.4)  Standard error of G-band mean magnitude (Vega) (added by CDS) (phot_g_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FBP (e-/s)      (E11.4) ? Mean flux in the integrated BP band (phot_bp_mean_flux) [ucd=phot.flux;stat.mean;em.opt.B]
+    e_FBP (e-/s)    (E11.4) ? Error on the integrated BP mean flux (phot_bp_mean_flux_error) (25) [ucd=stat.error;phot.flux;stat.mean]
+    BPmag (mag)     (F7.4)  ? Integrated BP mean magnitude (Vega) (phot_bp_mean_mag) (26) [ucd=phot.mag;stat.mean;em.opt.B]
+    e_BPmag (mag)   (F6.4)  ? Standard error of BP mean magnitude (Vega) (added by CDS) (phot_bp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FRP (e-/s)      (E11.4) ? Mean flux in the integrated RP band (phot_rp_mean_flux) [ucd=phot.flux.density;em.opt.R]
+    e_FRP (e-/s)    (E11.4) ? Error on the integrated RP mean flux (phot_rp_mean_flux_error) (28) [ucd=stat.error;phot.flux;stat.mean]
+    RPmag (mag)     (F7.4)  ? Integrated RP mean magnitude (Vega) (phot_rp_mean_mag) (29) [ucd=phot.mag;stat.mean;em.opt.R]
+    e_RPmag (mag)   (F6.4)  ? Standard error of RP mean magnitude (Vega) (added by CDS) (phot_rp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    BP-RP (mag)     (F7.4)  ? BP-RP colour (photBpMeanMag-photRMeanMag) (bp_rp) [ucd=phot.color;em.opt.B;em.opt.R]
+    RV (km/s)       (F7.2)  ? Spectroscopic radial velocity in the solar barycentric reference frame (radial_velocity) [ucd=spect.dopplerVeloc.opt;pos.barycenter]
+    e_RV (km/s)     (F5.2)  ? Radial velocity error (radial_velocity_error) (30) [ucd=stat.error;spect.dopplerVeloc.opt;pos.barycenter]
+    Teff (K)        (F7.2)  ? Stellar effective temperature (estimate from Apsis-Priam) (teff_val) [ucd=phys.temperature.effective]
+    AG (mag)        (F7.4)  ? Estimate of extinction in the G band from Apsis-Priam (a_g_val) [ucd=phys.absorption.gal]
+    E(BP-RP) (mag)  (F7.4)  ? Estimate of redenning E(BP-RP) from Apsis-Priam (e_bp_min_rp_val) [ucd=phot.color.excess]
+    Rad (solRad)    (F6.2)  ? Estimate of radius from Apsis-FLAME (radius_val) [ucd=phys.size.radius]
+    Lum (solLum)    (F9.3)  ? Esimate of luminosity from Apsis-FLAME (lum_val) [ucd=phys.luminosity]
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+                e                       e                                                        e_p              e_p    D                                                                        e                                      e                      e                                             
+                _RA_ICR                 _DE_ICR                                e_Pl    pmRA      mRA (m pmDE      mDE (m u                         Gma     e_Gmag             e           BPma    _BPmag             e           RPma    _RPmag BP-R    RV      _RV ( T       A       E(BP-RP Rad (s Lum      
+RA_ICRS (deg)   S (mas) DE_ICRS (deg)   S (mas) Source              Plx (mas)  x (mas) (mas/yr)  as/yr) (mas/yr)  as/yr) p FG (e-/s)   e_FG (e-/s) g (mag) (mag)  FBP (e-/s)  _FBP (e-/s) g (mag) (mag)  FRP (e-/s)  _FRP (e-/s) g (mag) (mag)  P (mag) (km/s)  km/s) eff (K) G (mag) ) (mag) olRad) (solLum) 
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+145.85689722929  0.2008 +19.86108782384  0.1055  639582718422207488    -0.0014  0.2420    -6.698  0.243     4.271  0.228 1  7.3235e+05  1.0023e+04 11.0266 0.0149  2.1087e+04  2.2869e+03 14.5414 0.1178  1.2234e+06  3.0573e+04  9.5430 0.0271  4.9984               3299.00                        
+
+#END#  -ref=VOTx29108 ===============================================================================================================================================================================================================================================================================
+
+=============
+=============
+no source in the Gaia dr2 for G190111_C04611
+=============
+================
+have source in the Gaia dr2 for G190111_C04509
+#  
+#   VizieR Astronomical Server vizier.u-strasbg.fr
+#    Date: 2019-01-11T17:55:52 [V1.99+ (14-Oct-2013)]
+#   In case of problem, please report to: cds-question@unistra.fr
+# 
+#   
+#Coosys J2000: eq_FK5 J2000 
+#INFO votable-version=1.99+ (14-Oct-2013) 
+#INFO -ref=VOTx31759 
+#INFO -out.max=100 
+#INFO queryParameters=5 
+#-oc.form=D.
+#-source=I/345/gaia2
+#-c=145.85698+19.86116
+#-c.rs=2.000000
+#-out.max=100
+#
+#INFO -c=145.856980+19.861160,rs=2. 
+#
+
+#RESOURCE=yCat_1345
+#Name: I/345
+#Title: Gaia DR2 (Gaia Collaboration, 2018)
+#Coosys H_2015.500: ICRS     
+#Table I_345_gaia2:
+#Name: I/345/gaia2
+#Title: GaiaSource DR2 data
+#---Details of Columns:
+    RA_ICRS (deg)   (F15.11) Barycentric right ascension (ICRS) at Ep=2015.5 (ra) [ucd=pos.eq.ra;meta.main]
+    e_RA_ICRS (mas) (F7.4)  Standard error of right ascension (e_RA*cosDE) (ra_error) [ucd=stat.error;pos.eq.ra]
+    DE_ICRS (deg)   (F15.11) Barycentric declination (ICRS) at Ep=2015.5 (dec) [ucd=pos.eq.dec;meta.main]
+    e_DE_ICRS (mas) (F7.4)  Standard error of declination (dec_error) [ucd=stat.error;pos.eq.dec]
+    Source          (I19)   Unique source identifier (unique within a particular Data Release) (source_id) (G2) [ucd=meta.id;meta.main]
+    Plx (mas)       (F10.4) ? Absolute stellar parallax (parallax) [ucd=pos.parallax]
+    e_Plx (mas)     (F7.4)  ? Standard error of parallax (parallax_error) [ucd=stat.error;pos.parallax]
+    pmRA (mas/yr)   (F9.3)  ? Proper motion in right ascension direction (pmRA*cosDE) (pmra) (3) [ucd=pos.pm;pos.eq.ra]
+    e_pmRA (mas/yr) (F6.3)  ? Standard error of proper motion in right ascension direction (pmra_error) [ucd=stat.error;pos.pm;pos.eq.ra]
+    pmDE (mas/yr)   (F9.3)  ? Proper motion in declination direction (pmdec) (4) [ucd=pos.pm;pos.eq.dec]
+    e_pmDE (mas/yr) (F6.3)  ? Standard error of proper motion in declination direction (pmdec_error) [ucd=stat.error;pos.pm;pos.eq.dec]
+    Dup             (I1)    [0/1] Source with duplicate sources (duplicated_source) (21) [ucd=meta.code.status]
+    FG (e-/s)       (E11.4) G-band mean flux (phot_g_mean_flux) [ucd=phot.flux;stat.mean;em.opt]
+    e_FG (e-/s)     (E11.4) Error on G-band mean flux (phot_g_mean_flux_error) [ucd=stat.error;phot.flux;stat.mean]
+    Gmag (mag)      (F7.4)  G-band mean magnitude (Vega) (phot_g_mean_mag) (23) [ucd=phot.mag;stat.mean;em.opt]
+    e_Gmag (mag)    (F6.4)  Standard error of G-band mean magnitude (Vega) (added by CDS) (phot_g_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FBP (e-/s)      (E11.4) ? Mean flux in the integrated BP band (phot_bp_mean_flux) [ucd=phot.flux;stat.mean;em.opt.B]
+    e_FBP (e-/s)    (E11.4) ? Error on the integrated BP mean flux (phot_bp_mean_flux_error) (25) [ucd=stat.error;phot.flux;stat.mean]
+    BPmag (mag)     (F7.4)  ? Integrated BP mean magnitude (Vega) (phot_bp_mean_mag) (26) [ucd=phot.mag;stat.mean;em.opt.B]
+    e_BPmag (mag)   (F6.4)  ? Standard error of BP mean magnitude (Vega) (added by CDS) (phot_bp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FRP (e-/s)      (E11.4) ? Mean flux in the integrated RP band (phot_rp_mean_flux) [ucd=phot.flux.density;em.opt.R]
+    e_FRP (e-/s)    (E11.4) ? Error on the integrated RP mean flux (phot_rp_mean_flux_error) (28) [ucd=stat.error;phot.flux;stat.mean]
+    RPmag (mag)     (F7.4)  ? Integrated RP mean magnitude (Vega) (phot_rp_mean_mag) (29) [ucd=phot.mag;stat.mean;em.opt.R]
+    e_RPmag (mag)   (F6.4)  ? Standard error of RP mean magnitude (Vega) (added by CDS) (phot_rp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    BP-RP (mag)     (F7.4)  ? BP-RP colour (photBpMeanMag-photRMeanMag) (bp_rp) [ucd=phot.color;em.opt.B;em.opt.R]
+    RV (km/s)       (F7.2)  ? Spectroscopic radial velocity in the solar barycentric reference frame (radial_velocity) [ucd=spect.dopplerVeloc.opt;pos.barycenter]
+    e_RV (km/s)     (F5.2)  ? Radial velocity error (radial_velocity_error) (30) [ucd=stat.error;spect.dopplerVeloc.opt;pos.barycenter]
+    Teff (K)        (F7.2)  ? Stellar effective temperature (estimate from Apsis-Priam) (teff_val) [ucd=phys.temperature.effective]
+    AG (mag)        (F7.4)  ? Estimate of extinction in the G band from Apsis-Priam (a_g_val) [ucd=phys.absorption.gal]
+    E(BP-RP) (mag)  (F7.4)  ? Estimate of redenning E(BP-RP) from Apsis-Priam (e_bp_min_rp_val) [ucd=phot.color.excess]
+    Rad (solRad)    (F6.2)  ? Estimate of radius from Apsis-FLAME (radius_val) [ucd=phys.size.radius]
+    Lum (solLum)    (F9.3)  ? Esimate of luminosity from Apsis-FLAME (lum_val) [ucd=phys.luminosity]
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+                e                       e                                                        e_p              e_p    D                                                                        e                                      e                      e                                             
+                _RA_ICR                 _DE_ICR                                e_Pl    pmRA      mRA (m pmDE      mDE (m u                         Gma     e_Gmag             e           BPma    _BPmag             e           RPma    _RPmag BP-R    RV      _RV ( T       A       E(BP-RP Rad (s Lum      
+RA_ICRS (deg)   S (mas) DE_ICRS (deg)   S (mas) Source              Plx (mas)  x (mas) (mas/yr)  as/yr) (mas/yr)  as/yr) p FG (e-/s)   e_FG (e-/s) g (mag) (mag)  FBP (e-/s)  _FBP (e-/s) g (mag) (mag)  FRP (e-/s)  _FRP (e-/s) g (mag) (mag)  P (mag) (km/s)  km/s) eff (K) G (mag) ) (mag) olRad) (solLum) 
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+145.85689722929  0.2008 +19.86108782384  0.1055  639582718422207488    -0.0014  0.2420    -6.698  0.243     4.271  0.228 1  7.3235e+05  1.0023e+04 11.0266 0.0149  2.1087e+04  2.2869e+03 14.5414 0.1178  1.2234e+06  3.0573e+04  9.5430 0.0271  4.9984               3299.00                        
+
+#END#  -ref=VOTx31759 ===============================================================================================================================================================================================================================================================================
+
+=============
+=============
+no source in the Gaia dr2 for G190111_C04611
+=============
+================
+have source in the Gaia dr2 for G190111_C04509
+#  
+#   VizieR Astronomical Server vizier.u-strasbg.fr
+#    Date: 2019-01-11T17:57:14 [V1.99+ (14-Oct-2013)]
+#   In case of problem, please report to: cds-question@unistra.fr
+# 
+#   
+#Coosys J2000: eq_FK5 J2000 
+#INFO votable-version=1.99+ (14-Oct-2013) 
+#INFO -ref=VOTx36915 
+#INFO -out.max=100 
+#INFO queryParameters=5 
+#-oc.form=D.
+#-source=I/345/gaia2
+#-c=145.85698+19.86116
+#-c.rs=2.000000
+#-out.max=100
+#
+#INFO -c=145.856980+19.861160,rs=2. 
+#
+
+#RESOURCE=yCat_1345
+#Name: I/345
+#Title: Gaia DR2 (Gaia Collaboration, 2018)
+#Coosys H_2015.500: ICRS     
+#Table I_345_gaia2:
+#Name: I/345/gaia2
+#Title: GaiaSource DR2 data
+#---Details of Columns:
+    RA_ICRS (deg)   (F15.11) Barycentric right ascension (ICRS) at Ep=2015.5 (ra) [ucd=pos.eq.ra;meta.main]
+    e_RA_ICRS (mas) (F7.4)  Standard error of right ascension (e_RA*cosDE) (ra_error) [ucd=stat.error;pos.eq.ra]
+    DE_ICRS (deg)   (F15.11) Barycentric declination (ICRS) at Ep=2015.5 (dec) [ucd=pos.eq.dec;meta.main]
+    e_DE_ICRS (mas) (F7.4)  Standard error of declination (dec_error) [ucd=stat.error;pos.eq.dec]
+    Source          (I19)   Unique source identifier (unique within a particular Data Release) (source_id) (G2) [ucd=meta.id;meta.main]
+    Plx (mas)       (F10.4) ? Absolute stellar parallax (parallax) [ucd=pos.parallax]
+    e_Plx (mas)     (F7.4)  ? Standard error of parallax (parallax_error) [ucd=stat.error;pos.parallax]
+    pmRA (mas/yr)   (F9.3)  ? Proper motion in right ascension direction (pmRA*cosDE) (pmra) (3) [ucd=pos.pm;pos.eq.ra]
+    e_pmRA (mas/yr) (F6.3)  ? Standard error of proper motion in right ascension direction (pmra_error) [ucd=stat.error;pos.pm;pos.eq.ra]
+    pmDE (mas/yr)   (F9.3)  ? Proper motion in declination direction (pmdec) (4) [ucd=pos.pm;pos.eq.dec]
+    e_pmDE (mas/yr) (F6.3)  ? Standard error of proper motion in declination direction (pmdec_error) [ucd=stat.error;pos.pm;pos.eq.dec]
+    Dup             (I1)    [0/1] Source with duplicate sources (duplicated_source) (21) [ucd=meta.code.status]
+    FG (e-/s)       (E11.4) G-band mean flux (phot_g_mean_flux) [ucd=phot.flux;stat.mean;em.opt]
+    e_FG (e-/s)     (E11.4) Error on G-band mean flux (phot_g_mean_flux_error) [ucd=stat.error;phot.flux;stat.mean]
+    Gmag (mag)      (F7.4)  G-band mean magnitude (Vega) (phot_g_mean_mag) (23) [ucd=phot.mag;stat.mean;em.opt]
+    e_Gmag (mag)    (F6.4)  Standard error of G-band mean magnitude (Vega) (added by CDS) (phot_g_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FBP (e-/s)      (E11.4) ? Mean flux in the integrated BP band (phot_bp_mean_flux) [ucd=phot.flux;stat.mean;em.opt.B]
+    e_FBP (e-/s)    (E11.4) ? Error on the integrated BP mean flux (phot_bp_mean_flux_error) (25) [ucd=stat.error;phot.flux;stat.mean]
+    BPmag (mag)     (F7.4)  ? Integrated BP mean magnitude (Vega) (phot_bp_mean_mag) (26) [ucd=phot.mag;stat.mean;em.opt.B]
+    e_BPmag (mag)   (F6.4)  ? Standard error of BP mean magnitude (Vega) (added by CDS) (phot_bp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FRP (e-/s)      (E11.4) ? Mean flux in the integrated RP band (phot_rp_mean_flux) [ucd=phot.flux.density;em.opt.R]
+    e_FRP (e-/s)    (E11.4) ? Error on the integrated RP mean flux (phot_rp_mean_flux_error) (28) [ucd=stat.error;phot.flux;stat.mean]
+    RPmag (mag)     (F7.4)  ? Integrated RP mean magnitude (Vega) (phot_rp_mean_mag) (29) [ucd=phot.mag;stat.mean;em.opt.R]
+    e_RPmag (mag)   (F6.4)  ? Standard error of RP mean magnitude (Vega) (added by CDS) (phot_rp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    BP-RP (mag)     (F7.4)  ? BP-RP colour (photBpMeanMag-photRMeanMag) (bp_rp) [ucd=phot.color;em.opt.B;em.opt.R]
+    RV (km/s)       (F7.2)  ? Spectroscopic radial velocity in the solar barycentric reference frame (radial_velocity) [ucd=spect.dopplerVeloc.opt;pos.barycenter]
+    e_RV (km/s)     (F5.2)  ? Radial velocity error (radial_velocity_error) (30) [ucd=stat.error;spect.dopplerVeloc.opt;pos.barycenter]
+    Teff (K)        (F7.2)  ? Stellar effective temperature (estimate from Apsis-Priam) (teff_val) [ucd=phys.temperature.effective]
+    AG (mag)        (F7.4)  ? Estimate of extinction in the G band from Apsis-Priam (a_g_val) [ucd=phys.absorption.gal]
+    E(BP-RP) (mag)  (F7.4)  ? Estimate of redenning E(BP-RP) from Apsis-Priam (e_bp_min_rp_val) [ucd=phot.color.excess]
+    Rad (solRad)    (F6.2)  ? Estimate of radius from Apsis-FLAME (radius_val) [ucd=phys.size.radius]
+    Lum (solLum)    (F9.3)  ? Esimate of luminosity from Apsis-FLAME (lum_val) [ucd=phys.luminosity]
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+                e                       e                                                        e_p              e_p    D                                                                        e                                      e                      e                                             
+                _RA_ICR                 _DE_ICR                                e_Pl    pmRA      mRA (m pmDE      mDE (m u                         Gma     e_Gmag             e           BPma    _BPmag             e           RPma    _RPmag BP-R    RV      _RV ( T       A       E(BP-RP Rad (s Lum      
+RA_ICRS (deg)   S (mas) DE_ICRS (deg)   S (mas) Source              Plx (mas)  x (mas) (mas/yr)  as/yr) (mas/yr)  as/yr) p FG (e-/s)   e_FG (e-/s) g (mag) (mag)  FBP (e-/s)  _FBP (e-/s) g (mag) (mag)  FRP (e-/s)  _FRP (e-/s) g (mag) (mag)  P (mag) (km/s)  km/s) eff (K) G (mag) ) (mag) olRad) (solLum) 
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+145.85689722929  0.2008 +19.86108782384  0.1055  639582718422207488    -0.0014  0.2420    -6.698  0.243     4.271  0.228 1  7.3235e+05  1.0023e+04 11.0266 0.0149  2.1087e+04  2.2869e+03 14.5414 0.1178  1.2234e+06  3.0573e+04  9.5430 0.0271  4.9984               3299.00                        
+
+#END#  -ref=VOTx36915 ===============================================================================================================================================================================================================================================================================
+
+=============
+=============
+no source in the Gaia dr2 for G190111_C04611
+=============
+================
+have source in the Gaia dr2 for G190111_C04509
+#  
+#   VizieR Astronomical Server vizier.u-strasbg.fr
+#    Date: 2019-01-11T17:57:28 [V1.99+ (14-Oct-2013)]
+#   In case of problem, please report to: cds-question@unistra.fr
+# 
+#   
+#Coosys J2000: eq_FK5 J2000 
+#INFO votable-version=1.99+ (14-Oct-2013) 
+#INFO -ref=VOTx37640 
+#INFO -out.max=100 
+#INFO queryParameters=5 
+#-oc.form=D.
+#-source=I/345/gaia2
+#-c=145.85698+19.86116
+#-c.rs=2.000000
+#-out.max=100
+#
+#INFO -c=145.856980+19.861160,rs=2. 
+#
+
+#RESOURCE=yCat_1345
+#Name: I/345
+#Title: Gaia DR2 (Gaia Collaboration, 2018)
+#Coosys H_2015.500: ICRS     
+#Table I_345_gaia2:
+#Name: I/345/gaia2
+#Title: GaiaSource DR2 data
+#---Details of Columns:
+    RA_ICRS (deg)   (F15.11) Barycentric right ascension (ICRS) at Ep=2015.5 (ra) [ucd=pos.eq.ra;meta.main]
+    e_RA_ICRS (mas) (F7.4)  Standard error of right ascension (e_RA*cosDE) (ra_error) [ucd=stat.error;pos.eq.ra]
+    DE_ICRS (deg)   (F15.11) Barycentric declination (ICRS) at Ep=2015.5 (dec) [ucd=pos.eq.dec;meta.main]
+    e_DE_ICRS (mas) (F7.4)  Standard error of declination (dec_error) [ucd=stat.error;pos.eq.dec]
+    Source          (I19)   Unique source identifier (unique within a particular Data Release) (source_id) (G2) [ucd=meta.id;meta.main]
+    Plx (mas)       (F10.4) ? Absolute stellar parallax (parallax) [ucd=pos.parallax]
+    e_Plx (mas)     (F7.4)  ? Standard error of parallax (parallax_error) [ucd=stat.error;pos.parallax]
+    pmRA (mas/yr)   (F9.3)  ? Proper motion in right ascension direction (pmRA*cosDE) (pmra) (3) [ucd=pos.pm;pos.eq.ra]
+    e_pmRA (mas/yr) (F6.3)  ? Standard error of proper motion in right ascension direction (pmra_error) [ucd=stat.error;pos.pm;pos.eq.ra]
+    pmDE (mas/yr)   (F9.3)  ? Proper motion in declination direction (pmdec) (4) [ucd=pos.pm;pos.eq.dec]
+    e_pmDE (mas/yr) (F6.3)  ? Standard error of proper motion in declination direction (pmdec_error) [ucd=stat.error;pos.pm;pos.eq.dec]
+    Dup             (I1)    [0/1] Source with duplicate sources (duplicated_source) (21) [ucd=meta.code.status]
+    FG (e-/s)       (E11.4) G-band mean flux (phot_g_mean_flux) [ucd=phot.flux;stat.mean;em.opt]
+    e_FG (e-/s)     (E11.4) Error on G-band mean flux (phot_g_mean_flux_error) [ucd=stat.error;phot.flux;stat.mean]
+    Gmag (mag)      (F7.4)  G-band mean magnitude (Vega) (phot_g_mean_mag) (23) [ucd=phot.mag;stat.mean;em.opt]
+    e_Gmag (mag)    (F6.4)  Standard error of G-band mean magnitude (Vega) (added by CDS) (phot_g_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FBP (e-/s)      (E11.4) ? Mean flux in the integrated BP band (phot_bp_mean_flux) [ucd=phot.flux;stat.mean;em.opt.B]
+    e_FBP (e-/s)    (E11.4) ? Error on the integrated BP mean flux (phot_bp_mean_flux_error) (25) [ucd=stat.error;phot.flux;stat.mean]
+    BPmag (mag)     (F7.4)  ? Integrated BP mean magnitude (Vega) (phot_bp_mean_mag) (26) [ucd=phot.mag;stat.mean;em.opt.B]
+    e_BPmag (mag)   (F6.4)  ? Standard error of BP mean magnitude (Vega) (added by CDS) (phot_bp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FRP (e-/s)      (E11.4) ? Mean flux in the integrated RP band (phot_rp_mean_flux) [ucd=phot.flux.density;em.opt.R]
+    e_FRP (e-/s)    (E11.4) ? Error on the integrated RP mean flux (phot_rp_mean_flux_error) (28) [ucd=stat.error;phot.flux;stat.mean]
+    RPmag (mag)     (F7.4)  ? Integrated RP mean magnitude (Vega) (phot_rp_mean_mag) (29) [ucd=phot.mag;stat.mean;em.opt.R]
+    e_RPmag (mag)   (F6.4)  ? Standard error of RP mean magnitude (Vega) (added by CDS) (phot_rp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    BP-RP (mag)     (F7.4)  ? BP-RP colour (photBpMeanMag-photRMeanMag) (bp_rp) [ucd=phot.color;em.opt.B;em.opt.R]
+    RV (km/s)       (F7.2)  ? Spectroscopic radial velocity in the solar barycentric reference frame (radial_velocity) [ucd=spect.dopplerVeloc.opt;pos.barycenter]
+    e_RV (km/s)     (F5.2)  ? Radial velocity error (radial_velocity_error) (30) [ucd=stat.error;spect.dopplerVeloc.opt;pos.barycenter]
+    Teff (K)        (F7.2)  ? Stellar effective temperature (estimate from Apsis-Priam) (teff_val) [ucd=phys.temperature.effective]
+    AG (mag)        (F7.4)  ? Estimate of extinction in the G band from Apsis-Priam (a_g_val) [ucd=phys.absorption.gal]
+    E(BP-RP) (mag)  (F7.4)  ? Estimate of redenning E(BP-RP) from Apsis-Priam (e_bp_min_rp_val) [ucd=phot.color.excess]
+    Rad (solRad)    (F6.2)  ? Estimate of radius from Apsis-FLAME (radius_val) [ucd=phys.size.radius]
+    Lum (solLum)    (F9.3)  ? Esimate of luminosity from Apsis-FLAME (lum_val) [ucd=phys.luminosity]
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+                e                       e                                                        e_p              e_p    D                                                                        e                                      e                      e                                             
+                _RA_ICR                 _DE_ICR                                e_Pl    pmRA      mRA (m pmDE      mDE (m u                         Gma     e_Gmag             e           BPma    _BPmag             e           RPma    _RPmag BP-R    RV      _RV ( T       A       E(BP-RP Rad (s Lum      
+RA_ICRS (deg)   S (mas) DE_ICRS (deg)   S (mas) Source              Plx (mas)  x (mas) (mas/yr)  as/yr) (mas/yr)  as/yr) p FG (e-/s)   e_FG (e-/s) g (mag) (mag)  FBP (e-/s)  _FBP (e-/s) g (mag) (mag)  FRP (e-/s)  _FRP (e-/s) g (mag) (mag)  P (mag) (km/s)  km/s) eff (K) G (mag) ) (mag) olRad) (solLum) 
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+145.85689722929  0.2008 +19.86108782384  0.1055  639582718422207488    -0.0014  0.2420    -6.698  0.243     4.271  0.228 1  7.3235e+05  1.0023e+04 11.0266 0.0149  2.1087e+04  2.2869e+03 14.5414 0.1178  1.2234e+06  3.0573e+04  9.5430 0.0271  4.9984               3299.00                        
+
+#END#  -ref=VOTx37640 ===============================================================================================================================================================================================================================================================================
+
+=============
+=============
+no source in the Gaia dr2 for G190111_C04611
+=============
+================
+have source in the Gaia dr2 for G190111_C04509
+#  
+#   VizieR Astronomical Server vizier.u-strasbg.fr
+#    Date: 2019-01-11T17:59:21 [V1.99+ (14-Oct-2013)]
+#   In case of problem, please report to: cds-question@unistra.fr
+# 
+#   
+#Coosys J2000: eq_FK5 J2000 
+#INFO votable-version=1.99+ (14-Oct-2013) 
+#INFO -ref=VOTx44225 
+#INFO -out.max=100 
+#INFO queryParameters=5 
+#-oc.form=D.
+#-source=I/345/gaia2
+#-c=145.85698+19.86116
+#-c.rs=2.000000
+#-out.max=100
+#
+#INFO -c=145.856980+19.861160,rs=2. 
+#
+
+#RESOURCE=yCat_1345
+#Name: I/345
+#Title: Gaia DR2 (Gaia Collaboration, 2018)
+#Coosys H_2015.500: ICRS     
+#Table I_345_gaia2:
+#Name: I/345/gaia2
+#Title: GaiaSource DR2 data
+#---Details of Columns:
+    RA_ICRS (deg)   (F15.11) Barycentric right ascension (ICRS) at Ep=2015.5 (ra) [ucd=pos.eq.ra;meta.main]
+    e_RA_ICRS (mas) (F7.4)  Standard error of right ascension (e_RA*cosDE) (ra_error) [ucd=stat.error;pos.eq.ra]
+    DE_ICRS (deg)   (F15.11) Barycentric declination (ICRS) at Ep=2015.5 (dec) [ucd=pos.eq.dec;meta.main]
+    e_DE_ICRS (mas) (F7.4)  Standard error of declination (dec_error) [ucd=stat.error;pos.eq.dec]
+    Source          (I19)   Unique source identifier (unique within a particular Data Release) (source_id) (G2) [ucd=meta.id;meta.main]
+    Plx (mas)       (F10.4) ? Absolute stellar parallax (parallax) [ucd=pos.parallax]
+    e_Plx (mas)     (F7.4)  ? Standard error of parallax (parallax_error) [ucd=stat.error;pos.parallax]
+    pmRA (mas/yr)   (F9.3)  ? Proper motion in right ascension direction (pmRA*cosDE) (pmra) (3) [ucd=pos.pm;pos.eq.ra]
+    e_pmRA (mas/yr) (F6.3)  ? Standard error of proper motion in right ascension direction (pmra_error) [ucd=stat.error;pos.pm;pos.eq.ra]
+    pmDE (mas/yr)   (F9.3)  ? Proper motion in declination direction (pmdec) (4) [ucd=pos.pm;pos.eq.dec]
+    e_pmDE (mas/yr) (F6.3)  ? Standard error of proper motion in declination direction (pmdec_error) [ucd=stat.error;pos.pm;pos.eq.dec]
+    Dup             (I1)    [0/1] Source with duplicate sources (duplicated_source) (21) [ucd=meta.code.status]
+    FG (e-/s)       (E11.4) G-band mean flux (phot_g_mean_flux) [ucd=phot.flux;stat.mean;em.opt]
+    e_FG (e-/s)     (E11.4) Error on G-band mean flux (phot_g_mean_flux_error) [ucd=stat.error;phot.flux;stat.mean]
+    Gmag (mag)      (F7.4)  G-band mean magnitude (Vega) (phot_g_mean_mag) (23) [ucd=phot.mag;stat.mean;em.opt]
+    e_Gmag (mag)    (F6.4)  Standard error of G-band mean magnitude (Vega) (added by CDS) (phot_g_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FBP (e-/s)      (E11.4) ? Mean flux in the integrated BP band (phot_bp_mean_flux) [ucd=phot.flux;stat.mean;em.opt.B]
+    e_FBP (e-/s)    (E11.4) ? Error on the integrated BP mean flux (phot_bp_mean_flux_error) (25) [ucd=stat.error;phot.flux;stat.mean]
+    BPmag (mag)     (F7.4)  ? Integrated BP mean magnitude (Vega) (phot_bp_mean_mag) (26) [ucd=phot.mag;stat.mean;em.opt.B]
+    e_BPmag (mag)   (F6.4)  ? Standard error of BP mean magnitude (Vega) (added by CDS) (phot_bp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FRP (e-/s)      (E11.4) ? Mean flux in the integrated RP band (phot_rp_mean_flux) [ucd=phot.flux.density;em.opt.R]
+    e_FRP (e-/s)    (E11.4) ? Error on the integrated RP mean flux (phot_rp_mean_flux_error) (28) [ucd=stat.error;phot.flux;stat.mean]
+    RPmag (mag)     (F7.4)  ? Integrated RP mean magnitude (Vega) (phot_rp_mean_mag) (29) [ucd=phot.mag;stat.mean;em.opt.R]
+    e_RPmag (mag)   (F6.4)  ? Standard error of RP mean magnitude (Vega) (added by CDS) (phot_rp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    BP-RP (mag)     (F7.4)  ? BP-RP colour (photBpMeanMag-photRMeanMag) (bp_rp) [ucd=phot.color;em.opt.B;em.opt.R]
+    RV (km/s)       (F7.2)  ? Spectroscopic radial velocity in the solar barycentric reference frame (radial_velocity) [ucd=spect.dopplerVeloc.opt;pos.barycenter]
+    e_RV (km/s)     (F5.2)  ? Radial velocity error (radial_velocity_error) (30) [ucd=stat.error;spect.dopplerVeloc.opt;pos.barycenter]
+    Teff (K)        (F7.2)  ? Stellar effective temperature (estimate from Apsis-Priam) (teff_val) [ucd=phys.temperature.effective]
+    AG (mag)        (F7.4)  ? Estimate of extinction in the G band from Apsis-Priam (a_g_val) [ucd=phys.absorption.gal]
+    E(BP-RP) (mag)  (F7.4)  ? Estimate of redenning E(BP-RP) from Apsis-Priam (e_bp_min_rp_val) [ucd=phot.color.excess]
+    Rad (solRad)    (F6.2)  ? Estimate of radius from Apsis-FLAME (radius_val) [ucd=phys.size.radius]
+    Lum (solLum)    (F9.3)  ? Esimate of luminosity from Apsis-FLAME (lum_val) [ucd=phys.luminosity]
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+                e                       e                                                        e_p              e_p    D                                                                        e                                      e                      e                                             
+                _RA_ICR                 _DE_ICR                                e_Pl    pmRA      mRA (m pmDE      mDE (m u                         Gma     e_Gmag             e           BPma    _BPmag             e           RPma    _RPmag BP-R    RV      _RV ( T       A       E(BP-RP Rad (s Lum      
+RA_ICRS (deg)   S (mas) DE_ICRS (deg)   S (mas) Source              Plx (mas)  x (mas) (mas/yr)  as/yr) (mas/yr)  as/yr) p FG (e-/s)   e_FG (e-/s) g (mag) (mag)  FBP (e-/s)  _FBP (e-/s) g (mag) (mag)  FRP (e-/s)  _FRP (e-/s) g (mag) (mag)  P (mag) (km/s)  km/s) eff (K) G (mag) ) (mag) olRad) (solLum) 
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+145.85689722929  0.2008 +19.86108782384  0.1055  639582718422207488    -0.0014  0.2420    -6.698  0.243     4.271  0.228 1  7.3235e+05  1.0023e+04 11.0266 0.0149  2.1087e+04  2.2869e+03 14.5414 0.1178  1.2234e+06  3.0573e+04  9.5430 0.0271  4.9984               3299.00                        
+
+#END#  -ref=VOTx44225 ===============================================================================================================================================================================================================================================================================
+
+=============
+=============
+no source in the Gaia dr2 for G190111_C04611
+=============
+=============
+no source in the Gaia dr2 for G190111_C04611
+=============
+================
+have source in the Gaia dr2 for G190111_C04509
+#  
+#   VizieR Astronomical Server vizier.u-strasbg.fr
+#    Date: 2019-01-11T18:02:43 [V1.99+ (14-Oct-2013)]
+#   In case of problem, please report to: cds-question@unistra.fr
+# 
+#   
+#Coosys J2000: eq_FK5 J2000 
+#INFO votable-version=1.99+ (14-Oct-2013) 
+#INFO -ref=VOTx8921 
+#INFO -out.max=100 
+#INFO queryParameters=5 
+#-oc.form=D.
+#-source=I/345/gaia2
+#-c=145.85698+19.86116
+#-c.rs=2.000000
+#-out.max=100
+#
+#INFO -c=145.856980+19.861160,rs=2. 
+#
+
+#RESOURCE=yCat_1345
+#Name: I/345
+#Title: Gaia DR2 (Gaia Collaboration, 2018)
+#Coosys H_2015.500: ICRS     
+#Table I_345_gaia2:
+#Name: I/345/gaia2
+#Title: GaiaSource DR2 data
+#---Details of Columns:
+    RA_ICRS (deg)   (F15.11) Barycentric right ascension (ICRS) at Ep=2015.5 (ra) [ucd=pos.eq.ra;meta.main]
+    e_RA_ICRS (mas) (F7.4)  Standard error of right ascension (e_RA*cosDE) (ra_error) [ucd=stat.error;pos.eq.ra]
+    DE_ICRS (deg)   (F15.11) Barycentric declination (ICRS) at Ep=2015.5 (dec) [ucd=pos.eq.dec;meta.main]
+    e_DE_ICRS (mas) (F7.4)  Standard error of declination (dec_error) [ucd=stat.error;pos.eq.dec]
+    Source          (I19)   Unique source identifier (unique within a particular Data Release) (source_id) (G2) [ucd=meta.id;meta.main]
+    Plx (mas)       (F10.4) ? Absolute stellar parallax (parallax) [ucd=pos.parallax]
+    e_Plx (mas)     (F7.4)  ? Standard error of parallax (parallax_error) [ucd=stat.error;pos.parallax]
+    pmRA (mas/yr)   (F9.3)  ? Proper motion in right ascension direction (pmRA*cosDE) (pmra) (3) [ucd=pos.pm;pos.eq.ra]
+    e_pmRA (mas/yr) (F6.3)  ? Standard error of proper motion in right ascension direction (pmra_error) [ucd=stat.error;pos.pm;pos.eq.ra]
+    pmDE (mas/yr)   (F9.3)  ? Proper motion in declination direction (pmdec) (4) [ucd=pos.pm;pos.eq.dec]
+    e_pmDE (mas/yr) (F6.3)  ? Standard error of proper motion in declination direction (pmdec_error) [ucd=stat.error;pos.pm;pos.eq.dec]
+    Dup             (I1)    [0/1] Source with duplicate sources (duplicated_source) (21) [ucd=meta.code.status]
+    FG (e-/s)       (E11.4) G-band mean flux (phot_g_mean_flux) [ucd=phot.flux;stat.mean;em.opt]
+    e_FG (e-/s)     (E11.4) Error on G-band mean flux (phot_g_mean_flux_error) [ucd=stat.error;phot.flux;stat.mean]
+    Gmag (mag)      (F7.4)  G-band mean magnitude (Vega) (phot_g_mean_mag) (23) [ucd=phot.mag;stat.mean;em.opt]
+    e_Gmag (mag)    (F6.4)  Standard error of G-band mean magnitude (Vega) (added by CDS) (phot_g_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FBP (e-/s)      (E11.4) ? Mean flux in the integrated BP band (phot_bp_mean_flux) [ucd=phot.flux;stat.mean;em.opt.B]
+    e_FBP (e-/s)    (E11.4) ? Error on the integrated BP mean flux (phot_bp_mean_flux_error) (25) [ucd=stat.error;phot.flux;stat.mean]
+    BPmag (mag)     (F7.4)  ? Integrated BP mean magnitude (Vega) (phot_bp_mean_mag) (26) [ucd=phot.mag;stat.mean;em.opt.B]
+    e_BPmag (mag)   (F6.4)  ? Standard error of BP mean magnitude (Vega) (added by CDS) (phot_bp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FRP (e-/s)      (E11.4) ? Mean flux in the integrated RP band (phot_rp_mean_flux) [ucd=phot.flux.density;em.opt.R]
+    e_FRP (e-/s)    (E11.4) ? Error on the integrated RP mean flux (phot_rp_mean_flux_error) (28) [ucd=stat.error;phot.flux;stat.mean]
+    RPmag (mag)     (F7.4)  ? Integrated RP mean magnitude (Vega) (phot_rp_mean_mag) (29) [ucd=phot.mag;stat.mean;em.opt.R]
+    e_RPmag (mag)   (F6.4)  ? Standard error of RP mean magnitude (Vega) (added by CDS) (phot_rp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    BP-RP (mag)     (F7.4)  ? BP-RP colour (photBpMeanMag-photRMeanMag) (bp_rp) [ucd=phot.color;em.opt.B;em.opt.R]
+    RV (km/s)       (F7.2)  ? Spectroscopic radial velocity in the solar barycentric reference frame (radial_velocity) [ucd=spect.dopplerVeloc.opt;pos.barycenter]
+    e_RV (km/s)     (F5.2)  ? Radial velocity error (radial_velocity_error) (30) [ucd=stat.error;spect.dopplerVeloc.opt;pos.barycenter]
+    Teff (K)        (F7.2)  ? Stellar effective temperature (estimate from Apsis-Priam) (teff_val) [ucd=phys.temperature.effective]
+    AG (mag)        (F7.4)  ? Estimate of extinction in the G band from Apsis-Priam (a_g_val) [ucd=phys.absorption.gal]
+    E(BP-RP) (mag)  (F7.4)  ? Estimate of redenning E(BP-RP) from Apsis-Priam (e_bp_min_rp_val) [ucd=phot.color.excess]
+    Rad (solRad)    (F6.2)  ? Estimate of radius from Apsis-FLAME (radius_val) [ucd=phys.size.radius]
+    Lum (solLum)    (F9.3)  ? Esimate of luminosity from Apsis-FLAME (lum_val) [ucd=phys.luminosity]
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+                e                       e                                                        e_p              e_p    D                                                                        e                                      e                      e                                             
+                _RA_ICR                 _DE_ICR                                e_Pl    pmRA      mRA (m pmDE      mDE (m u                         Gma     e_Gmag             e           BPma    _BPmag             e           RPma    _RPmag BP-R    RV      _RV ( T       A       E(BP-RP Rad (s Lum      
+RA_ICRS (deg)   S (mas) DE_ICRS (deg)   S (mas) Source              Plx (mas)  x (mas) (mas/yr)  as/yr) (mas/yr)  as/yr) p FG (e-/s)   e_FG (e-/s) g (mag) (mag)  FBP (e-/s)  _FBP (e-/s) g (mag) (mag)  FRP (e-/s)  _FRP (e-/s) g (mag) (mag)  P (mag) (km/s)  km/s) eff (K) G (mag) ) (mag) olRad) (solLum) 
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+145.85689722929  0.2008 +19.86108782384  0.1055  639582718422207488    -0.0014  0.2420    -6.698  0.243     4.271  0.228 1  7.3235e+05  1.0023e+04 11.0266 0.0149  2.1087e+04  2.2869e+03 14.5414 0.1178  1.2234e+06  3.0573e+04  9.5430 0.0271  4.9984               3299.00                        
+
+#END#  -ref=VOTx8921 ================================================================================================================================================================================================================================================================================
+
+=============
+=============
+no source in the Gaia dr2 for G190111_C04611
+=============
+================
+have source in the Gaia dr2 for G190111_C04509
+#  
+#   VizieR Astronomical Server vizier.u-strasbg.fr
+#    Date: 2019-01-11T18:04:04 [V1.99+ (14-Oct-2013)]
+#   In case of problem, please report to: cds-question@unistra.fr
+# 
+#   
+#Coosys J2000: eq_FK5 J2000 
+#INFO votable-version=1.99+ (14-Oct-2013) 
+#INFO -ref=VOTx14373 
+#INFO -out.max=100 
+#INFO queryParameters=5 
+#-oc.form=D.
+#-source=I/345/gaia2
+#-c=145.85698+19.86116
+#-c.rs=2.000000
+#-out.max=100
+#
+#INFO -c=145.856980+19.861160,rs=2. 
+#
+
+#RESOURCE=yCat_1345
+#Name: I/345
+#Title: Gaia DR2 (Gaia Collaboration, 2018)
+#Coosys H_2015.500: ICRS     
+#Table I_345_gaia2:
+#Name: I/345/gaia2
+#Title: GaiaSource DR2 data
+#---Details of Columns:
+    RA_ICRS (deg)   (F15.11) Barycentric right ascension (ICRS) at Ep=2015.5 (ra) [ucd=pos.eq.ra;meta.main]
+    e_RA_ICRS (mas) (F7.4)  Standard error of right ascension (e_RA*cosDE) (ra_error) [ucd=stat.error;pos.eq.ra]
+    DE_ICRS (deg)   (F15.11) Barycentric declination (ICRS) at Ep=2015.5 (dec) [ucd=pos.eq.dec;meta.main]
+    e_DE_ICRS (mas) (F7.4)  Standard error of declination (dec_error) [ucd=stat.error;pos.eq.dec]
+    Source          (I19)   Unique source identifier (unique within a particular Data Release) (source_id) (G2) [ucd=meta.id;meta.main]
+    Plx (mas)       (F10.4) ? Absolute stellar parallax (parallax) [ucd=pos.parallax]
+    e_Plx (mas)     (F7.4)  ? Standard error of parallax (parallax_error) [ucd=stat.error;pos.parallax]
+    pmRA (mas/yr)   (F9.3)  ? Proper motion in right ascension direction (pmRA*cosDE) (pmra) (3) [ucd=pos.pm;pos.eq.ra]
+    e_pmRA (mas/yr) (F6.3)  ? Standard error of proper motion in right ascension direction (pmra_error) [ucd=stat.error;pos.pm;pos.eq.ra]
+    pmDE (mas/yr)   (F9.3)  ? Proper motion in declination direction (pmdec) (4) [ucd=pos.pm;pos.eq.dec]
+    e_pmDE (mas/yr) (F6.3)  ? Standard error of proper motion in declination direction (pmdec_error) [ucd=stat.error;pos.pm;pos.eq.dec]
+    Dup             (I1)    [0/1] Source with duplicate sources (duplicated_source) (21) [ucd=meta.code.status]
+    FG (e-/s)       (E11.4) G-band mean flux (phot_g_mean_flux) [ucd=phot.flux;stat.mean;em.opt]
+    e_FG (e-/s)     (E11.4) Error on G-band mean flux (phot_g_mean_flux_error) [ucd=stat.error;phot.flux;stat.mean]
+    Gmag (mag)      (F7.4)  G-band mean magnitude (Vega) (phot_g_mean_mag) (23) [ucd=phot.mag;stat.mean;em.opt]
+    e_Gmag (mag)    (F6.4)  Standard error of G-band mean magnitude (Vega) (added by CDS) (phot_g_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FBP (e-/s)      (E11.4) ? Mean flux in the integrated BP band (phot_bp_mean_flux) [ucd=phot.flux;stat.mean;em.opt.B]
+    e_FBP (e-/s)    (E11.4) ? Error on the integrated BP mean flux (phot_bp_mean_flux_error) (25) [ucd=stat.error;phot.flux;stat.mean]
+    BPmag (mag)     (F7.4)  ? Integrated BP mean magnitude (Vega) (phot_bp_mean_mag) (26) [ucd=phot.mag;stat.mean;em.opt.B]
+    e_BPmag (mag)   (F6.4)  ? Standard error of BP mean magnitude (Vega) (added by CDS) (phot_bp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FRP (e-/s)      (E11.4) ? Mean flux in the integrated RP band (phot_rp_mean_flux) [ucd=phot.flux.density;em.opt.R]
+    e_FRP (e-/s)    (E11.4) ? Error on the integrated RP mean flux (phot_rp_mean_flux_error) (28) [ucd=stat.error;phot.flux;stat.mean]
+    RPmag (mag)     (F7.4)  ? Integrated RP mean magnitude (Vega) (phot_rp_mean_mag) (29) [ucd=phot.mag;stat.mean;em.opt.R]
+    e_RPmag (mag)   (F6.4)  ? Standard error of RP mean magnitude (Vega) (added by CDS) (phot_rp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    BP-RP (mag)     (F7.4)  ? BP-RP colour (photBpMeanMag-photRMeanMag) (bp_rp) [ucd=phot.color;em.opt.B;em.opt.R]
+    RV (km/s)       (F7.2)  ? Spectroscopic radial velocity in the solar barycentric reference frame (radial_velocity) [ucd=spect.dopplerVeloc.opt;pos.barycenter]
+    e_RV (km/s)     (F5.2)  ? Radial velocity error (radial_velocity_error) (30) [ucd=stat.error;spect.dopplerVeloc.opt;pos.barycenter]
+    Teff (K)        (F7.2)  ? Stellar effective temperature (estimate from Apsis-Priam) (teff_val) [ucd=phys.temperature.effective]
+    AG (mag)        (F7.4)  ? Estimate of extinction in the G band from Apsis-Priam (a_g_val) [ucd=phys.absorption.gal]
+    E(BP-RP) (mag)  (F7.4)  ? Estimate of redenning E(BP-RP) from Apsis-Priam (e_bp_min_rp_val) [ucd=phot.color.excess]
+    Rad (solRad)    (F6.2)  ? Estimate of radius from Apsis-FLAME (radius_val) [ucd=phys.size.radius]
+    Lum (solLum)    (F9.3)  ? Esimate of luminosity from Apsis-FLAME (lum_val) [ucd=phys.luminosity]
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+                e                       e                                                        e_p              e_p    D                                                                        e                                      e                      e                                             
+                _RA_ICR                 _DE_ICR                                e_Pl    pmRA      mRA (m pmDE      mDE (m u                         Gma     e_Gmag             e           BPma    _BPmag             e           RPma    _RPmag BP-R    RV      _RV ( T       A       E(BP-RP Rad (s Lum      
+RA_ICRS (deg)   S (mas) DE_ICRS (deg)   S (mas) Source              Plx (mas)  x (mas) (mas/yr)  as/yr) (mas/yr)  as/yr) p FG (e-/s)   e_FG (e-/s) g (mag) (mag)  FBP (e-/s)  _FBP (e-/s) g (mag) (mag)  FRP (e-/s)  _FRP (e-/s) g (mag) (mag)  P (mag) (km/s)  km/s) eff (K) G (mag) ) (mag) olRad) (solLum) 
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+145.85689722929  0.2008 +19.86108782384  0.1055  639582718422207488    -0.0014  0.2420    -6.698  0.243     4.271  0.228 1  7.3235e+05  1.0023e+04 11.0266 0.0149  2.1087e+04  2.2869e+03 14.5414 0.1178  1.2234e+06  3.0573e+04  9.5430 0.0271  4.9984               3299.00                        
+
+#END#  -ref=VOTx14373 ===============================================================================================================================================================================================================================================================================
+
+=============
+=============
+no source in the Gaia dr2 for G190111_C04611
+=============
+================
+have source in the Gaia dr2 for G190111_C04509
+#  
+#   VizieR Astronomical Server vizier.u-strasbg.fr
+#    Date: 2019-01-11T18:07:15 [V1.99+ (14-Oct-2013)]
+#   In case of problem, please report to: cds-question@unistra.fr
+# 
+#   
+#Coosys J2000: eq_FK5 J2000 
+#INFO votable-version=1.99+ (14-Oct-2013) 
+#INFO -ref=VOTx27890 
+#INFO -out.max=100 
+#INFO queryParameters=5 
+#-oc.form=D.
+#-source=I/345/gaia2
+#-c=145.85698+19.86116
+#-c.rs=2.000000
+#-out.max=100
+#
+#INFO -c=145.856980+19.861160,rs=2. 
+#
+
+#RESOURCE=yCat_1345
+#Name: I/345
+#Title: Gaia DR2 (Gaia Collaboration, 2018)
+#Coosys H_2015.500: ICRS     
+#Table I_345_gaia2:
+#Name: I/345/gaia2
+#Title: GaiaSource DR2 data
+#---Details of Columns:
+    RA_ICRS (deg)   (F15.11) Barycentric right ascension (ICRS) at Ep=2015.5 (ra) [ucd=pos.eq.ra;meta.main]
+    e_RA_ICRS (mas) (F7.4)  Standard error of right ascension (e_RA*cosDE) (ra_error) [ucd=stat.error;pos.eq.ra]
+    DE_ICRS (deg)   (F15.11) Barycentric declination (ICRS) at Ep=2015.5 (dec) [ucd=pos.eq.dec;meta.main]
+    e_DE_ICRS (mas) (F7.4)  Standard error of declination (dec_error) [ucd=stat.error;pos.eq.dec]
+    Source          (I19)   Unique source identifier (unique within a particular Data Release) (source_id) (G2) [ucd=meta.id;meta.main]
+    Plx (mas)       (F10.4) ? Absolute stellar parallax (parallax) [ucd=pos.parallax]
+    e_Plx (mas)     (F7.4)  ? Standard error of parallax (parallax_error) [ucd=stat.error;pos.parallax]
+    pmRA (mas/yr)   (F9.3)  ? Proper motion in right ascension direction (pmRA*cosDE) (pmra) (3) [ucd=pos.pm;pos.eq.ra]
+    e_pmRA (mas/yr) (F6.3)  ? Standard error of proper motion in right ascension direction (pmra_error) [ucd=stat.error;pos.pm;pos.eq.ra]
+    pmDE (mas/yr)   (F9.3)  ? Proper motion in declination direction (pmdec) (4) [ucd=pos.pm;pos.eq.dec]
+    e_pmDE (mas/yr) (F6.3)  ? Standard error of proper motion in declination direction (pmdec_error) [ucd=stat.error;pos.pm;pos.eq.dec]
+    Dup             (I1)    [0/1] Source with duplicate sources (duplicated_source) (21) [ucd=meta.code.status]
+    FG (e-/s)       (E11.4) G-band mean flux (phot_g_mean_flux) [ucd=phot.flux;stat.mean;em.opt]
+    e_FG (e-/s)     (E11.4) Error on G-band mean flux (phot_g_mean_flux_error) [ucd=stat.error;phot.flux;stat.mean]
+    Gmag (mag)      (F7.4)  G-band mean magnitude (Vega) (phot_g_mean_mag) (23) [ucd=phot.mag;stat.mean;em.opt]
+    e_Gmag (mag)    (F6.4)  Standard error of G-band mean magnitude (Vega) (added by CDS) (phot_g_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FBP (e-/s)      (E11.4) ? Mean flux in the integrated BP band (phot_bp_mean_flux) [ucd=phot.flux;stat.mean;em.opt.B]
+    e_FBP (e-/s)    (E11.4) ? Error on the integrated BP mean flux (phot_bp_mean_flux_error) (25) [ucd=stat.error;phot.flux;stat.mean]
+    BPmag (mag)     (F7.4)  ? Integrated BP mean magnitude (Vega) (phot_bp_mean_mag) (26) [ucd=phot.mag;stat.mean;em.opt.B]
+    e_BPmag (mag)   (F6.4)  ? Standard error of BP mean magnitude (Vega) (added by CDS) (phot_bp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    FRP (e-/s)      (E11.4) ? Mean flux in the integrated RP band (phot_rp_mean_flux) [ucd=phot.flux.density;em.opt.R]
+    e_FRP (e-/s)    (E11.4) ? Error on the integrated RP mean flux (phot_rp_mean_flux_error) (28) [ucd=stat.error;phot.flux;stat.mean]
+    RPmag (mag)     (F7.4)  ? Integrated RP mean magnitude (Vega) (phot_rp_mean_mag) (29) [ucd=phot.mag;stat.mean;em.opt.R]
+    e_RPmag (mag)   (F6.4)  ? Standard error of RP mean magnitude (Vega) (added by CDS) (phot_rp_mean_mag_error) (37) [ucd=stat.error;phot.mag;stat.mean]
+    BP-RP (mag)     (F7.4)  ? BP-RP colour (photBpMeanMag-photRMeanMag) (bp_rp) [ucd=phot.color;em.opt.B;em.opt.R]
+    RV (km/s)       (F7.2)  ? Spectroscopic radial velocity in the solar barycentric reference frame (radial_velocity) [ucd=spect.dopplerVeloc.opt;pos.barycenter]
+    e_RV (km/s)     (F5.2)  ? Radial velocity error (radial_velocity_error) (30) [ucd=stat.error;spect.dopplerVeloc.opt;pos.barycenter]
+    Teff (K)        (F7.2)  ? Stellar effective temperature (estimate from Apsis-Priam) (teff_val) [ucd=phys.temperature.effective]
+    AG (mag)        (F7.4)  ? Estimate of extinction in the G band from Apsis-Priam (a_g_val) [ucd=phys.absorption.gal]
+    E(BP-RP) (mag)  (F7.4)  ? Estimate of redenning E(BP-RP) from Apsis-Priam (e_bp_min_rp_val) [ucd=phot.color.excess]
+    Rad (solRad)    (F6.2)  ? Estimate of radius from Apsis-FLAME (radius_val) [ucd=phys.size.radius]
+    Lum (solLum)    (F9.3)  ? Esimate of luminosity from Apsis-FLAME (lum_val) [ucd=phys.luminosity]
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+                e                       e                                                        e_p              e_p    D                                                                        e                                      e                      e                                             
+                _RA_ICR                 _DE_ICR                                e_Pl    pmRA      mRA (m pmDE      mDE (m u                         Gma     e_Gmag             e           BPma    _BPmag             e           RPma    _RPmag BP-R    RV      _RV ( T       A       E(BP-RP Rad (s Lum      
+RA_ICRS (deg)   S (mas) DE_ICRS (deg)   S (mas) Source              Plx (mas)  x (mas) (mas/yr)  as/yr) (mas/yr)  as/yr) p FG (e-/s)   e_FG (e-/s) g (mag) (mag)  FBP (e-/s)  _FBP (e-/s) g (mag) (mag)  FRP (e-/s)  _FRP (e-/s) g (mag) (mag)  P (mag) (km/s)  km/s) eff (K) G (mag) ) (mag) olRad) (solLum) 
+--------------- ------- --------------- ------- ------------------- ---------- ------- --------- ------ --------- ------ - ----------- ----------- ------- ------ ----------- ----------- ------- ------ ----------- ----------- ------- ------ ------- ------- ----- ------- ------- ------- ------ ---------
+145.85689722929  0.2008 +19.86108782384  0.1055  639582718422207488    -0.0014  0.2420    -6.698  0.243     4.271  0.228 1  7.3235e+05  1.0023e+04 11.0266 0.0149  2.1087e+04  2.2869e+03 14.5414 0.1178  1.2234e+06  3.0573e+04  9.5430 0.0271  4.9984               3299.00                        
+
+#END#  -ref=VOTx27890 ===============================================================================================================================================================================================================================================================================
+
+=============

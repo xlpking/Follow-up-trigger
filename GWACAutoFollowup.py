@@ -8,6 +8,10 @@ import time
 import math
 import logging
 from FollowUp import FollowUp
+import os,sys
+#sys.path.append(‘/Volumes/Data/Documents/GitHub/Follow-up-trigger’) 
+from xreadpara import xplot, xfindgaiadr2
+
 
 #nohup python getOTImgsAll.py > /dev/null 2>&1 &
 class GWACAutoFollowup:
@@ -63,10 +67,11 @@ class GWACAutoFollowup:
     QOT2 = "SELECT ot_id, mag, found_time_utc from ot_level2 where name='%s'"
     
     maxExpTime = 150
-    maxExpTimeFilter = 100
-    maxMonitorTime = 180 #minute, max is 5 hours
+    maxExpTimeFilter = 80
+    maxExpTimeFilter2 = 110
+    maxMonitorTime = 1800 #minute, max is 5 hours
     
-    BjtimeStart = 8  
+    BjtimeStart = 16
     BjtimeEnd = 17
     
     stage2TriggerDelay = 2.0 #minute  #2
@@ -87,7 +92,6 @@ class GWACAutoFollowup:
     deltaMagDiffTotal = 0.1
     
     
-    
     deltaT = 1.0
     
     nexttmsghour = 0
@@ -95,6 +99,8 @@ class GWACAutoFollowup:
     Talertmsg = 60.0
     
     delayTime_max = 40
+    
+ 
     
     def __init__(self):
         
@@ -227,6 +233,27 @@ class GWACAutoFollowup:
             self.log.error(" update science_object auto_observation error ")
             self.log.error(err)
 
+    def sendTriggerMsg007(self, tmsg):
+
+        try:
+            
+            #sendTime = datetime.strftime(datetime.now(), "%Y-%m-%d %H:%M:%S")
+            #tmsg = "%s: %s"%(sendTime, tmsg)
+            msgURL = "http://%s/gwebend/sendTrigger2WChart.action?chatId=gwac007&triggerMsg="%(self.webServerIP2)
+            #msgURL = "http://%s/gwebend/sendTrigger2WChart.action?chatId=gwac003&triggerMsg="%(self.webServerIP2)
+            turl = "%s%s"%(msgURL,tmsg)
+            #self.log.debug(turl)
+            
+            msgSession = requests.Session()
+            msgSession.get(turl, timeout=10, verify=False)
+            
+        except Exception as e:
+            self.log.error(" send trigger msg error ")
+            self.log.error(str(e))
+
+    
+
+ 
     def sendTriggerMsg005(self, tmsg):
 
         try:
@@ -265,7 +292,7 @@ class GWACAutoFollowup:
             self.log.error(str(e))
     
     #tobs=[{'filter':['R','B'],'expTime':40,'frameCount':1},{'filter':['R'],'expTime':40,'frameCount':2}]
-    def sendObservationCommand(self, sciObj, observes=[],autoLoop=1,lastExpTime=-1, magdiff=0):
+    def sendObservationCommand(self, sciObj, observes=[],autoLoop=1,lastExpTime=-1, magdiff=0, telescope=1, priority=41):
 
         try:
             self.log.debug(observes)
@@ -291,23 +318,28 @@ class GWACAutoFollowup:
                 else:
                     expTime = tobs['expTime']
                     
-                
-                if expTime>self.maxExpTimeFilter:   
+                if expTime>self.maxExpTimeFilter and magdiff< 0.2:
                     tfilters = ['R']
-                    
+                
+                if expTime>self.maxExpTimeFilter2:
+                    tfilters = ['R']
+                
                 frameCount = tobs['frameCount']
                 print("again tfilters=%s"%(tfilters))
                 for tf in tfilters:
                     tfilter = tf    #xlp only B no R？
                     print("tfilter=%s"%(tfilter))
-                    fup = FollowUp(ra,dec,expTime,tfilter,frameCount,otName)
+                    fup = FollowUp(ra,dec,expTime,tfilter,frameCount,otName, telescope, priority)
                     self.log.debug(fup.getFollowUpString())
                     fup.uploadFollowUpCommond(autoLoop)   #to send the request of follow-up
                     tmsg="Followup request: status=%d RA=%.5f DEC=%.5f exptime=%d " \
-                    "filter=%s frameCount=%d OTname=%s"%(status, ra,dec,expTime,tfilter,frameCount,otName)
+                    "filter=%s frameCount=%d OTname=%s, telescope=%d, priority=%d\n"%(status, ra,dec,expTime,tfilter,frameCount,otName, telescope, priority)
                     print(tmsg)
-                    
                     self.sendTriggerMsg005(tmsg)
+                    #tmsg="debug infor: status=%d RA=%.5f DEC=%.5f lastExpTime=%d " \
+                    #"filter=%s frameCount=%d OTname=%s, magDiff=%.5f, priority=%d\n"%(status, ra,dec,lastExpTime,tfilter,frameCount,otName, magdiff, priority)
+                    #print(tmsg)                
+                    #self.sendTriggerMsg005(tmsg)
                     
         except Exception as e:
             self.log.error("sendObservationCommand error")
@@ -356,15 +388,15 @@ class GWACAutoFollowup:
             print(sciObj)
             a0 = sciObj[0] #line
             a1 = sciObj[1] #OT name
-            a2 = sciObj[2] # RA deg
-            a3 = sciObj[3] # DEC deg 
+            RAD = sciObj[2] # RA deg
+            DEC = sciObj[3] # DEC deg 
             a4 = sciObj[4] # R mag
             a11 = sciObj[11]
             a9 = sciObj[9]
             print(a0)
             print(a1)
-            print(a2)
-            print(a3)
+            print(RAD)
+            print(DEC)
             print(a4)
             print(a11)
             print(a11[0:3])
@@ -449,6 +481,30 @@ class GWACAutoFollowup:
                             "during the time between %s and %s "%(sciObj[1], fadingslope, ot2[1],sciObj[4], foundTime, curDateTime)
                             self.sendTriggerMsg005(tmsg)
                             #self.closeSciObjAutoObservation(sciObj[0])
+
+                        
+                        #print("%f %f %s"%(RAD, DEC, sciObj[1]))
+                        #aa="%f %f %s"%(RAD, DEC, sciObj[1])
+                        #xreadpara(aa)
+                        
+                        fileout="%s_newtemp.txt"%(sciObj[1])
+                        pngfilename="%s_HRD.png"%(sciObj[1])
+                        xfindgaiadr2(RAD, DEC, sciObj[1])
+                        #ff=open(fileout,'r')
+                        #objtableall=ff.readlines()
+                        #ff.close()
+                        if os.access(fileout, os.F_OK):
+                            print "Given file path is exist."
+                            pngfile=xplot(sciObj[1])
+                            if pngfile:
+                                print("will send the figure %s to the wechat"%(pngfilename))
+                            else:
+                                print("there is not %s"%(pngfilename))
+                        else:
+                            print("%s is not exist"%(fileout))
+                          
+                    
+                    
                     if diffMinutes>self.stage2TriggerDelay:
                         print("diffMinutes=%s"%(diffMinutes))
                         tobs=[{'filter':['B','R'],'expTime':30,'frameCount':1}]
@@ -456,11 +512,16 @@ class GWACAutoFollowup:
                         #time.sleep(5)
                         
                         isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, autoLoop=2)
+                        
                         #if isExceedMaxTime:
                         #    self.closeSciObjAutoObservation(sciObj[0])
                         #    self.sendTriggerMsg("%s expTime exceed %d seconds, stop observation."%(ot2Name, self.maxExpTime))
                         self.updateSciObjStatus(sciObj[0], 2)
-                        
+                        #if a11[0:3] ==  "CAT":
+                        #file2 = open('/home/gwac/software/GWAC_OT3.txt', 'w') 
+                        #writeline = "%s %f %f\n"%(sciObj[1], RAD, DEC)
+                        #file2.write(writeline)
+                        #file2.close()
                 else: # exceed max monitor time, do not monitor this sciobj anymore
                     print("Time is out")
                     self.closeSciObjAutoObservation(sciObj[0])
@@ -540,6 +601,7 @@ class GWACAutoFollowup:
                         if diffMinutes < self.maxMonitorTime:         
                             if status == 2:
                                 if magDiff>=self.stage2MagDiff:
+                                    priority = 41
                                     if triggerStatus == status:
                                         tmsg = "Auto Trigger 60CM Telescope:\n" \
                                            "The %s :\n"\
@@ -552,17 +614,21 @@ class GWACAutoFollowup:
                                            "usno B-R: %.2f\n" \
                                            " \n" \
                                            "DeltaMag during the whole obs by %.2f\n"\
-                                           "DeltaMag during the last two epochs is %.2f\n"%(OTFlag, sciObj[1],sciObj[11],status, ot2[1], sciObj[4], fupRecordN[1], sciObj[7], sciObj[8]-sciObj[7],  fupRecordN[1] - sciObj[4], magDiff)
+                                           "DeltaMag during the last two epochs is %.2f\n"\
+                                           "\n"\
+                                           "The link is  http://www.gwac.top/gwac/gwac/pgwac-ot-detail2.action?otName=%s"\
+                                           %(OTFlag, sciObj[1],sciObj[11],status, ot2[1], sciObj[4], fupRecordN[1], sciObj[7], sciObj[8]-sciObj[7],  fupRecordN[1] - sciObj[4], magDiff,sciObj[1])
                                         self.sendTriggerMsg(tmsg)
                                         self.updateSciObjTriggerStatus(sciObj[0], status+1)
+                                        self.sendTriggerMsg007(tmsg)
                                         tmsg = "The delay time for the next request of follow-up is %s minutes"%(self.stage3TriggerDelay1)
                                         self.sendTriggerMsg005(tmsg)
-
+                                            
                                    # if diffMinutes>self.stage3TriggerDelay1:
                                     if diffMinutes > 0:
                                         tobs=[{'filter':['B'],'expTime':40,'frameCount':1},
                                                {'filter':['R'],'expTime':40,'frameCount':3}]
-                                        isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, magDiff)
+                                        isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, magDiff, 1, priority)
                                        # if isExceedMaxTime:
                                        #     self.closeSciObjAutoObservation(sciObj[0])   
                                        #     self.sendTriggerMsg("%s expTime exceed %d seconds, stop observation."%(ot2Name, self.maxExpTime))
@@ -570,12 +636,18 @@ class GWACAutoFollowup:
                                         self.updateSciObjStatus(sciObj[0], status+1)
                                     break
                                 else:
+                                    priority = 40
+                                    coloraccess = sciObj[8]-sciObj[7]
+                                    if coloraccess > 2:
+                                        OTFlag = "Variable candidate"
+                                    if coloraccess < 0.5:
+                                        OTFlag = "DN candidate"    
                                     if triggerStatus == status:
                                         self.sendTriggerMsg("The %s %s %s Stage%d, magDiff: %.2f, obtained by %.2f and %.2f during the last two epochs"%(OTFlag, sciObj[1],sciObj[11],status, magDiff, fupRecordN[1],fupRecordN1[1]))
                                         self.updateSciObjTriggerStatus(sciObj[0], status+1)
                                     if diffMinutes>self.stage3TriggerDelay2:
                                         tobs=[{'filter':['B','R'],'expTime':30,'frameCount':1}]
-                                        isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, magDiff)
+                                        isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, magDiff, 1, priority)
                                         #if isExceedMaxTime:
                                         #    self.closeSciObjAutoObservation(sciObj[0])
                                         #    self.sendTriggerMsg("%s expTime exceed %d seconds, stop observation."%(ot2Name, self.maxExpTime))
@@ -587,6 +659,7 @@ class GWACAutoFollowup:
                             elif status > 2:
                                 print("status >2")
                                 if magDiff>=self.stageNMagDiff1 and magDiffTotalslope >=self.deltaMagDiffTotal:
+                                    priority = 41
                                     if triggerStatus == status:
                                         tmsg = "Auto Trigger 60CM Telescope:\n" \
                                            "The %s :\n" \
@@ -602,11 +675,12 @@ class GWACAutoFollowup:
                                            "DeltaMag during the last two epochs is %.2f\n"%(OTFlag, sciObj[1],sciObj[11],status, ot2[1], sciObj[4], fupRecordN[1], sciObj[7], sciObj[8]-sciObj[7],  fupRecordN[1] - sciObj[4], magDiff)
                                         self.sendTriggerMsg(tmsg)
                                         self.updateSciObjTriggerStatus(sciObj[0], status+1)
+                                        self.sendTriggerMsg007(tmsg)
                                     #if diffMinutes>self.stageNTriggerDelay1:
                                     if diffMinutes>0:
                                         tobs=[{'filter':['B'],'expTime':40,'frameCount':1},
                                                {'filter':['R'],'expTime':40,'frameCount':3}]
-                                        isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, magDiff)
+                                        isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, magDiff, 1, priority)
                                         #if isExceedMaxTime:
                                         #    self.closeSciObjAutoObservation(sciObj[0])
                                         #    self.sendTriggerMsg("%s expTime exceed %d seconds, stop observation."%(ot2Name, self.maxExpTime))
@@ -614,6 +688,7 @@ class GWACAutoFollowup:
                                         self.updateSciObjStatus(sciObj[0], status+1)
                                     break
                                 else:
+                                    priority = 40
                                     print("magDiff is small")
                                     autoLoopIdx = sciObj[10]
                                     print(autoLoopIdx)
@@ -630,6 +705,7 @@ class GWACAutoFollowup:
                                     #self.sendTriggerMsg005("%s %.2f\n"%(sciObj[1],magDiffK))
                                     #if magDiffK>=self.stageNMagDiff2 and magDiffTotalslope>=self.deltaMagDiffTotal:
                                     if magDiffK>=self.stageNMagDiff2:
+                                        priority = 41
                                         if triggerStatus == status:
                                             tmsg = "Auto Trigger 60CM Telescope:\n" \
                                                "The %s :\n"\
@@ -645,10 +721,11 @@ class GWACAutoFollowup:
                                                "DeltaMag during the loop is %.2f\n"%(OTFlag, sciObj[1],sciObj[11],status, ot2[1], sciObj[4], fupRecordN[1], sciObj[7], sciObj[8]-sciObj[7],  fupRecordN[1] - sciObj[4], magDiffK)
                                             self.sendTriggerMsg(tmsg)
                                             self.updateSciObjTriggerStatus(sciObj[0], status+1)
+                                            self.sendTriggerMsg007(tmsg)
                                         if diffMinutes>self.stageNTriggerDelay2:
                                         #if diffMinutes>0:  
                                             tobs=[{'filter':['B','R'],'expTime':30,'frameCount':2}]
-                                            isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, magDiffK)
+                                            isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, magDiffK, 1, priority)
                                           #  if isExceedMaxTime:
                                           #      self.closeSciObjAutoObservation(sciObj[0])
                                           #      self.sendTriggerMsg("%s expTime exceed %d seconds, stop observation."%(ot2Name, self.maxExpTime))
@@ -657,6 +734,7 @@ class GWACAutoFollowup:
                                             self.updateSciObjAutoLoopSlow(sciObj[0], status)
                                         break
                                     else:
+                                        priority = 40
                                         print("magDiffk is small")
                                         print("fupRecordNk=%s"%(fupRecordNk))
                                         fupRecordTime  =  fupRecordN[2]
@@ -677,7 +755,7 @@ class GWACAutoFollowup:
                                        
                                         if diffMinutes>stageNTriggerDelay4:
                                             tobs=[{'filter':['B','R'],'expTime':30,'frameCount':1}]
-                                            isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, magDiffK)
+                                            isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, magDiffK, 1, priority)
                                            # if isExceedMaxTime:
                                            #     self.closeSciObjAutoObservation(sciObj[0])
                                            #     self.sendTriggerMsg("%s expTime exceed %d seconds, stop observation."%(ot2Name, self.maxExpTime))
@@ -697,7 +775,7 @@ class GWACAutoFollowup:
                         self.log.warning("cannot find fupRecord[n] mag, use limit mag")
                         print("limitmag")
                         fupRecordN1 = fupRecordN1[0]
-                        
+                        priority = 41
                         print(fupObserves)
                         limitMag = fupObserves[0][0]
                         magDiff = math.fabs(limitMag-fupRecordN1[1])
@@ -707,7 +785,7 @@ class GWACAutoFollowup:
                                             "magDiff: %.2f"%(sciObj[1],sciObj[11],status, limitMag,  fupRecordN1[1],  magDiff))
                        
                         tobs=[{'filter':['B','R'],'expTime':30,'frameCount':1}]
-                        isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, magDiff)
+                        isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, magDiff, 1, priority)
                         if isExceedMaxTime:
                             self.closeSciObjAutoObservation(sciObj[0])
                             self.sendTriggerMsg005("%s expTime exceed %d seconds, stop observation. The limit mag is %.2f in R-band "%(ot2Name, self.maxExpTime, limitMag))
@@ -726,10 +804,10 @@ class GWACAutoFollowup:
                         #limitMag = fupObserves[0][0]
                         #magDiff = math.fabs(limitMag-fupRecordN1[1])
                         #self.sendTriggerMsg("%s %s Stage%d, magDiff: %.2f"%(sciObj[1],sciObj[11],status, magDiff))
-                    
+                        priority = 40
                         limitMag = fupObserves[0][0]
                         tobs=[{'filter':['R'],'expTime':150,'frameCount':1}]
-                        isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, -1)
+                        isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, -1, 1, priority)
                         if isExceedMaxTime:
                             self.closeSciObjAutoObservation(sciObj[0])
                             self.sendTriggerMsg005("%s expTime exceed %d seconds, stop observation. The limit mag is %.2f in R-band "%(ot2Name, self.maxExpTime, limitMag))
@@ -747,7 +825,7 @@ class GWACAutoFollowup:
 
     def start(self):
         
-        #ot2Name = 'G190110_C09266'
+        #ot2Name = 'G190118_C00894'
         #self.initSciObj(ot2Name)
         #ot2Name = 'G190110_C00142'
         #self.initSciObj(ot2Name)
@@ -757,10 +835,10 @@ class GWACAutoFollowup:
         #self.initSciObj(ot2Name)
         #ot2Name = 'G181224_C06421'
         #self.initSciObj(ot2Name)
-        #ot2Name = 'G181224_C06657'
-        #self.initSciObj(ot2Name)        
-        #ot2Name = 'G181228_C11036'
-        #self.initSciObj(ot2Name)
+        ot2Name = 'G190127_C01189'
+        self.initSciObj(ot2Name)        
+        ot2Name = 'G190127_C15267'
+        self.initSciObj(ot2Name)
     
         tmsg = "Restart the code"
         self.sendTriggerMsg(tmsg)
@@ -786,7 +864,7 @@ class GWACAutoFollowup:
             
 
 if __name__ == '__main__':
-
+    
     gwacAutoFollowUp = GWACAutoFollowup()
     gwacAutoFollowUp.start()
     
