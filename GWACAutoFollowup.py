@@ -69,9 +69,9 @@ class GWACAutoFollowup:
     maxExpTime = 150
     maxExpTimeFilter = 80
     maxExpTimeFilter2 = 110
-    maxMonitorTime = 1800 #minute, max is 5 hours
-    
-    BjtimeStart = 16
+    maxMonitorTime = 180 #minute, max is 5 hours
+    #maxMonitorTime = 180 #minute, max is 5 hours
+    BjtimeStart = 8
     BjtimeEnd = 17
     
     stage2TriggerDelay = 2.0 #minute  #2
@@ -100,7 +100,8 @@ class GWACAutoFollowup:
     
     delayTime_max = 40
     
- 
+    dirHRDImage = "/home/gwac/software/"
+    #dirHRDImage = "/Volumes/Data/Documents/GitHub/Follow-up-trigger"
     
     def __init__(self):
         
@@ -232,6 +233,26 @@ class GWACAutoFollowup:
         except Exception as err:
             self.log.error(" update science_object auto_observation error ")
             self.log.error(err)
+            
+            
+    #usage: self.sendImage('/data/path/of/img','imgPath.png')
+    def sendImage(self, imgPath, imgName):
+        print(imgPath)
+        try:
+            msgURL = "http://%s/gwebend/sendTrigger2WChart.action"%(self.webServerIP2)
+            
+            fullPath = "%s/%s"%(imgPath, imgName)
+            msgSession = requests.Session()
+            #mediaType:image,voice,video,file
+            data = {'chatId':'gwac003','mediaType':'image'}
+            files = {"fileUpload" : (imgName, open(fullPath, "rb"), "image/jpeg")}
+            r=msgSession.post(msgURL, data, files=files)
+            
+            #self.log.debug(r.text)
+            msgSession.close()
+        except Exception as e:
+            self.log.error("send trigger msg error ")
+            self.log.error(str(e))        
 
     def sendTriggerMsg007(self, tmsg):
 
@@ -482,7 +503,7 @@ class GWACAutoFollowup:
                             self.sendTriggerMsg005(tmsg)
                             #self.closeSciObjAutoObservation(sciObj[0])
 
-                        
+
                         #print("%f %f %s"%(RAD, DEC, sciObj[1]))
                         #aa="%f %f %s"%(RAD, DEC, sciObj[1])
                         #xreadpara(aa)
@@ -490,19 +511,22 @@ class GWACAutoFollowup:
                         fileout="%s_newtemp.txt"%(sciObj[1])
                         pngfilename="%s_HRD.png"%(sciObj[1])
                         xfindgaiadr2(RAD, DEC, sciObj[1])
-                        #ff=open(fileout,'r')
-                        #objtableall=ff.readlines()
-                        #ff.close()
                         if os.access(fileout, os.F_OK):
-                            print "Given file path is exist."
+                            print("Given file path %s is exist"%(fileout))
                             pngfile=xplot(sciObj[1])
+                            #time.sleep(5)
                             if pngfile:
+                                self.sendImage(self.dirHRDImage, pngfilename)
                                 print("will send the figure %s to the wechat"%(pngfilename))
                             else:
                                 print("there is not %s"%(pngfilename))
+                                tmsg="Have read the data from Gaia dr2, however, there is no %s"%(pngfilename)
+                                self.sendTriggerMsg(tmsg)
                         else:
                             print("%s is not exist"%(fileout))
-                          
+                            tmsg="Can not get the data from Gaia dr2, %s is not exist"%(fileout)
+                            self.sendTriggerMsg(tmsg)
+                        
                     
                     
                     if diffMinutes>self.stage2TriggerDelay:
@@ -753,6 +777,15 @@ class GWACAutoFollowup:
                                                                 "The delay time is %.2f, estimated by %s and %s \n"%(OTFlag, sciObj[1],sciObj[11],status, magDiffK,stageNTriggerDelay4,fupRecordTime, fupRecordTimeNk ))
                                             self.updateSciObjTriggerStatus(sciObj[0], status+1)  
                                        
+                                        coloraccess = sciObj[8]-sciObj[7]
+                                        Diff_all = fupRecordN[1] - sciObj[4]
+                                        if status == 5 and coloraccess > 2.0  and Diff_all < self.stage2MagDiff:
+                                            print("The %s is larger, and the status is %d "%(coloraccess, status))
+                                            self.closeSciObjAutoObservation(sciObj[0])   # on any response for the last request of the follow-up observations. give up.
+                                            self.sendTriggerMsg005("stop observation for %s, for its larger B-R of %5.2f , and the small brightness changing of %5.2f in the whole observations. "%(ot2Name, coloraccess, fupRecordN[1]-sciObj[4]))
+                                            self.log.warning("%s, %.2f exceed max monitor time(%dminutes), close monitor."%(ot2Name, diffMinutes, self.maxMonitorTime))
+                                            break 
+                                        
                                         if diffMinutes>stageNTriggerDelay4:
                                             tobs=[{'filter':['B','R'],'expTime':30,'frameCount':1}]
                                             isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, magDiffK, 1, priority)
@@ -835,10 +868,10 @@ class GWACAutoFollowup:
         #self.initSciObj(ot2Name)
         #ot2Name = 'G181224_C06421'
         #self.initSciObj(ot2Name)
-        ot2Name = 'G190127_C01189'
-        self.initSciObj(ot2Name)        
-        ot2Name = 'G190127_C15267'
-        self.initSciObj(ot2Name)
+        #ot2Name = 'G190131_C06547'
+        #self.initSciObj(ot2Name)        
+        #ot2Name = 'G190131_C03464'
+        #self.initSciObj(ot2Name)
     
         tmsg = "Restart the code"
         self.sendTriggerMsg(tmsg)
@@ -854,8 +887,8 @@ class GWACAutoFollowup:
                 #print("\n*************%05d run, sleep %d seconds...\n"%(idx, sleepTime))
                 time.sleep(sleepTime)
                 idx = idx + 1
-                #if idx >1:
-                #    break
+         #       if idx >2:
+          #          break
              
         except Exception as err:
             self.log.error(" gwacAutoFollowUp error ")

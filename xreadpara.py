@@ -99,10 +99,15 @@ def xplot(OTname):
  
 
 def xfindgaiadr2(ra,dec, OTname):
-    radecstr = "%s+%s"%(ra,dec)
-    print(radecstr)
+    dec = float(dec)
+    ra	= float(ra)
+    if dec < 0:
+    	radecstr = "%s%s"%(ra,dec)
+    else:
+    	radecstr = "%s+%s"%(ra,dec)
+    print("radecstr=%s"%(radecstr))
     fileout="%s_newtemp.txt"%(OTname)
-    aa="python find_gaia_dr2.py -r 2 \"%s\" >gaiaobjlist.txt"%(radecstr)  
+    aa="/home/gwac/anaconda3/bin/python ~/software/find_gaia_dr2.py -r 2 \"%s\" >gaiaobjlist.txt"%(radecstr)  
     #os.system("mkdir -p %s"%(self.origPreViewDir))
     os.system(aa)
     ff=open("gaiaobjlist.txt",'r')
@@ -135,8 +140,8 @@ def xfindgaiadr2(ra,dec, OTname):
                 dec = 0.0
             if len(plxReal.strip())==0:
                 plxReal = 0.1
-            if plxReal < 0:
-                plxReal=0.1
+            #if plxReal < 0:
+            #    plxReal=0.1
             if len(Gmag.strip())==0:
                 Gmag = 99
             if len(BPRP.strip())==0:
