@@ -69,9 +69,9 @@ class GWACAutoFollowup:
     maxExpTime = 150
     maxExpTimeFilter = 80
     maxExpTimeFilter2 = 110
-    maxMonitorTime = 180 #minute, max is 5 hours
+    maxMonitorTime = 1800 #minute, max is 5 hours
     #maxMonitorTime = 180 #minute, max is 5 hours
-    BjtimeStart = 8
+    BjtimeStart = 13
     BjtimeEnd = 17
     
     stage2TriggerDelay = 2.0 #minute  #2
@@ -350,17 +350,22 @@ class GWACAutoFollowup:
                 for tf in tfilters:
                     tfilter = tf    #xlp only B no R？
                     print("tfilter=%s"%(tfilter))
-                    fup = FollowUp(ra,dec,expTime,tfilter,frameCount,otName, telescope, priority)
-                    self.log.debug(fup.getFollowUpString())
-                    fup.uploadFollowUpCommond(autoLoop)   #to send the request of follow-up
-                    tmsg="Followup request: status=%d RA=%.5f DEC=%.5f exptime=%d " \
-                    "filter=%s frameCount=%d OTname=%s, telescope=%d, priority=%d\n"%(status, ra,dec,expTime,tfilter,frameCount,otName, telescope, priority)
-                    print(tmsg)
-                    self.sendTriggerMsg005(tmsg)
-                    #tmsg="debug infor: status=%d RA=%.5f DEC=%.5f lastExpTime=%d " \
-                    #"filter=%s frameCount=%d OTname=%s, magDiff=%.5f, priority=%d\n"%(status, ra,dec,lastExpTime,tfilter,frameCount,otName, magdiff, priority)
-                    #print(tmsg)                
-                    #self.sendTriggerMsg005(tmsg)
+                    idxFC = 0
+                    while idxFC < frameCount:
+                        #fup = FollowUp(ra,dec,expTime,tfilter,frameCount,otName, telescope, priority)
+                        frameCountSingle = 1
+                        fup = FollowUp(ra,dec,expTime,tfilter,frameCountSingle,otName, telescope, priority)
+                        self.log.debug(fup.getFollowUpString())
+                        fup.uploadFollowUpCommond(autoLoop)   #to send the request of follow-up
+                        tmsg="Followup request: status=%d RA=%.5f DEC=%.5f exptime=%d " \
+                        "filter=%s frameCount=%d OTname=%s, telescope=%d, priority=%d\n"%(status, ra,dec,expTime,tfilter,frameCountSingle,otName, telescope, priority)
+                        print(tmsg)
+                        self.sendTriggerMsg005(tmsg)
+                        #tmsg="debug infor: status=%d RA=%.5f DEC=%.5f lastExpTime=%d " \
+                        #"filter=%s frameCount=%d OTname=%s, magDiff=%.5f, priority=%d\n"%(status, ra,dec,lastExpTime,tfilter,frameCount,otName, magdiff, priority)
+                        #print(tmsg)                
+                        #self.sendTriggerMsg005(tmsg)
+                        idxFC = idxFC + 1
                     
         except Exception as e:
             self.log.error("sendObservationCommand error")
@@ -487,10 +492,13 @@ class GWACAutoFollowup:
                            "usno R2 : %.2f\n"\
                            "usno B-R: %.2f\n" \
                            " \n"\
+                           "RA : %f\n"\
+                           "DEC: %f\n"\
+                           " \n"\
                            "The amplitude is more than %.2f  relative to USNO \n" \
                            "This is one %s"\
                            " \n"\
-                           "The link is  http://www.gwac.top/gwac/gwac/pgwac-ot-detail2.action?otName=%s"%(sciObj[1],sciObj[11],ot2[1], sciObj[4],sciObj[7],sciObj[8]-sciObj[7], Fdiffmag, OTFlag, sciObj[1])
+                           "The link is  http://www.gwac.top/gwac/gwac/pgwac-ot-detail2.action?otName=%s"%(sciObj[1],sciObj[11],ot2[1], sciObj[4],sciObj[7],sciObj[8]-sciObj[7], RAD, DEC, Fdiffmag, OTFlag, sciObj[1])
                         self.log.debug(tmsg)
                         self.sendTriggerMsg(tmsg)
                         self.updateSciObjTriggerStatus(sciObj[0], status+1)
@@ -504,9 +512,7 @@ class GWACAutoFollowup:
                             #self.closeSciObjAutoObservation(sciObj[0])
 
 
-                        #print("%f %f %s"%(RAD, DEC, sciObj[1]))
-                        #aa="%f %f %s"%(RAD, DEC, sciObj[1])
-                        #xreadpara(aa)
+       
                         
                         fileout="%s_newtemp.txt"%(sciObj[1])
                         pngfilename="%s_HRD.png"%(sciObj[1])
@@ -870,8 +876,8 @@ class GWACAutoFollowup:
         #self.initSciObj(ot2Name)
         #ot2Name = 'G190131_C06547'
         #self.initSciObj(ot2Name)        
-        #ot2Name = 'G190131_C03464'
-        #self.initSciObj(ot2Name)
+        ot2Name = 'G190217_C01143'
+        self.initSciObj(ot2Name)
     
         tmsg = "Restart the code"
         self.sendTriggerMsg(tmsg)
@@ -887,8 +893,8 @@ class GWACAutoFollowup:
                 #print("\n*************%05d run, sleep %d seconds...\n"%(idx, sleepTime))
                 time.sleep(sleepTime)
                 idx = idx + 1
-         #       if idx >2:
-          #          break
+                if idx >2:
+                    break
              
         except Exception as err:
             self.log.error(" gwacAutoFollowUp error ")
