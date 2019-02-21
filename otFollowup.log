@@ -1,13 +1,52 @@
-2019-01-30 05:41:55,331 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
-2019-01-30 05:41:55,901 DEBUG http://10.0.10.236:9995 "GET /gwebend/sendTrigger2WChart.action?chatId=gwac003&triggerMsg=Restart%20the%20code HTTP/1.1" 200 27
-2019-01-30 05:41:55,907 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
-2019-01-30 05:41:56,283 DEBUG http://10.0.10.236:9995 "GET /gwebend/sendTrigger2WChart.action?chatId=gwac005&triggerMsg=Beijing%20time%20(hour)%20is%2013,%20working%20time,%20%20next%20alive%20msg%20will%20be%20one%20hour%20later HTTP/1.1" 200 27
-2019-01-30 05:41:56,445 DEBUG found 3 sciObjs
-2019-01-30 05:41:56,631 WARNING G190126_C03061, 5409.52 exceed max monitor time(5000minutes), close monitor.
-2019-01-30 05:41:56,791 DEBUG cannot find ot2 G190126_C03061
-2019-01-30 05:41:56,949 DEBUG cannot find ot2 G190127_C01189
-2019-01-30 05:41:57,111 DEBUG cannot find ot2 G190127_C15267
-2019-01-30 05:41:57,113 DEBUG 
+2019-02-18 02:14:51,309 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
+2019-02-18 02:14:51,933 DEBUG http://10.0.10.236:9995 "GET /gwebend/sendTrigger2WChart.action?chatId=gwac003&triggerMsg=Restart%20the%20code HTTP/1.1" 200 27
+2019-02-18 02:14:51,939 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
+2019-02-18 02:14:52,338 DEBUG http://10.0.10.236:9995 "GET /gwebend/sendTrigger2WChart.action?chatId=gwac005&triggerMsg=Beijing%20time%20(hour)%20is%2010,%20working%20time,%20%20next%20alive%20msg%20will%20be%20one%20hour%20later HTTP/1.1" 200 27
+2019-02-18 02:14:52,509 DEBUG found 1 sciObjs
+2019-02-18 02:14:52,663 DEBUG ot2: G190217_C01143, status: 1, triggerStatus: 1
+2019-02-18 02:14:52,665 DEBUG New Auto Trigger 60CM Telescope:
+G190217_C01143 CATAS01 Stage1.
+ 
+gwacMag: 12.80
+60cmfirstObsMag: 12.61
+ 
+usno R2 : 13.61
+usno B-R: 0.34
+ 
+RA : 65.875313
+DEC: 80.219269
+ 
+The amplitude is more than -1.00  relative to USNO 
+This is one Flaring Candidate 
+The link is  http://www.gwac.top/gwac/gwac/pgwac-ot-detail2.action?otName=G190217_C01143
+2019-02-18 02:14:52,670 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
+2019-02-18 02:14:54,103 DEBUG http://10.0.10.236:9995 "GET /gwebend/sendTrigger2WChart.action?chatId=gwac003&triggerMsg=New%20Auto%20Trigger%2060CM%20Telescope:%0AG190217_C01143%20CATAS01%20Stage1.%0A%20%0AgwacMag:%2012.80%0A60cmfirstObsMag:%2012.61%0A%20%0Ausno%20R2%20:%2013.61%0Ausno%20B-R:%200.34%0A%20%0ARA%20:%2065.875313%0ADEC:%2080.219269%0A%20%0AThe%20amplitude%20is%20more%20than%20-1.00%20%20relative%20to%20USNO%20%0AThis%20is%20one%20Flaring%20Candidate%20%0AThe%20link%20is%20%20http://www.gwac.top/gwac/gwac/pgwac-ot-detail2.action?otName=G190217_C01143 HTTP/1.1" 200 27
+2019-02-18 02:14:54,285 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
+2019-02-18 02:14:54,682 DEBUG http://10.0.10.236:9995 "GET /gwebend/sendTrigger2WChart.action?chatId=gwac005&triggerMsg=The%20delay%20time%20for%20the%20next%20request%20of%20follow-up%20is%202.0%20minutes HTTP/1.1" 200 27
+2019-02-18 02:14:54,739 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
+2019-02-18 02:14:55,131 DEBUG http://10.0.10.236:9995 "GET /gwebend/sendTrigger2WChart.action?chatId=gwac003&triggerMsg=Can%20not%20get%20the%20data%20from%20Gaia%20dr2,%20G190217_C01143_newtemp.txt%20is%20not%20exist HTTP/1.1" 200 27
+2019-02-18 02:14:55,133 DEBUG [{'filter': ['B', 'R'], 'expTime': 30, 'frameCount': 1}]
+2019-02-18 02:14:55,135 DEBUG append_plan gwac 0
+append_object G190217_C01143 65.875313 80.219269 2000 LIGHT 30 1 B 41   1
+
+2019-02-18 02:14:55,139 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
+2019-02-18 02:14:55,213 DEBUG http://10.0.10.236:9995 "POST /gwebend/otFollowUp.action HTTP/1.1" 200 437
+2019-02-18 02:14:55,219 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
+2019-02-18 02:14:55,607 DEBUG http://10.0.10.236:9995 "GET /gwebend/sendTrigger2WChart.action?chatId=gwac005&triggerMsg=Followup%20request:%20status=1%20RA=65.87531%20DEC=80.21927%20exptime=30%20filter=B%20frameCount=1%20OTname=G190217_C01143,%20telescope=1,%20priority=41%0A HTTP/1.1" 200 27
+2019-02-18 02:14:55,610 DEBUG append_plan gwac 0
+append_object G190217_C01143 65.875313 80.219269 2000 LIGHT 30 1 R 41   1
+
+2019-02-18 02:14:55,614 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
+2019-02-18 02:14:55,675 DEBUG http://10.0.10.236:9995 "POST /gwebend/otFollowUp.action HTTP/1.1" 200 437
+2019-02-18 02:14:55,680 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
+2019-02-18 02:14:56,080 DEBUG http://10.0.10.236:9995 "GET /gwebend/sendTrigger2WChart.action?chatId=gwac005&triggerMsg=Followup%20request:%20status=1%20RA=65.87531%20DEC=80.21927%20exptime=30%20filter=R%20frameCount=1%20OTname=G190217_C01143,%20telescope=1,%20priority=41%0A HTTP/1.1" 200 27
+2019-02-18 02:14:56,260 DEBUG 
 
 *************00001 run, sleep 10 seconds...
+
+2019-02-18 02:15:06,415 DEBUG found 1 sciObjs
+2019-02-18 02:15:06,568 DEBUG ot2: G190217_C01143, status: 2, triggerStatus: 2
+2019-02-18 02:15:06,727 DEBUG 
+
+*************00002 run, sleep 10 seconds...
 

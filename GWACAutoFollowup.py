@@ -50,7 +50,7 @@ class GWACAutoFollowup:
         "password": "gdb%980"
         }
     
-    QSciObj = "SELECT so_id, name, point_ra, point_dec, mag, status, trigger_status, " \
+    QSciObj = "SELECT so_id, name, obj_ra, obj_dec, mag, status, trigger_status, " \
         "found_usno_r2, found_usno_b2, discovery_time_utc, auto_loop_slow, type " \
         "from science_object where auto_observation=true and status>=1" 
     QFupObj = "SELECT fuo.fuo_id, fuo.fuo_name, fuoType.fuo_type_name " \
@@ -69,9 +69,9 @@ class GWACAutoFollowup:
     maxExpTime = 150
     maxExpTimeFilter = 80
     maxExpTimeFilter2 = 110
-    maxMonitorTime = 1800 #minute, max is 5 hours
+    maxMonitorTime = 180 #minute, max is 5 hours
     #maxMonitorTime = 180 #minute, max is 5 hours
-    BjtimeStart = 13
+    BjtimeStart = 8
     BjtimeEnd = 17
     
     stage2TriggerDelay = 2.0 #minute  #2
@@ -876,8 +876,8 @@ class GWACAutoFollowup:
         #self.initSciObj(ot2Name)
         #ot2Name = 'G190131_C06547'
         #self.initSciObj(ot2Name)        
-        ot2Name = 'G190217_C01143'
-        self.initSciObj(ot2Name)
+        #ot2Name = 'G190217_C01143'
+        #self.initSciObj(ot2Name)
     
         tmsg = "Restart the code"
         self.sendTriggerMsg(tmsg)
@@ -893,8 +893,8 @@ class GWACAutoFollowup:
                 #print("\n*************%05d run, sleep %d seconds...\n"%(idx, sleepTime))
                 time.sleep(sleepTime)
                 idx = idx + 1
-                if idx >2:
-                    break
+                #if idx >2:
+                #    break
              
         except Exception as err:
             self.log.error(" gwacAutoFollowUp error ")
