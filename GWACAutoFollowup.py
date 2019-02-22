@@ -234,6 +234,24 @@ class GWACAutoFollowup:
             self.log.error(" update science_object auto_observation error ")
             self.log.error(err)
             
+    #fast transient channal for the plot        
+    def sendImage007(self, imgPath, imgName):
+        print(imgPath)
+        try:
+            msgURL = "http://%s/gwebend/sendTrigger2WChart.action"%(self.webServerIP2)
+            
+            fullPath = "%s/%s"%(imgPath, imgName)
+            msgSession = requests.Session()
+            #mediaType:image,voice,video,file
+            data = {'chatId':'gwac007','mediaType':'image'}
+            files = {"fileUpload" : (imgName, open(fullPath, "rb"), "image/jpeg")}
+            r=msgSession.post(msgURL, data, files=files)
+            
+            #self.log.debug(r.text)
+            msgSession.close()
+        except Exception as e:
+            self.log.error("send trigger msg error ")
+            self.log.error(str(e))                
             
     #usage: self.sendImage('/data/path/of/img','imgPath.png')
     def sendImage(self, imgPath, imgName):
@@ -254,8 +272,9 @@ class GWACAutoFollowup:
             self.log.error("send trigger msg error ")
             self.log.error(str(e))        
 
-    def sendTriggerMsg007(self, tmsg):
+    def sendTriggerMsg007(self, tmsg):  
 
+        #fast transient channal
         try:
             
             #sendTime = datetime.strftime(datetime.now(), "%Y-%m-%d %H:%M:%S")
@@ -651,6 +670,17 @@ class GWACAutoFollowup:
                                         self.sendTriggerMsg(tmsg)
                                         self.updateSciObjTriggerStatus(sciObj[0], status+1)
                                         self.sendTriggerMsg007(tmsg)
+                                        
+
+                                        pngfilename="%s_HRD.png"%(sciObj[1])
+                                        if pngfilename:
+                                            self.sendImage007(self.dirHRDImage, pngfilename)
+                                            print("will send the figure %s to the wechat"%(pngfilename))
+                                        else:
+                                            print("there is not %s"%(pngfilename))
+                                            tmsg="Have read the data from Gaia dr2, however, there is no %s"%(pngfilename)
+                                            self.sendTriggerMsg(tmsg)
+  
                                         tmsg = "The delay time for the next request of follow-up is %s minutes"%(self.stage3TriggerDelay1)
                                         self.sendTriggerMsg005(tmsg)
                                             
@@ -876,7 +906,7 @@ class GWACAutoFollowup:
         #self.initSciObj(ot2Name)
         #ot2Name = 'G190131_C06547'
         #self.initSciObj(ot2Name)        
-        #ot2Name = 'G190221_C00303'
+        #ot2Name = 'G190221_C05245'
         #self.initSciObj(ot2Name)
     
         tmsg = "Restart the code"
