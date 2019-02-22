@@ -513,7 +513,7 @@ class GWACAutoFollowup:
 
 
        
-                        
+
                         fileout="%s_newtemp.txt"%(sciObj[1])
                         pngfilename="%s_HRD.png"%(sciObj[1])
                         xfindgaiadr2(RAD, DEC, sciObj[1])
@@ -876,11 +876,16 @@ class GWACAutoFollowup:
         #self.initSciObj(ot2Name)
         #ot2Name = 'G190131_C06547'
         #self.initSciObj(ot2Name)        
-        #ot2Name = 'G190217_C01143'
+        #ot2Name = 'G190221_C00303'
         #self.initSciObj(ot2Name)
     
         tmsg = "Restart the code"
         self.sendTriggerMsg(tmsg)
+        
+        aa="cd %s"%(self.dirHRDImage)
+        os.system(aa)
+        bb="pwd"
+        os.system(bb)
         
         idx = 1
         try:

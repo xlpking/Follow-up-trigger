@@ -69,7 +69,7 @@ def xplot(OTname):
             #print(f1t)
     
 
-    dataset = np.loadtxt("gaia_dr2_hrd.cat")
+    dataset = np.loadtxt("/home/gwac/software/gaia_dr2_hrd.cat")
     pngfilename="%s_HRD.png"%(OTname)
     OTnametitle = "Hertzsprung-Russell diagram for %s"%(OTname)
     plt.figure(figsize=(8,8))
