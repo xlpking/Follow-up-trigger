@@ -62,8 +62,8 @@ def xplot(OTname):
                 "Realplx=%f mas\n"\
                 "plx=%f mas\n"\
                 "Gmag=%f \n"\
-                "bprp=%f\n"\
-                "teff=%f k\n"\
+                "bp-rp=%f\n"\
+                "Teff=%f k\n"\
                 "AbsoMag=%f\n"%(ra,dec,Realplx, plx,Gmag,bprp,Teff,AbsoMag)   
         #print("ra=%f,dec=%f,plx=%f,Gmag=%f,bprp=%f,teff=%f"%(ra,dec,plx,Gmag,bprp,Teff))
             #print(f1t)
@@ -107,7 +107,7 @@ def xfindgaiadr2(ra,dec, OTname):
     	radecstr = "%s+%s"%(ra,dec)
     print("radecstr=%s"%(radecstr))
     fileout="%s_newtemp.txt"%(OTname)
-    aa="/home/gwac/anaconda3/bin/python ~/software/find_gaia_dr2.py -r 2 \"%s\" >gaiaobjlist.txt"%(radecstr)  
+    aa="/home/gwac/anaconda3/bin/python ~/software/find_gaia_dr2.py -r 1 \"%s\" >gaiaobjlist.txt"%(radecstr)  
     #os.system("mkdir -p %s"%(self.origPreViewDir))
     os.system(aa)
     ff=open("gaiaobjlist.txt",'r')
