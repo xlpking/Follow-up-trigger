@@ -75,7 +75,7 @@ def xplot(OTname):
     plt.figure(figsize=(8,8))
     plt.title(OTnametitle, fontsize=12)
     plt.ylim(18,-5)
-    plt.xlim(-2,6)
+    plt.xlim(-2,7)
     plt.grid(True)
     plt.xlabel('bp-rp')
     plt.ylabel('Absolute G mag')
