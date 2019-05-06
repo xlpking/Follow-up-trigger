@@ -241,31 +241,25 @@ if __name__=='__main__':
     results = ps1cone(ra,dec,radius,release='dr2',columns=columns,verbose=True,**constraints)
     # print first few lines
     lines = results.split('\n')
-    #ff=open("PS1.txt", 'w')
-    #ff.write(results)
-    #ff.close
-    print(len(lines),"rows in results -- first 50 rows:")
-    print('\n'.join(lines[:50]))
-    print("==========")
-    tab = ascii.read(results)
-    #print(tab)
-    
-    #ff=open("PS1_new.txt", 'w')
-    #ff.write(tab)
-    #ff.close
-    print("~~~~~~~~~")
+    ff=open("PS1.txt", 'w')
+    ff.write(results)
+    ff.close
+    #print(len(lines),"rows in results -- first 50 rows:")
+    #print('\n'.join(lines[:50]))
+    #print("==========")
+    #tab = ascii.read(results)
+    #print("~~~~~~~~~")
     # improve the format
-    for filter in 'gr':
     #for filter in 'grizy':
-        col = filter+'MeanPSFMag'
-        print(col)
-        try:
-            tab[col].format = ".4f"
-            tab[col][tab[col] == -999.0] = np.nan
-        except KeyError:
-            print("{} not found".format(col))
-    print(tab)
-    ascii.write(tab, 'PS1.txt',fast_writer=True,overwrite=True)
+    #    col = filter+'MeanPSFMag'
+    #    print(col)
+    #    try:
+    #        tab[col].format = ".4f"
+    #        tab[col][tab[col] == -999.0] = np.nan
+    #    except KeyError:
+    #        print("{} not found".format(col))
+    #print(tab)
+    #ascii.write(tab, 'PS1.txt',fast_writer=True,overwrite=True)
 
 
 
