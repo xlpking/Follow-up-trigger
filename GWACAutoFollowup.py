@@ -67,10 +67,11 @@ class GWACAutoFollowup:
     QOT2 = "SELECT ot_id, mag, found_time_utc from ot_level2 where name='%s'"
     
     maxExpTime = 150
+    #maxExpTime = 100
     maxExpTimeFilter = 80
     maxExpTimeFilter2 = 110
+    #maxMonitorTime = 100 #minute, max is 5 hours
     maxMonitorTime = 180 #minute, max is 5 hours
-    #maxMonitorTime = 180 #minute, max is 5 hours
     BjtimeStart = 8
     BjtimeEnd = 17
     
@@ -97,8 +98,8 @@ class GWACAutoFollowup:
     nexttmsghour = 0
     nexttmsgminutes = 0
     Talertmsg = 60.0
-    
     delayTime_max = 40
+    #delayTime_max = 50
     
     dirHRDImage = "/home/gwac/software/"
     #dirHRDImage = "/Volumes/Data/Documents/GitHub/Follow-up-trigger"
@@ -534,7 +535,7 @@ class GWACAutoFollowup:
        
 
                         fileout="%s_newtemp.txt"%(sciObj[1])
-                        pngfilename="%s_HRD.png"%(sciObj[1])
+                        pngfilename="%s_HRD.png"%(sciObj[1])                       
                         xfindgaiadr2(RAD, DEC, sciObj[1])
                         if os.access(fileout, os.F_OK):
                             print("Given file path %s is exist"%(fileout))
@@ -551,8 +552,23 @@ class GWACAutoFollowup:
                             print("%s is not exist"%(fileout))
                             tmsg="Can not get the data from Gaia dr2, %s is not exist"%(fileout)
                             self.sendTriggerMsg(tmsg)
-                        
-                    
+                            
+                        dwarfnovaFlag="%s_DwarfnovaFlag.txt"%(sciObj[1])
+                        if os.access(dwarfnovaFlag, os.F_OK):
+                            print("Dwarfnova file is exist")
+                            ffdw=open(dwarfnovaFlag, 'r')
+                            newdataalldw=ffdw.readlines()
+                            for f1dw in newdataalldw:
+                                f1t = f1dw.split()
+                                xDwarfnovaValue = f1t[0]                     
+                                if xDwarfnovaValue == 1:
+                                    OTFlag = "DN candidate"
+                                else:
+                                    OTFlag  = "Variable candiate"
+                        else:
+                            print("%s is not exist"%(dwarfnovaFlag))
+                            tmsg="Can not tell the classification, %s is not exist"%(dwarfnovaFlag)
+                            self.sendTriggerMsg(tmsg)
                     
                     if diffMinutes>self.stage2TriggerDelay:
                         print("diffMinutes=%s"%(diffMinutes))
@@ -577,6 +593,24 @@ class GWACAutoFollowup:
                     self.log.warning("%s, %.2f exceed max monitor time(%dminutes), close monitor."%(ot2Name, diffMinutes, self.maxMonitorTime))
                     
             elif status > 1:
+
+                dwarfnovaFlag="%s_DwarfnovaFlag.txt"%(sciObj[1])
+                if os.access(dwarfnovaFlag, os.F_OK):
+                    print("Dwarfnova file is exist")
+                    ffdw=open(dwarfnovaFlag, 'r')
+                    newdataalldw=ffdw.readlines()
+                    for f1dw in newdataalldw:
+                        f1t = f1dw.split()
+                        xDwarfnovaValue = f1t[0]                     
+                        if xDwarfnovaValue == 1:
+                            OTFlag = "DN candidate"
+                        else:
+                            OTFlag  = "Variable candiate"
+                    else:
+                        print("%s is not exist"%(dwarfnovaFlag))
+                        tmsg="Can not tell the classification, %s is not exist"%(dwarfnovaFlag)
+                        self.sendTriggerMsg(tmsg)
+
                                 
                 ot2Id = ot2[0]
                         
@@ -698,10 +732,10 @@ class GWACAutoFollowup:
                                 else:
                                     priority = 40
                                     coloraccess = sciObj[8]-sciObj[7]
-                                    if coloraccess > 2:
-                                        OTFlag = "Variable candidate"
-                                    if coloraccess < 0.5:
-                                        OTFlag = "DN candidate"    
+                                    #if coloraccess > 2:
+                                    #    OTFlag = "Variable candidate"
+                                    #if coloraccess < 0.5:
+                                    #    OTFlag = "DN candidate"    
                                     if triggerStatus == status:
                                         self.sendTriggerMsg("The %s %s %s Stage%d, magDiff: %.2f, obtained by %.2f and %.2f during the last two epochs"%(OTFlag, sciObj[1],sciObj[11],status, magDiff, fupRecordN[1],fupRecordN1[1]))
                                         self.updateSciObjTriggerStatus(sciObj[0], status+1)

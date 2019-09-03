@@ -13,6 +13,9 @@ import matplotlib.pyplot as plt
 #import pylab as pl
 
 
+ply_a = 2.0
+ply_b = 9.14
+
 #from matplotlib import pyplot
 #from amuse.plot import loglog, xlabel, ylabel
 #X, Y = [], []
@@ -72,10 +75,11 @@ def xplot(OTname):
     dataset = np.loadtxt("/home/gwac/software/gaia_dr2_hrd.cat")
     pngfilename="%s_HRD.png"%(OTname)
     OTnametitle = "Hertzsprung-Russell diagram for %s"%(OTname)
+    OTnameFlag = "%s_DwarfnovaFlag.txt"%(OTname)
     plt.figure(figsize=(8,8))
     plt.title(OTnametitle, fontsize=12)
     plt.ylim(18,-5)
-    plt.xlim(-2,7)
+    plt.xlim(-2,6)
     plt.grid(True)
     plt.xlabel('bp-rp')
     plt.ylabel('Absolute G mag')
@@ -84,6 +88,16 @@ def xplot(OTname):
     #plt.plot( x , y)
     print(bprp)
     print(AbsoMag)
+    
+    DwarfnovaC = ply_a * bprp + ply_b
+    if AbsoMag < DwarfnovaC : 
+        DwarfnovaFlag = 1       
+    else:
+        DwarfnovaFlag = 2 
+    
+    ff=open(OTnameFlag, 'w')
+    ff.write(DwarfnovaFlag)
+    ff.close()
     
     plt.plot(dataset[:,4], dataset[:,7], 'ro', markersize=0.5)
     plt.plot(bprp, AbsoMag,'bo',markersize=10)
@@ -96,6 +110,8 @@ def xplot(OTname):
     plt.savefig(pngfilename, dpi=100)
     return pngfilename
 
+    
+
  
 
 def xfindgaiadr2(ra,dec, OTname):
@@ -107,7 +123,7 @@ def xfindgaiadr2(ra,dec, OTname):
     	radecstr = "%s+%s"%(ra,dec)
     print("radecstr=%s"%(radecstr))
     fileout="%s_newtemp.txt"%(OTname)
-    aa="/home/gwac/anaconda3/bin/python ~/software/find_gaia_dr2.py -r 1 \"%s\" >gaiaobjlist.txt"%(radecstr)  
+    aa="/home/gwac/anaconda3/bin/python ~/software/find_gaia_dr2.py -r 1.3 \"%s\" >gaiaobjlist.txt"%(radecstr)  
     #os.system("mkdir -p %s"%(self.origPreViewDir))
     os.system(aa)
     ff=open("gaiaobjlist.txt",'r')
