@@ -167,6 +167,23 @@ class GWACAutoFollowup:
             
         return rows
 
+    def updateAutoObservationsTrue(self):
+        
+        tsql = "update science_object set auto_observation=true"
+        #self.log.debug(tsql)
+        
+        try:
+            self.connDb()
+    
+            cur = self.conn.cursor()
+            cur.execute(tsql)
+            self.conn.commit()
+            cur.close()
+            self.closeDb()
+        except Exception as err:
+            self.log.error(" update science_object status error ")
+            print(err)
+
     def updateSciObjStatus(self, soId, status):
         
         tsql = "update science_object set status=%d where so_id=%d"%(status, soId)
@@ -554,20 +571,23 @@ class GWACAutoFollowup:
                             self.sendTriggerMsg(tmsg)
                             
                         dwarfnovaFlag="%s_DwarfnovaFlag.txt"%(sciObj[1])
+                        print("============%s=========="%(dwarfnovaFlag))
                         if os.access(dwarfnovaFlag, os.F_OK):
-                            print("Dwarfnova file is exist")
+                            print("Dwarfnova file is exist for status = 1")
                             ffdw=open(dwarfnovaFlag, 'r')
                             newdataalldw=ffdw.readlines()
                             for f1dw in newdataalldw:
                                 f1t = f1dw.split()
                                 xDwarfnovaValue = f1t[0]                     
-                                if xDwarfnovaValue == 1:
+                                if xDwarfnovaValue == "YES":
                                     OTFlag = "DN candidate"
                                 else:
                                     OTFlag  = "Variable candiate"
+                            tmsg="%s is a %s"%(sciObj[1], OTFlag)
+                            self.sendTriggerMsg(tmsg)
                         else:
-                            print("%s is not exist"%(dwarfnovaFlag))
-                            tmsg="Can not tell the classification, %s is not exist"%(dwarfnovaFlag)
+                            print("%s is not exist for status=1"%(dwarfnovaFlag))
+                            tmsg="Can not tell the classification, %s is not exist for status=1"%(dwarfnovaFlag)
                             self.sendTriggerMsg(tmsg)
                     
                     if diffMinutes>self.stage2TriggerDelay:
@@ -596,20 +616,21 @@ class GWACAutoFollowup:
 
                 dwarfnovaFlag="%s_DwarfnovaFlag.txt"%(sciObj[1])
                 if os.access(dwarfnovaFlag, os.F_OK):
-                    print("Dwarfnova file is exist")
+                    print("Dwarfnova file is exist for status >1 ")
                     ffdw=open(dwarfnovaFlag, 'r')
                     newdataalldw=ffdw.readlines()
                     for f1dw in newdataalldw:
                         f1t = f1dw.split()
                         xDwarfnovaValue = f1t[0]                     
-                        if xDwarfnovaValue == 1:
+                        if xDwarfnovaValue == "YES ":
                             OTFlag = "DN candidate"
                         else:
                             OTFlag  = "Variable candiate"
-                    else:
-                        print("%s is not exist"%(dwarfnovaFlag))
-                        tmsg="Can not tell the classification, %s is not exist"%(dwarfnovaFlag)
-                        self.sendTriggerMsg(tmsg)
+                    print("TOFlag=%s for status >2 "%(OTFlag))        
+                else:
+                    print("%s is not exist for status >1"%(dwarfnovaFlag))
+                    tmsg="Can not tell the classification, %s is not exist for status >1"%(dwarfnovaFlag)
+                    self.sendTriggerMsg(tmsg)
 
                                 
                 ot2Id = ot2[0]
@@ -940,11 +961,14 @@ class GWACAutoFollowup:
         #self.initSciObj(ot2Name)
         #ot2Name = 'G190131_C06547'
         #self.initSciObj(ot2Name)        
-        #ot2Name = 'G190221_C05245'
+        #ot2Name = 'G190902_C01017'
         #self.initSciObj(ot2Name)
     
         tmsg = "Restart the code"
         self.sendTriggerMsg(tmsg)
+        
+        
+        #self.updateAutoObservationsTrue()
         
         aa="cd %s"%(self.dirHRDImage)
         os.system(aa)

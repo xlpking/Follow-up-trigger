@@ -90,13 +90,13 @@ def xplot(OTname):
     print(AbsoMag)
     
     DwarfnovaC = ply_a * bprp + ply_b
-    if AbsoMag < DwarfnovaC : 
-        DwarfnovaFlag = 1       
+    if AbsoMag > DwarfnovaC : 
+        DwarfnovaFlag = "YES"       
     else:
-        DwarfnovaFlag = 2 
+        DwarfnovaFlag = "NO" 
     
     ff=open(OTnameFlag, 'w')
-    ff.write(DwarfnovaFlag)
+    ff.write("%s"%(DwarfnovaFlag))
     ff.close()
     
     plt.plot(dataset[:,4], dataset[:,7], 'ro', markersize=0.5)

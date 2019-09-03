@@ -65,6 +65,7 @@ class FollowUp:
         
     #@fail_retry(3, exception=requests.Timeout)
     def uploadFollowUpCommond(self, autoLoop=1):
+        
         ''' '''
         ts = requests.Session()
         parameters = {'ot2fp.userName': self.userName, 
@@ -88,6 +89,12 @@ class FollowUp:
         else:
             print(resp[u'result'])
         return r.status_code == 200
+        
+
+    def uploadFollowUpCommondtest(self, autoLoop=1):
+        ''' '''
+        print("To send the command")
+        return True
         
 if __name__ == '__main__':
     
