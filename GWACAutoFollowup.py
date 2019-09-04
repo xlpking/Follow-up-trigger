@@ -629,8 +629,9 @@ class GWACAutoFollowup:
                     print("TOFlag=%s for status >2 "%(OTFlag))        
                 else:
                     print("%s is not exist for status >1"%(dwarfnovaFlag))
-                    tmsg="Can not tell the classification, %s is not exist for status >1"%(dwarfnovaFlag)
-                    self.sendTriggerMsg(tmsg)
+                    OTFlag = "Flaring candidate"
+                    #tmsg="Can not tell the classification, %s is not exist for status >1"%(dwarfnovaFlag)
+                    #self.sendTriggerMsg(tmsg)
 
                                 
                 ot2Id = ot2[0]
@@ -961,7 +962,7 @@ class GWACAutoFollowup:
         #self.initSciObj(ot2Name)
         #ot2Name = 'G190131_C06547'
         #self.initSciObj(ot2Name)        
-        #ot2Name = 'G190902_C01017'
+        #ot2Name = 'G190903_C03296'
         #self.initSciObj(ot2Name)
     
         tmsg = "Restart the code"
