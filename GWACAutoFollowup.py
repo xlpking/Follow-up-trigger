@@ -1029,8 +1029,8 @@ class GWACAutoFollowup:
         #self.initSciObj(ot2Name)
         #ot2Name = 'G190131_C06547'
         #self.initSciObj(ot2Name)        
-        ot2Name = 'G201217_C10436'
-        self.initSciObj(ot2Name)
+        #ot2Name = 'G201217_C10436'
+        #self.initSciObj(ot2Name)
     
         tmsg = "Restart the code"
         self.sendTriggerMsg(tmsg)
