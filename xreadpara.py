@@ -10,8 +10,21 @@ import numpy as np
 import linecache
 from math import log
 import matplotlib.pyplot as plt
+import logging
 #import pylab as pl
 
+#verbose = True
+#log = logging.getLogger() #create logger
+#log.setLevel(logging.DEBUG) #set level of logger
+#formatter = logging.Formatter("%(asctime)s %(levelname)s %(message)s") #set format of logger
+#logging.Formatter.converter = time.gmtime #convert time in logger to UCT
+#filehandler = logging.FileHandler("otFollowup.log", 'w+')
+#filehandler.setFormatter(formatter) #add format to log file
+#log.addHandler(filehandler) #link log file to logger
+#if verbose:
+#    streamhandler = logging.StreamHandler() #create print to screen logging
+#    streamhandler.setFormatter(formatter) #add format to screen logging
+#    log.addHandler(streamhandler) #link logger to screen logging
 
 ply_a = 2.0
 ply_b = 9.14
@@ -79,7 +92,7 @@ def xplot(OTname):
     plt.figure(figsize=(8,8))
     plt.title(OTnametitle, fontsize=12)
     plt.ylim(18,-5)
-    plt.xlim(-2,6)
+    plt.xlim(-2,7)
     plt.grid(True)
     plt.xlabel('bp-rp')
     plt.ylabel('Absolute G mag')
@@ -117,12 +130,20 @@ def xplot(OTname):
 def xfindgaiadr2(ra,dec, OTname):
     dec = float(dec)
     ra	= float(ra)
+    fileoutlog="xlogMonitor.txt"
+    xff=open(fileoutlog, 'w')
+    xff.write("%s,%s,%s\n"%(ra,dec,OTname))
+    xff.close()
     if dec < 0:
     	radecstr = "%s%s"%(ra,dec)
     else:
     	radecstr = "%s+%s"%(ra,dec)
     print("radecstr=%s"%(radecstr))
+    xff=open(fileoutlog, 'w')
+    xff.write("radecstr=%s"%(radecstr))
+    xff.close()
     fileout="%s_newtemp.txt"%(OTname)
+    #1.3 is the 1.3 arcsec
     aa="/home/gwac/anaconda3/bin/python ~/software/find_gaia_dr2.py -r 1.3 \"%s\" >gaiaobjlist.txt"%(radecstr)  
     #os.system("mkdir -p %s"%(self.origPreViewDir))
     os.system(aa)
@@ -175,6 +196,9 @@ def xfindgaiadr2(ra,dec, OTname):
             ff=open(fileout, 'w')
             ff.write(aa)
             ff.close()
+           # xff=open(fileoutlog, 'w')
+           # xff.write("aa=%s %s %s %s %s %s"%(ra,dec,plxReal,Gmag,BPRP,Teff))
+           # xff.close()
             
 
             break
@@ -188,6 +212,10 @@ if __name__=='__main__':
     decput = sys.argv[2]
     OTname = sys.argv[3]
     print("%s,%s,%s\n"%(raput,decput,OTname))
+    fileoutlog="xlogMonitor.txt"
+    xff=open(fileoutlog, 'w')
+    xff.write("%s,%s,%s\n"%(raput,decput,OTname))
+    xff.close()
     xfindgaiadr2(raput,decput, OTname)
     xplot(OTname)
     
