@@ -695,9 +695,12 @@ class GWACAutoFollowup:
                 print("lastLimitmag=%s, processResult=%s"%(lastLimitMag, processResult))                 
                 if lastLimitMag is None or processResult==0:     # no limit obtained from follow-up in the DB, "None is not a srting", 
                     #processResult is the flag of the results, 0 menas that DB have not got the results of the data processing
-                    continue
+                    lastLimitMag = 18.0
+                    #continue
                 
                 lastExpTime = fupObserves[0][1]
+                #print("===========xinliping============")
+                print("lastLimitMag = %.2f\n"%(lastLimitMag))
                 
                 tsql = self.QFupObj%(ot2Id)
                 #fuo_id, fuo_name, fuo_type_name
@@ -731,7 +734,9 @@ class GWACAutoFollowup:
                     print("To print fupRecordN1")
                     print(fupRecordN1)
                     print("============over====")
-                                        
+                    print(fupRecordN.shape[0])  
+                    print(fupRecordN1.shape[0])
+                    print("============over1====")
                     #if find object in Nth folllow
                     if fupRecordN.shape[0]>0 and fupRecordN1.shape[0]>0:
                         print("TSESFDE")
@@ -992,6 +997,10 @@ class GWACAutoFollowup:
                         priority = 41
                         print(fupObserves)
                         limitMag = fupObserves[0][0]
+                        if limitMag is None:     # no limit obtained from follow-up in the DB, "None is not a srting", 
+                            #processResult is the flag of the results, 0 menas that DB have not got the results of the data processing
+                            limitMag = 18.0
+                            #continue
                         magDiff = math.fabs(limitMag-fupRecordN1[1])
                         self.sendTriggerMsg("%s %s Stage%d \n " \
                                             "No detection, limitmag is %.2f \n" \
@@ -1020,6 +1029,10 @@ class GWACAutoFollowup:
                         #self.sendTriggerMsg("%s %s Stage%d, magDiff: %.2f"%(sciObj[1],sciObj[11],status, magDiff))
                         priority = 40
                         limitMag = fupObserves[0][0]
+                        if limitMag is None:     # no limit obtained from follow-up in the DB, "None is not a srting", 
+                            #processResult is the flag of the results, 0 menas that DB have not got the results of the data processing
+                            limitMag = 18.0
+                            #continue
                         tobs=[{'filter':['R'],'expTime':150,'frameCount':1}]
                         isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, -1, 1, priority)
                         if isExceedMaxTime:
@@ -1032,6 +1045,9 @@ class GWACAutoFollowup:
                         break
                     else:  
                         limitMag = fupObserves[0][0]
+                        if limitMag is None:     # no limit obtained from follow-up in the DB, "None is not a srting", 
+                            #processResult is the flag of the results, 0 menas that DB have not got the results of the data processing
+                            limitMag = 18.0
                         self.closeSciObjAutoObservation(sciObj[0])
                         self.log.warning("cannot find fupRecord[n-1] mag, stop obs")
                         self.sendTriggerMsg005("%s Stage%d cannot find fupRecord[n-1], stop observation. The limit mag is %.2f in R-band "%(ot2Name, status, limitMag))
