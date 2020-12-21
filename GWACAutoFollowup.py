@@ -88,9 +88,9 @@ class GWACAutoFollowup:
     
     stage1MagDiff = 1.2    #no vilid
     stage2MagDiff = 0.2  #0.3
-    stageNMagDiff1 = 0.2
+    stageNMagDiff1 = 0.1  #0.2
     stageNMagDiff2 = 0.3
-    deltaMagDiffTotal = 0.1
+    deltaMagDiffTotal = 0.4
     
     
     deltaT = 2.0
@@ -98,8 +98,8 @@ class GWACAutoFollowup:
     nexttmsghour = 0
     nexttmsgminutes = 0
     Talertmsg = 60.0
-    delayTime_max = 40
-    #delayTime_max = 50
+    #delayTime_max = 40
+    delayTime_max = 100
     
     dirHRDImage = "/home/gwac/software/"
     #dirHRDImage = "/Volumes/Data/Documents/GitHub/Follow-up-trigger"
@@ -411,6 +411,32 @@ class GWACAutoFollowup:
             self.log.error(e)
             
         return False
+
+
+    def ra2hour(self, RAD):
+        # convert the RA DEC in degree to hour format
+        #==================================
+        hh = RAD//15
+        mmss = RAD/15 - hh
+        mmss1 = mmss * 60
+        mm = math.floor(mmss1)
+        ss = (mmss1 - mm) * 60
+        RA_Hour="%.2d:%.2d:%.3f"%(hh,mm,ss)
+        print("RA=%s"%(RA_Hour))
+        return RA_Hour
+    
+    
+    def dec2hour(self, DEC):
+        dd = math.floor(DEC)
+        MMSS = (DEC - dd) * 60
+        MM = math.floor(MMSS)
+        SS = (MMSS - MM) * 60
+        DEC_Hour="%.2d:%.2d:%.3f"%(dd,MM,SS)
+        print("DEC=%s"%(DEC_Hour))
+        return DEC_Hour
+            #==================================
+
+
     
     #debug, info, warn, error
     def autoFollowUp(self):
@@ -481,23 +507,8 @@ class GWACAutoFollowup:
             triggerStatus = sciObj[6] #trigger_status=1
             
             
-            # convert the RA DEC in degree to hour format
-            #==================================
-            hh = RAD//15
-            mmss = RAD/15 - hh
-            mmss1 = mmss * 60
-            mm = math.floor(mmss1)
-            ss = (mmss1 - mm) * 60
-            RA_Hour="%.2d:%.2d:%.3f"%(hh,mm,ss)
-            print("RA=%s"%(RA_Hour))
-            dd = math.floor(DEC)
-            MMSS = (DEC - dd) * 60
-            MM = math.floor(MMSS)
-            SS = (MMSS - MM) * 60
-            DEC_Hour="%.2d:%.2d:%.3f"%(dd,MM,SS)
-            print("DEC=%s"%(DEC_Hour))
-            
-            #==================================
+            RA_Hour = self.ra2hour(RAD)
+            DEC_Hour = self.dec2hour(DEC)
             
             
             foundTime = sciObj[9]
@@ -728,7 +739,8 @@ class GWACAutoFollowup:
                         fupRecordN1 = fupRecordN1[0]
                         
                         magDiff = math.fabs(fupRecordN[1]-fupRecordN1[1])
-                        magDiffTotalslope  = math.fabs(fupRecordN[1]-sciObj[4])/status
+                        #magDiffTotalslope  = math.fabs(fupRecordN[1]-sciObj[4])/status
+                        Diff_all = math.fabs(fupRecordN[1]-sciObj[4])
                         observeTime = fupRecordN[2]
                         foundTime = sciObj[9]
                         #curDateTime = datetime.now()
@@ -818,7 +830,8 @@ class GWACAutoFollowup:
                                     break
                             elif status > 2:
                                 print("status >2")
-                                if magDiff>=self.stageNMagDiff1 and magDiffTotalslope >=self.deltaMagDiffTotal:
+                                #if magDiff>=self.stageNMagDiff1 and magDiffTotalslope >=self.deltaMagDiffTotal:
+                                if magDiff>=self.stageNMagDiff1 and Diff_all >=self.deltaMagDiffTotal:     
                                     priority = 41
                                     if triggerStatus == status:
                                         tmsg = "Auto Trigger 60CM Telescope:\n" \
@@ -901,7 +914,10 @@ class GWACAutoFollowup:
                                             self.sendTriggerMsg007(tmsg)
                                         if diffMinutes>self.stageNTriggerDelay2:
                                         #if diffMinutes>0:  
-                                            tobs=[{'filter':['B','R'],'expTime':30,'frameCount':2}]
+                                            #tobs=[{'filter':['B','R'],'expTime':30,'frameCount':2}]
+                                            tobs=[{'filter':['B'],'expTime':40,'frameCount':1},
+                                               {'filter':['R'],'expTime':40,'frameCount':6}
+                                               ]
                                             isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, magDiffK, 1, priority)
                                           #  if isExceedMaxTime:
                                           #      self.closeSciObjAutoObservation(sciObj[0])
@@ -913,6 +929,7 @@ class GWACAutoFollowup:
                                     else:
                                         coloraccess = sciObj[8]-sciObj[7]
                                         Diff_all = fupRecordN[1] - sciObj[4]
+                                        deltamag2R2 = fupRecordN[1] - sciObj[7]
                                         priority = 40
                                         print("magDiffk is small")
                                         print("fupRecordNk=%s"%(fupRecordNk))
@@ -923,9 +940,13 @@ class GWACAutoFollowup:
                                         #ot2time = ot2[2]
                                         #stageNTriggerDelay4 = (1+self.deltaT) * (fupRecordTime - ot2time).total_seconds()/60.0
                                  
-                                        if Diff_all > 0.6 :
-                                            deltaT = 0.3
-                                            stageNTriggerDelay4 = (1+deltaT) * ((fupRecordTime - fupRecordTimeNk).total_seconds()/60.0)
+                                        if Diff_all > 0.6:
+                                            if deltamag2R2 > 1.0:
+                                                deltaT = 0.2
+                                                stageNTriggerDelay4 = (1+deltaT) * ((fupRecordTime - fupRecordTimeNk).total_seconds()/60.0)
+                                            else:
+                                                deltaT = 0.3
+                                                stageNTriggerDelay4 = (1 + deltaT) * ((fupRecordTime - fupRecordTimeNk).total_seconds() / 60.0)
                                         else:                                            
                                             stageNTriggerDelay4 = (1+self.deltaT) * ((fupRecordTime - fupRecordTimeNk).total_seconds()/60.0)
                                         
@@ -946,7 +967,8 @@ class GWACAutoFollowup:
                                             break 
                                         
                                         if diffMinutes>stageNTriggerDelay4:
-                                            tobs=[{'filter':['B','R'],'expTime':30,'frameCount':1}]
+                                            #tobs=[{'filter':['B','R'],'expTime':30,'frameCount':1}]
+                                            tobs = [{'filter': ['R'], 'expTime': 30, 'frameCount': 1}]
                                             isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, magDiffK, 1, priority)
                                            # if isExceedMaxTime:
                                            #     self.closeSciObjAutoObservation(sciObj[0])
@@ -976,7 +998,7 @@ class GWACAutoFollowup:
                                             "The magnitude in the last obs is %.2f\n " \
                                             "magDiff: %.2f"%(sciObj[1],sciObj[11],status, limitMag,  fupRecordN1[1],  magDiff))
                        
-                        tobs=[{'filter':['B','R'],'expTime':30,'frameCount':1}]
+                        tobs=[{'filter':['R'],'expTime':30,'frameCount':2}]
                         isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, magDiff, 1, priority)
                         if isExceedMaxTime:
                             self.closeSciObjAutoObservation(sciObj[0])
