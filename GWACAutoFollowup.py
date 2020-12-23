@@ -73,7 +73,7 @@ class GWACAutoFollowup:
     maxExpTimeFilter = 80
     maxExpTimeFilter2 = 110
     #maxMonitorTime = 100 #minute, max is 5 hours
-    maxMonitorTime = 180 #180 #minute, max is 5 hours
+    maxMonitorTime = 500 #180 #minute, max is 5 hours
     BjtimeStart = 8
     BjtimeEnd = 15
     
@@ -629,6 +629,10 @@ class GWACAutoFollowup:
                         tmsg = "The delay time for the next request of follow-up is %s minutes"%(self.stage2TriggerDelay)
                         self.sendTriggerMsg005(tmsg)
     
+    
+                        tmsg="For 216obs: %s, RA=%s, DEC=%s, J2000, BFOSC, G8, exptime=5min for each, 1.8\" slit"%(sciObj[1], RA_Hour, DEC_Hour)
+                        self.sendTriggerMsg(tmsg)
+    
 
                         fileout="%s_newtemp.txt"%(sciObj[1])
                         pngfilename="%s_HRD.png"%(sciObj[1])
@@ -857,6 +861,9 @@ class GWACAutoFollowup:
                                        #     break
                                         self.updateSciObjStatus(sciObj[0], status+1)
                                         
+                                        
+                                        tmsg="For 216obs: %s, RA=%s, DEC=%s, J2000, BFOSC, G8, exptime=5 min for each, 1.8\" slit"%(sciObj[1], RA_Hour, DEC_Hour)
+                                        self.sendTriggerMsg007(tmsg)
                                         self.xgetps1img007(RAD, DEC, 2400, sciObj[1])
                                         #=====================================
                                         #xgetps1(RAD, DEC, 240, sciObj[1])
