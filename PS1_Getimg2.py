@@ -139,13 +139,13 @@ def xgetps1(ra, dec, size1, otname):
         plt.margins(0, 0)
 
 
-        x = 120
-        y = 120
+        x = 1200
+        y = 1200
         plt.scatter(x,y, marker="o", c='', edgecolors='w', s=1000)
         textc="1*1 arcmin"
-        #radec = "RA=%f, DEC%f" % (ra, dec)
+        radec = "RA=%f, DEC%f" % (ra, dec)
         plt.text(40, 50, otname, color="w")
-        #plt.text(40,60, radec, color="w")
+        plt.text(40,60, radec, color="w")
         plt.text(120, 220, textc, color="w")
         #plt.show()
         pngfilename = "%s_ps1.png"%(otname)
@@ -158,6 +158,8 @@ def xgetps1(ra, dec, size1, otname):
 
 def xgetps10arcmin(ra, dec, size1, otname):
     ps1img = "%s_ps1_0.jpg" % (otname)
+    if os.path.exists(ps1img):
+        os.remove(ps1img)
     # grayscale image
     #gim = getgrayim(ra,dec,size=size1,filter="i")
     # color image
@@ -212,10 +214,7 @@ if __name__=='__main__':
     #xgetps1(ra,dec,size1, otname)
     #10 arcmin
     #size1 = 2400  # 4pixel= 1 arcsec,  2400pixel=10 arcmin, 240pixel=1 arcmin,
-    if size1 > 5:
-        xgetps10arcmin(ra, dec, size1, otname)
-    else:
-       xgetps1(ra,dec,size1, otname) 
+    xgetps10arcmin(ra, dec, size1, otname)
        
     print(datetime.datetime.now())
 

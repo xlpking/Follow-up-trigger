@@ -11,7 +11,9 @@ from FollowUp import FollowUp
 import os,sys
 #sys.path.append(‘/Volumes/Data/Documents/GitHub/Follow-up-trigger’) 
 from xreadpara import xplot, xfindgaiadr2
-
+#from PS1_Getimg1 import xgetps1
+#from PS1_Getimg2 import xgetps10arcmin
+from PS1_Getimg import xgetps1, xgetps10arcmin
 
 #nohup python getOTImgsAll.py > /dev/null 2>&1 &
 class GWACAutoFollowup:
@@ -444,6 +446,31 @@ class GWACAutoFollowup:
             #==================================
 
 
+    def xgetps1img007(self, RA, DEC, size, otname ):
+        #=====================================
+        xgetps10arcmin(RA, DEC, size, otname)
+        pngfilename1="%s_ps1.png"%(otname)
+        if pngfilename1:
+            self.sendImage007(self.dirHRDImage, pngfilename1)
+        else:
+            print("there is not %s"%(pngfilename1))
+            tmsg="Have to read the PS1 image, but there is no %s"%(pngfilename1)
+            self.sendTriggerMsg007(tmsg)
+        
+        #==================================== 
+
+    def xgetps1img005(self, RA, DEC, size, otname ):
+        #=====================================
+        xgetps1(RA, DEC, size, otname)
+        pngfilename1="%s_ps1.png"%(otname)
+        if pngfilename1:
+            self.sendImage(self.dirHRDImage, pngfilename1)
+        else:
+            print("there is not %s"%(pngfilename1))
+            tmsg="Have to read the PS1 image, but there is no %s"%(pngfilename1)
+            self.sendTriggerMsg007(tmsg)
+        
+        #==================================== 
  
     def xchecktime(self):
         bjtimehour = int(time.strftime('%H',time.localtime(time.time())))
@@ -648,7 +675,7 @@ class GWACAutoFollowup:
                     if diffMinutes>self.stage2TriggerDelay:
                         print("diffMinutes=%s"%(diffMinutes))
                         #tobs=[{'filter':['B','R'],'expTime':20,'frameCount':1}]
-                        tobs=[{'filter':['R'],'expTime':20,'frameCount':2}]
+                        tobs=[{'filter':['R'],'expTime':30,'frameCount':2}]
                         
                         #print("tobs=%s"%(tobs))
                         #time.sleep(5)
@@ -659,6 +686,9 @@ class GWACAutoFollowup:
                         #    self.closeSciObjAutoObservation(sciObj[0])
                         #    self.sendTriggerMsg("%s expTime exceed %d seconds, stop observation."%(ot2Name, self.maxExpTime))
                         self.updateSciObjStatus(sciObj[0], 2)
+                        
+                        self.xgetps1img005(RAD, DEC, 240, sciObj[1])
+                        
                         #if a11[0:3] ==  "CAT":
                         #file2 = open('/home/gwac/software/GWAC_OT3.txt', 'w') 
                         #writeline = "%s %f %f\n"%(sciObj[1], RAD, DEC)
@@ -692,7 +722,11 @@ class GWACAutoFollowup:
 
                                 
                 ot2Id = ot2[0]
-                        
+                
+                if status == 2:
+                    print("will sleep for 30 sec")
+                    time.sleep(30)
+                    
                 tsql = self.QFupObs%(ot2Id, status)
                 #tsql = self.QFupObs%(ot2Id)
                 #limit_mag
@@ -822,6 +856,21 @@ class GWACAutoFollowup:
                                        #     self.sendTriggerMsg("%s expTime exceed %d seconds, stop observation."%(ot2Name, self.maxExpTime))
                                        #     break
                                         self.updateSciObjStatus(sciObj[0], status+1)
+                                        
+                                        self.xgetps1img007(RAD, DEC, 2400, sciObj[1])
+                                        #=====================================
+                                        #xgetps1(RAD, DEC, 240, sciObj[1])
+                                        #pngfilename1="%s_ps1.png"%(sciObj[1])
+                                        #if pngfilename1:
+                                        #    self.sendImage007(self.dirHRDImage, pngfilename1)
+                                        #else:
+                                        #    print("there is not %s"%(pngfilename1))
+                                        #    tmsg="Have to read the PS1 image, but there is no %s"%(pngfilename1)
+                                        #    self.sendTriggerMsg007(tmsg)
+                                            
+                                        #======================================= 
+                                        
+                                        
                                     break
                                 else:
                                     priority = 40
@@ -835,7 +884,7 @@ class GWACAutoFollowup:
                                         self.updateSciObjTriggerStatus(sciObj[0], status+1)
                                     if diffMinutes>self.stage3TriggerDelay2:
                                         #tobs=[{'filter':['B','R'],'expTime':30,'frameCount':1}]
-                                        tobs=[{'filter':['R'],'expTime':30,'frameCount':1}]
+                                        tobs=[{'filter':['R'],'expTime':30,'frameCount':2}]
                                         isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, magDiff, 1, priority)
                                         #if isExceedMaxTime:
                                         #    self.closeSciObjAutoObservation(sciObj[0])
@@ -877,7 +926,7 @@ class GWACAutoFollowup:
                                     #if diffMinutes>self.stageNTriggerDelay1:
                                     if diffMinutes>0:
                                         tobs=[{'filter':['B'],'expTime':30,'frameCount':1},
-                                               {'filter':['R'],'expTime':30,'frameCount':6}
+                                               {'filter':['R'],'expTime':30,'frameCount':4}
                                                ]
                                         isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, magDiff, 1, priority)
                                         #if isExceedMaxTime:
@@ -987,7 +1036,7 @@ class GWACAutoFollowup:
                                         
                                         if diffMinutes>stageNTriggerDelay4:
                                             #tobs=[{'filter':['B','R'],'expTime':30,'frameCount':1}]
-                                            tobs = [{'filter': ['R'], 'expTime': 30, 'frameCount': 1}]
+                                            tobs = [{'filter': ['R'], 'expTime': 30, 'frameCount': 2}]
                                             isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, magDiffK, 1, priority)
                                            # if isExceedMaxTime:
                                            #     self.closeSciObjAutoObservation(sciObj[0])
@@ -1082,8 +1131,8 @@ class GWACAutoFollowup:
         #self.initSciObj(ot2Name)
         #ot2Name = 'G190131_C06547'
         #self.initSciObj(ot2Name)        
-        #ot2Name = 'G201222_C09589'
-        #self.initSciObj(ot2Name)
+        ot2Name = 'G201223_C02293'
+        self.initSciObj(ot2Name)
     
         tmsg = "Restart the code"
         self.sendTriggerMsg(tmsg)

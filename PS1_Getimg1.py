@@ -116,6 +116,15 @@ def getgrayim(ra, dec, size=240, output_size=None, filter="g", format="jpg"):
 
 def xgetps1(ra, dec, size1, otname):
     ps1img = "%s_ps1_0.jpg" % (otname)
+    pngfilename = "%s_ps1.png"%(otname)
+    if os.path.exists(ps1img):
+        print("yes,have ps1img")
+        os.remove(ps1img)
+        
+    if os.path.exists(pngfilename):
+        print("yes, pngfilename")
+        os.remove(pngfilename)
+        
     # grayscale image
     #gim = getgrayim(ra,dec,size=size1,filter="i")
     # color image
@@ -141,6 +150,7 @@ def xgetps1(ra, dec, size1, otname):
 
         x = 120
         y = 120
+        print("x=%d, y=%d"%(x,y))
         plt.scatter(x,y, marker="o", c='', edgecolors='w', s=1000)
         textc="1*1 arcmin"
         #radec = "RA=%f, DEC%f" % (ra, dec)
@@ -148,74 +158,30 @@ def xgetps1(ra, dec, size1, otname):
         #plt.text(40,60, radec, color="w")
         plt.text(120, 220, textc, color="w")
         #plt.show()
-        pngfilename = "%s_ps1.png"%(otname)
+        
         plt.savefig(pngfilename, dpi=100)
         return pngfilename
     else:
         print("no ps1 image ")
 
-
-
-def xgetps10arcmin(ra, dec, size1, otname):
-    ps1img = "%s_ps1_0.jpg" % (otname)
-    # grayscale image
-    #gim = getgrayim(ra,dec,size=size1,filter="i")
-    # color image
-    cim = getcolorim(ra,dec,size=size1,filters="grz")
-    #r image
-    #cim = getgrayim(ra,dec, size=size1, filter="r")
-    #print(dir(cim))
-    cim.save(ps1img)
-
-    if os.access(ps1img, os.F_OK):
-
-        plt.figure(figsize=(4, 4), dpi=50)
-        #set size square
-        img_arr = plt.imread(ps1img)
-        plt.imshow(img_arr)
-        plt.xticks([])
-        plt.yticks([])
-        plt.gca().xaxis.set_major_locator(plt.NullLocator())
-        plt.gca().yaxis.set_major_locator(plt.NullLocator())
-        plt.subplots_adjust(top=1, bottom=0, left=0, right=1, hspace=0, wspace=0)
-        plt.margins(0, 0)
-
-
-        x = 1200
-        y = 1200
-        plt.scatter(x,y, marker="o", c='', edgecolors='w', s=1000)
-        textc="10*10 arcmin"
-        radec = "RA=%f, DEC=%f" % (ra, dec)
-        plt.text(800, 200, otname, color="w")
-        plt.text(600,300, radec, color="w")
-        plt.text(100, 2200, textc, color="w")
-        #plt.show()
-        pngfilename = "%s_ps1.png"%(otname)
-        plt.savefig(pngfilename, dpi=100)
-        return pngfilename
-    else:
-        print("no ps1 image ")
 
 
 if __name__=='__main__':
-    ra = sys.argv[1]
-    dec = sys.argv[2]
-    size1 = sys.argv[3]
-    otname = sys.argv[4]
+    #ra = sys.argv[1]
+    #dec = sys.argv[2]
+    #size1 = sys.argv[3]
+    #otname = sys.argv[4]
     # Crab Nebula position
     print(datetime.datetime.now())
-    #ra = 42.282871
-    #dec = 49.837971
-    #otname = "G201221_C20405"
+    ra = 42.282871
+    dec = 49.837971
+    otname = "G201221_C20405"
     # 1 arcmin
-    #size1 = 240  # 4pixel= 1 arcsec,  2400pixel=10 arcmin, 240pixel=1 arcmin,
+    size1 = 240  # 4pixel= 1 arcsec,  2400pixel=10 arcmin, 240pixel=1 arcmin,
     #xgetps1(ra,dec,size1, otname)
     #10 arcmin
     #size1 = 2400  # 4pixel= 1 arcsec,  2400pixel=10 arcmin, 240pixel=1 arcmin,
-    if size1 > 5:
-        xgetps10arcmin(ra, dec, size1, otname)
-    else:
-       xgetps1(ra,dec,size1, otname) 
+    xgetps1(ra,dec,size1, otname) 
        
     print(datetime.datetime.now())
 
