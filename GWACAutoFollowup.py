@@ -89,7 +89,7 @@ class GWACAutoFollowup:
     #defined stageNTriggerDelay4 in the inner code
     #stageNTriggerDelay4 = (1+self.deltaT) * (fupRecordTime - ot2time).total_seconds()/60.0
     
-    stage1MagDiff = 1.2    #no vilid
+    stage1MagDiff = 0.2    #no vilid
     stage2MagDiff = 0.2  #0.3
     stageNMagDiff1 = 0.1  #0.2
     stageNMagDiff2 = 0.3
@@ -727,9 +727,9 @@ class GWACAutoFollowup:
                                 
                 ot2Id = ot2[0]
                 
-                if status == 2:
-                    print("will sleep for 30 sec")
-                    time.sleep(30)
+                #if status == 2:
+                #    print("will sleep for 30 sec")
+                #    time.sleep(30)
                     
                 tsql = self.QFupObs%(ot2Id, status)
                 #tsql = self.QFupObs%(ot2Id)
@@ -744,8 +744,8 @@ class GWACAutoFollowup:
                 print("lastLimitmag=%s, processResult=%s"%(lastLimitMag, processResult))                 
                 if lastLimitMag is None or processResult==0:     # no limit obtained from follow-up in the DB, "None is not a srting", 
                     #processResult is the flag of the results, 0 menas that DB have not got the results of the data processing
-                    lastLimitMag = 18.0
-                    #continue
+                    #lastLimitMag = 18.0
+                    continue
                 
                 lastExpTime = fupObserves[0][1]
                 #print("===========xinliping============")
@@ -786,12 +786,17 @@ class GWACAutoFollowup:
                     print(fupRecordN.shape[0])  
                     print(fupRecordN1.shape[0])
                     print("============over1====")
+                   
+                    
                     #if find object in Nth folllow
                     if fupRecordN.shape[0]>0 and fupRecordN1.shape[0]>0:
                         print("TSESFDE")
+                         
                         fupRecordN = fupRecordN[0]
                         fupRecordN1 = fupRecordN1[0]
-                        
+                        print(fupRecordN)
+                        print(fupRecordN1)
+                        #time.sleep(100)
                         magDiff = math.fabs(fupRecordN[1]-fupRecordN1[1])
                         #magDiffTotalslope  = math.fabs(fupRecordN[1]-sciObj[4])/status
                         Diff_all = math.fabs(fupRecordN[1]-sciObj[4])
@@ -852,7 +857,7 @@ class GWACAutoFollowup:
                                    # if diffMinutes>self.stage3TriggerDelay1:
                                     if diffMinutes > 0:
                                         tobs=[{'filter':['B'],'expTime':30,'frameCount':1},
-                                               {'filter':['R'],'expTime':30,'frameCount':2}   
+                                               {'filter':['R'],'expTime':30,'frameCount':3}   
                                                ]
                                         isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, magDiff, 1, priority)
                                        # if isExceedMaxTime:
@@ -1064,13 +1069,13 @@ class GWACAutoFollowup:
                         self.log.warning("cannot find fupRecord[n] mag, use limit mag")
                         print("limitmag")
                         fupRecordN1 = fupRecordN1[0]
-                        priority = 39
+                        #priority = 42
                         print(fupObserves)
                         limitMag = fupObserves[0][0]
                         if limitMag is None:     # no limit obtained from follow-up in the DB, "None is not a srting", 
                             #processResult is the flag of the results, 0 menas that DB have not got the results of the data processing
-                            limitMag = 18.0
-                            #continue
+                            #limitMag = 18.0
+                            continue
                         magDiff = math.fabs(limitMag-fupRecordN1[1])
                         self.sendTriggerMsg("%s %s Stage%d \n " \
                                             "No detection, limitmag is %.2f \n" \
@@ -1098,12 +1103,12 @@ class GWACAutoFollowup:
                         #magDiff = math.fabs(limitMag-fupRecordN1[1])
                         #self.sendTriggerMsg("%s %s Stage%d, magDiff: %.2f"%(sciObj[1],sciObj[11],status, magDiff))
                         priority = 39
-                        limitMag = fupObserves[0][0]
-                        if limitMag is None:     # no limit obtained from follow-up in the DB, "None is not a srting", 
+                        #limitMag = fupObserves[0][0]
+                        #if limitMag is None:     # no limit obtained from follow-up in the DB, "None is not a srting", 
                             #processResult is the flag of the results, 0 menas that DB have not got the results of the data processing
-                            limitMag = 18.0
-                            #continue
-                        tobs=[{'filter':['R'],'expTime':100,'frameCount':1}]
+                            #limitMag = 18.0
+                        #    continue
+                        tobs=[{'filter':['R'],'expTime':50,'frameCount':1}]
                         isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, -1, 1, priority)
                         if isExceedMaxTime:
                             self.closeSciObjAutoObservation(sciObj[0])
@@ -1138,7 +1143,7 @@ class GWACAutoFollowup:
         #self.initSciObj(ot2Name)
         #ot2Name = 'G190131_C06547'
         #self.initSciObj(ot2Name)        
-        ot2Name = 'G201223_C02293'
+        ot2Name = 'G201224_C07492'
         self.initSciObj(ot2Name)
     
         tmsg = "Restart the code"
