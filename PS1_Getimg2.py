@@ -187,6 +187,7 @@ def xgetps10arcmin(ra, dec, size1, otname):
         y = 1200
         plt.scatter(x,y, marker="o", c='', edgecolors='w', s=1000)
         textc="10*10 arcmin"
+        
         radec = "RA=%f, DEC=%f" % (ra, dec)
         plt.text(800, 200, otname, color="w")
         plt.text(600,300, radec, color="w")

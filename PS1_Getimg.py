@@ -11,6 +11,7 @@ from PIL import Image
 import matplotlib.pylab as plt
 import os, sys
 import time, datetime
+import math
 
 
 
@@ -156,6 +157,39 @@ def xgetps1(ra, dec, size1, otname):
 
 
 
+def ra2hour(RAD):
+    # convert the RA DEC in degree to hour format
+    #==================================
+    hh = RAD//15
+    mmss = RAD/15 - hh
+    mmss1 = mmss * 60
+    mm = math.floor(mmss1)
+    ss = (mmss1 - mm) * 60
+    if ss < 10:
+        RA_Hour="%.2d:%.2d:0%.3f"%(hh,mm,ss)
+    else:
+        RA_Hour="%.2d:%.2d:%.3f"%(hh,mm,ss)
+    print("RA=%s"%(RA_Hour))
+    return RA_Hour
+    
+    
+def dec2hour(DEC):
+    dd = math.floor(DEC)
+    MMSS = (DEC - dd) * 60
+    MM = math.floor(MMSS)
+    SS = (MMSS - MM) * 60
+    if SS < 10:
+        DEC_Hour="%.2d:%.2d:0%.3f"%(dd,MM,SS)
+    else:
+        DEC_Hour="%.2d:%.2d:%.3f"%(dd,MM,SS)
+    print("DEC=%s"%(DEC_Hour))
+    return DEC_Hour
+#==================================
+
+
+
+
+
 def xgetps10arcmin(ra, dec, size1, otname):
     ps1img = "%s_ps1_0.jpg" % (otname)
     # grayscale image
@@ -185,10 +219,14 @@ def xgetps10arcmin(ra, dec, size1, otname):
         y = 1200
         plt.scatter(x,y, marker="o", c='', edgecolors='w', s=1000)
         textc="10*10 arcmin"
-        radec = "RA=%f, DEC=%f" % (ra, dec)
+        
+        RA_Hour = ra2hour(ra)
+        DEC_Hour = dec2hour(dec)
+        
+        radec = "RA=%s, DEC=%s" % (RA_Hour, DEC_Hour)
         plt.text(800, 200, otname, color="w")
-        plt.text(600,300, radec, color="w")
-        plt.text(100, 2200, textc, color="w")
+        plt.text(400,300, radec, color="w")
+        plt.text(1600, 2200, textc, color="w")
         #plt.show()
         pngfilename = "%s_ps1.png"%(otname)
         plt.savefig(pngfilename, dpi=100)
