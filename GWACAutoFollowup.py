@@ -636,7 +636,7 @@ class GWACAutoFollowup:
                         tmsg = "The delay time for the next request of follow-up is %s minutes"%(self.stage2TriggerDelay)
                         self.sendTriggerMsg005(tmsg)
 
-                        tmsg="For 216obs: %s, RA=%s, DEC=%s, J2000, BFOSC, G8, exptime=5min for each, 1.8\" slit"%(sciObj[1], RA_Hour, DEC_Hour)
+                        tmsg="For 216obs: %s, RA=%s, DEC=%s, J2000, BFOSC, G8, exptime=5min for each, 1.8arcsec slit"%(sciObj[1], RA_Hour, DEC_Hour)
                         self.sendTriggerMsg(tmsg)
     
 
@@ -857,7 +857,7 @@ class GWACAutoFollowup:
                                         self.updateSciObjStatus(sciObj[0], status+1)
                                         
                                         
-                                        tmsg="For 216obs: %s, RA=%s, DEC=%s, J2000, BFOSC, G8, exptime=5 min for each, 1.8\" slit"%(sciObj[1], RA_Hour, DEC_Hour)
+                                        tmsg="For 216obs: %s, RA=%s, DEC=%s, J2000, BFOSC, G8, exptime=5 min for each, 1.8arcsec slit"%(sciObj[1], RA_Hour, DEC_Hour)
                                         self.sendTriggerMsg007(tmsg)
                                         self.xgetps1img007(RAD, DEC, 2400, sciObj[1])
                                         #=====================================
@@ -1059,7 +1059,7 @@ class GWACAutoFollowup:
                         self.log.warning("cannot find fupRecord[n] mag, use limit mag")
                         print("limitmag")
                         fupRecordN1 = fupRecordN1[0]
-                        #priority = 42
+                        priority = 39
                         print(fupObserves)
                         limitMag = fupObserves[0][0]
                         if limitMag is None:     # no limit obtained from follow-up in the DB, "None is not a srting", 
