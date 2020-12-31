@@ -73,7 +73,7 @@ class GWACAutoFollowup:
     maxExpTimeFilter = 80
     maxExpTimeFilter2 = 110
     #maxMonitorTime = 100 #minute, max is 5 hours
-    maxMonitorTime = 500 #180 #minute, max is 5 hours
+    maxMonitorTime = 180 #180 #minute, max is 5 hours
     BjtimeStart = 8
     BjtimeEnd = 15
     
@@ -490,6 +490,41 @@ class GWACAutoFollowup:
                 self.sendTriggerMsg005(tmsg)
                 self.nexttmsgminutes = bjtimeminute
                 self.nexttmsghour = bjtimehour
+                bttimeflag = 1
+                return bttimeflag 
+        elif bjtimehour != self.nexttmsghour:
+                tmsg="Beijing time (hour) is %d, working time,  next alive msg will be one hour later"%(bjtimehour)
+                print(tmsg)
+                self.sendTriggerMsg005(tmsg)
+                self.nexttmsghour = bjtimehour 
+                bttimeflag = 2
+                return bttimeflag
+        else:
+            print("=====working time===")
+            bttimeflag = 2
+            return bttimeflag
+    
+    
+    #debug, info, warn, error
+    def autoFollowUp(self):
+        
+        bjtimehour = int(time.strftime('%H',time.localtime(time.time())))
+        bjtimeminute = int(time.strftime('%M',time.localtime(time.time())))  
+        print("Beijing hour is %d, Beijng minutes is %d"%(bjtimehour,  bjtimeminute))
+       
+        delayMinutes = math.fabs((bjtimehour + bjtimeminute/60 - self.nexttmsghour - self.nexttmsgminutes/60)*60.0)
+        print("%.2f"%(delayMinutes))  
+        
+        if bjtimehour>=self.BjtimeStart and bjtimehour<self.BjtimeEnd:  
+            if delayMinutes  >= self.Talertmsg:  
+                if bjtimeminute < 10:
+                    tmsg="Beijing time is %d:0%d:00, day time, will sleep for %d min, and then try again"%(bjtimehour,bjtimeminute, self.Talertmsg)
+                else: 
+                    tmsg="Beijing time is %d:%d:00, day time, will sleep for %d min, and then try again"%(bjtimehour,bjtimeminute, self.Talertmsg)
+                print(tmsg)
+                self.sendTriggerMsg005(tmsg)
+                self.nexttmsgminutes = bjtimeminute
+                self.nexttmsghour = bjtimehour
             return
         elif bjtimehour != self.nexttmsghour:
                 tmsg="Beijing time (hour) is %d, working time,  next alive msg will be one hour later"%(bjtimehour)
@@ -498,11 +533,6 @@ class GWACAutoFollowup:
                 self.nexttmsghour = bjtimehour 
         else:
             print("=====working time===")
-    
-    
-    #debug, info, warn, error
-    def autoFollowUp(self):
-        self.xchecktime()
             
         #so_id, name, point_ra, point_dec, mag, status, trigger_status, 
         #found_usno_r2, found_usno_b2, discovery_time_utc, auto_loop_slow, type
@@ -638,7 +668,11 @@ class GWACAutoFollowup:
 
                         tmsg="For 216obs: %s, RA=%s, DEC=%s, J2000, BFOSC, G8, exptime=5min for each, 1.8arcsec slit"%(sciObj[1], RA_Hour, DEC_Hour)
                         self.sendTriggerMsg(tmsg)
+ 
     
+# if the code is running at W60ccd server, then this part shall be blocked since the speed of the Internate. 
+                        ##=====================================
+                        #'''
 
                         fileout="%s_newtemp.txt"%(sciObj[1])
                         pngfilename="%s_HRD.png"%(sciObj[1])
@@ -684,6 +718,8 @@ class GWACAutoFollowup:
                     
                         # to send the ps1 image to all transient with FoV of 1 arcmin
                         self.xgetps1img005(RAD, DEC, 240, sciObj[1])
+                       # '''
+#==================================================                        
                         
                 else: # exceed max monitor time, do not monitor this sciobj anymore
                     print("Time is out")
@@ -927,9 +963,14 @@ class GWACAutoFollowup:
                                         self.sendTriggerMsg007(tmsg)
                                     #if diffMinutes>self.stageNTriggerDelay1:
                                     if diffMinutes>0:
-                                        tobs=[{'filter':['B'],'expTime':30,'frameCount':1},
+                                        if fupRecordN[1] >= 15.0:    #for a typical dMe, B-R>2.0, so the mag in B band is lager than 17 mag. difficalt to obs. 
+                                            tobs=[{'filter':['R'],'expTime':30,'frameCount':4}]
+                                        else:
+                                            tobs=[{'filter':['B'],'expTime':30,'frameCount':1},
                                                {'filter':['R'],'expTime':30,'frameCount':4}
                                                ]
+                                            
+                                                                                        
                                         isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, magDiff, 1, priority)
                                         #if isExceedMaxTime:
                                         #    self.closeSciObjAutoObservation(sciObj[0])
@@ -1092,21 +1133,25 @@ class GWACAutoFollowup:
                         #limitMag = fupObserves[0][0]
                         #magDiff = math.fabs(limitMag-fupRecordN1[1])
                         #self.sendTriggerMsg("%s %s Stage%d, magDiff: %.2f"%(sciObj[1],sciObj[11],status, magDiff))
-                        priority = 39
+                        #priority = 39
                         #limitMag = fupObserves[0][0]
                         #if limitMag is None:     # no limit obtained from follow-up in the DB, "None is not a srting", 
                             #processResult is the flag of the results, 0 menas that DB have not got the results of the data processing
                             #limitMag = 18.0
                         #    continue
-                        tobs=[{'filter':['R'],'expTime':50,'frameCount':1}]
-                        isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, -1, 1, priority)
-                        if isExceedMaxTime:
-                            self.closeSciObjAutoObservation(sciObj[0])
-                            self.sendTriggerMsg005("%s expTime exceed %d seconds, stop observation. The limit mag is %.2f in R-band "%(ot2Name, self.maxExpTime, limitMag))
-                            break
+                        self.closeSciObjAutoObservation(sciObj[0])
+                        self.sendTriggerMsg005("%s stop observation for no detection! "%(ot2Name))
+                        #break     
+                        
+                        #tobs=[{'filter':['R'],'expTime':50,'frameCount':1}]
+                        #isExceedMaxTime = self.sendObservationCommand(sciObj, tobs, status+1, lastExpTime, -1, 1, priority)
+                        #if isExceedMaxTime:
+                        #    self.closeSciObjAutoObservation(sciObj[0])
+                        #    self.sendTriggerMsg005("%s expTime exceed %d seconds, stop observation. The limit mag is %.2f in R-band "%(ot2Name, self.maxExpTime, limitMag))
+                        #    break
 
-                        self.updateSciObjStatus(sciObj[0], status+1)
-                        self.updateSciObjTriggerStatus(sciObj[0], status+1)
+                        #self.updateSciObjStatus(sciObj[0], status+1)
+                        #self.updateSciObjTriggerStatus(sciObj[0], status+1)
                         break
                     else:  
                         priority = 39
