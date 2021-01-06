@@ -59,7 +59,7 @@ class GWACAutoFollowup:
         "from follow_up_object fuo " \
         "inner join follow_up_object_type fuoType on fuo.fuo_type_id=fuoType.fuo_type_id " \
         "where fuo.ot_id=%d"
-    QFupRec = "SELECT fupObs.auto_loop, fupRec.mag_cal_usno, fupRec.date_utc " \
+    QFupRec = "SELECT fupObs.auto_loop, fupRec.mag_cal_usno, fupRec.date_utc, fupRec.ra, fupRec.dec" \
         "from follow_up_record fupRec " \
         "inner join follow_up_observation fupObs on fupObs.fo_id=fupRec.fo_id "  \
         "where fupRec.filter='R' and fupRec.fuo_id=%d " \
