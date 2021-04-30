@@ -59,11 +59,6 @@ class GWACAutoFollowup:
         "from follow_up_object fuo " \
         "inner join follow_up_object_type fuoType on fuo.fuo_type_id=fuoType.fuo_type_id " \
         "where fuo.ot_id=%d"
-    #QFupRec = "SELECT fupObs.auto_loop, fupRec.mag_cal_usno, fupRec.date_utc, fupRec.ra, fupRec.dec" \
-    #    "from follow_up_record fupRec " \
-    #    "inner join follow_up_observation fupObs on fupObs.fo_id=fupRec.fo_id "  \
-    #    "where fupRec.filter='R' and fupRec.fuo_id=%d " \
-    #    "order by fupRec.date_utc asc"
     QFupRec = "SELECT fupObs.auto_loop, fupRec.mag_cal_usno, fupRec.date_utc " \
         "from follow_up_record fupRec " \
         "inner join follow_up_observation fupObs on fupObs.fo_id=fupRec.fo_id "  \
@@ -79,9 +74,8 @@ class GWACAutoFollowup:
     maxExpTimeFilter2 = 110
     #maxMonitorTime = 100 #minute, max is 5 hours
     maxMonitorTime = 180 #180 #minute, max is 5 hours
-    #maxMonitorTime = 700 #180 #minute, max is 5 hours
     BjtimeStart = 8
-    BjtimeEnd = 16
+    BjtimeEnd = 14
     
     #stage2TriggerDelay = 2.0 #minute  #2
     stage2TriggerDelay = 0.0 #minute  #2
@@ -96,7 +90,7 @@ class GWACAutoFollowup:
     #stageNTriggerDelay4 = (1+self.deltaT) * (fupRecordTime - ot2time).total_seconds()/60.0
     
     stage1MagDiff = 0.15    #no vilid
-    stage2MagDiff = 0.15  #0.3
+    stage2MagDiff = 0.2  #0.3
     stageNMagDiff1 = 0.1  #0.2
     stageNMagDiff2 = 0.3
     deltaMagDiffTotal = 0.4
@@ -310,13 +304,9 @@ class GWACAutoFollowup:
             #tmsg = "%s: %s"%(sendTime, tmsg)
             msgURL = "http://%s/gwebend/sendTrigger2WChart.action?chatId=gwac007&triggerMsg="%(self.webServerIP2)
             #msgURL = "http://%s/gwebend/sendTrigger2WChart.action?chatId=gwac003&triggerMsg="%(self.webServerIP2)
-
             turl = "%s%s"%(msgURL,tmsg)
             #self.log.debug(turl)
-            print("========turl=====")
-            print(turl)
-            print("=======end=========")
-            #time.sleep(20)
+            
             msgSession = requests.Session()
             msgSession.get(turl, timeout=10, verify=False)
             
@@ -649,7 +639,7 @@ class GWACAutoFollowup:
                         self.updateSciObjStatus(sciObj[0], 2) 
                    
                     if triggerStatus == 1:
-                        tmsg1 = "New Auto Trigger 60CM Telescope:\n" \
+                        tmsg = "New Auto Trigger 60CM Telescope:\n" \
                            "%s %s Stage1.\n" \
                            " \n"\
                            "gwacDiscoveryTime: %s UT\n"\
@@ -670,13 +660,13 @@ class GWACAutoFollowup:
                            "This is one %s"\
                            " \n"\
                            "The link is  http://www.gwac.top/gwac/gwac/pgwac-ot-detail2.action?otName=%s"%(sciObj[1],sciObj[11], ot2[2], sciObj[9], ot2[1], sciObj[4],sciObj[7],sciObj[8]-sciObj[7], RAD, DEC, RA_Hour, DEC_Hour, Fdiffmag, OTFlag, sciObj[1])
-                        self.log.debug(tmsg1)
-                        self.sendTriggerMsg(tmsg1)
+                        self.log.debug(tmsg)
+                        self.sendTriggerMsg(tmsg)
                         self.updateSciObjTriggerStatus(sciObj[0], status+1)
                         tmsg = "The delay time for the next request of follow-up is %s minutes"%(self.stage2TriggerDelay)
                         self.sendTriggerMsg005(tmsg)
 
-                        tmsg="For 216obs: %s, RA=%s, DEC=%s, error=0.5arcsec, J2000, Rmag=%f, BFOSC, G8, exptime=5min for each, 1.8arcsec slit"%(sciObj[1], RA_Hour, DEC_Hour,sciObj[4])
+                        tmsg="For 216obs: %s, RA=%s, DEC=%s, J2000, BFOSC, G8, exptime=5min for each, 1.8arcsec slit"%(sciObj[1], RA_Hour, DEC_Hour)
                         self.sendTriggerMsg(tmsg)
  
     
@@ -697,40 +687,6 @@ class GWACAutoFollowup:
                             if pngfile:
                                 self.sendImage(self.dirHRDImage, pngfilename)
                                 print("will send the figure %s to the wechat"%(pngfilename))
-                                dwarfnovaFlag="%s_DwarfnovaFlag.txt"%(sciObj[1])
-                                print("============%s=========="%(dwarfnovaFlag))
-                                if os.access(dwarfnovaFlag, os.F_OK):
-                                    print("Dwarfnova file is exist for status = 1")
-                                    ffdw=open(dwarfnovaFlag, 'r')
-                                    newdataalldw=ffdw.readlines()
-                                    for f1dw in newdataalldw:
-                                        f1t = f1dw.split()
-                                        xDwarfnovaValue = f1t[0]                     
-                                        if xDwarfnovaValue == "YES":
-                                            OTFlag = "DN candidate"
-                                        elif xDwarfnovaValue == "NO":
-                                            OTFlag  = "Variable candiate"
-                                        else: 
-                                            #xDwarfnovaValue == "Flare" :
-                                            OTFlag = "Flare candidate"
-                                            tmsg="%s is a %s\n"%(sciObj[1],OTFlag)
-                                            self.sendTriggerMsg007(tmsg1)
-                                            self.sendTriggerMsg007(tmsg)
-                                            self.xgetps1img007(RAD, DEC, 240, sciObj[1])
-                                            tmsgaladin="http://www.gwac.top/fc/finding-chart.html?ra=%f+dec=%f"%(RAD,DEC)
-                                            print("========tmsgaladin======")
-                                            print(tmsgaladin)
-                                            print("========end============")
-                                            #time.sleep(20)
-                                            self.sendTriggerMsg007(tmsgaladin)
-                                            self.sendImage007(self.dirHRDImage, pngfilename)                                            
-                                            
-                                    tmsg="%s is a %s"%(sciObj[1], OTFlag)
-                                    self.sendTriggerMsg(tmsg)
-                                else:
-                                    print("%s is not exist for status=1"%(dwarfnovaFlag))
-                                    tmsg="Can not tell the classification, %s is not exist for status=1"%(dwarfnovaFlag)
-                                    self.sendTriggerMsg(tmsg)
                             else:
                                 print("there is not %s"%(pngfilename))
                                 tmsg="Have read the data from Gaia dr2, however, there is no %s"%(pngfilename)
@@ -739,9 +695,7 @@ class GWACAutoFollowup:
                             print("%s is not exist"%(fileout))
                             tmsg="Can not get the data from Gaia dr2, %s is not exist"%(fileout)
                             self.sendTriggerMsg(tmsg)
-                      
-                        
-                        '''      
+                            
                         dwarfnovaFlag="%s_DwarfnovaFlag.txt"%(sciObj[1])
                         print("============%s=========="%(dwarfnovaFlag))
                         if os.access(dwarfnovaFlag, os.F_OK):
@@ -753,20 +707,6 @@ class GWACAutoFollowup:
                                 xDwarfnovaValue = f1t[0]                     
                                 if xDwarfnovaValue == "YES":
                                     OTFlag = "DN candidate"
-                                elif xDwarfnovaValue == "Flare" :
-                                    OTFlag = "Flare candidate"
-                                    tmsg="%s is a %s\n"%(sciObj[1],OTFlag)
-                                    self.sendTriggerMsg007(tmsg1)
-                                    self.sendTriggerMsg007(tmsg)
-                                    self.xgetps1img007(RAD, DEC, 240, sciObj[1])
-                                    tmsgaladin="http://www.gwac.top/fc/finding-chart.html?ra=%f+dec=%f"%(RAD,DEC)
-                                    print("========tmsgaladin======")
-                                    print(tmsgaladin)
-                                    print("========end============")
-                                    #time.sleep(20)
-                                    self.sendTriggerMsg007(tmsgaladin)
-                                    if pngfile:
-                                        self.sendImage007(self.dirHRDImage, pngfilename)
                                 else:
                                     OTFlag  = "Variable candiate"
                             tmsg="%s is a %s"%(sciObj[1], OTFlag)
@@ -775,19 +715,10 @@ class GWACAutoFollowup:
                             print("%s is not exist for status=1"%(dwarfnovaFlag))
                             tmsg="Can not tell the classification, %s is not exist for status=1"%(dwarfnovaFlag)
                             self.sendTriggerMsg(tmsg)
-                            
                     
                         # to send the ps1 image to all transient with FoV of 1 arcmin
-                            #http://www.gwac.top/fc/finding-chart.html
-                            #http://159.226.88.94/fc/finding-chart.html
-
-                        #message = ("Link of Finding Chart:\n http://ps1images.stsci.edu/cgi-bin/ps1cutouts?pos=%s+%s&filter=color&filetypes=stack&auxiliary=data&size=2400&output_size=0&verbose=0&autoscale=99.500000&catlist=" % (RAD,DEC))
-                        #self.sendTriggerMsg007(message)
-                        #time.sleep(20)
-                        #self.xgetps1img005(RAD, DEC, 240, sciObj[1])
-                        '''
-                        
-                        
+                        self.xgetps1img005(RAD, DEC, 240, sciObj[1])
+                       # '''
 #==================================================                        
                         
                 else: # exceed max monitor time, do not monitor this sciobj anymore
@@ -962,16 +893,8 @@ class GWACAutoFollowup:
                                         self.updateSciObjStatus(sciObj[0], status+1)
                                         
                                         
-                                        tmsg="For 216obs: %s, RA=%s, DEC=%s, error=0.5arcsec, Rmag=%f, J2000, BFOSC, G8, exptime=5 min for each, 1.8arcsec slit"%(sciObj[1], RA_Hour, DEC_Hour,fupRecordN[1])
+                                        tmsg="For 216obs: %s, RA=%s, DEC=%s, J2000, BFOSC, G8, exptime=5 min for each, 1.8arcsec slit"%(sciObj[1], RA_Hour, DEC_Hour)
                                         self.sendTriggerMsg007(tmsg)
-                                        tmsgaladin="http://www.gwac.top/fc/finding-chart.html?ra=%f+dec=%f"%(RAD,DEC)
-                                        print("========tmsgaladin======")
-                                        print(tmsgaladin)
-                                        print("========end============")
-                                        self.sendTriggerMsg007(tmsgaladin)
-                                        #message = ("Link of Finding Chart:\n http://ps1images.stsci.edu/cgi-bin/ps1cutouts?pos=%s+%s&filter=color&filetypes=stack&auxiliary=data&size=2400&output_size=0&verbose=0&autoscale=99.500000&catlist=" % (RAD,DEC))
-                                        #self.sendTriggerMsg007(message)
-                                        #time.sleep(20)
                                         self.xgetps1img007(RAD, DEC, 2400, sciObj[1])
                                         #=====================================
                                         #xgetps1(RAD, DEC, 240, sciObj[1])
@@ -1255,7 +1178,7 @@ class GWACAutoFollowup:
         #self.initSciObj(ot2Name)
         #ot2Name = 'G190131_C06547'
         #self.initSciObj(ot2Name)        
-        ot2Name = 'G210111_C23283'
+        ot2Name = 'G210107_C20652'
         self.initSciObj(ot2Name)
     
         tmsg = "Restart the code"
@@ -1268,7 +1191,7 @@ class GWACAutoFollowup:
         os.system(aa)
         bb="pwd"
         os.system(bb)
-        
+
         idx = 1
         try:
             while True:

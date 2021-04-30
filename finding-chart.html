@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>aladin</title>
+</head>
+<body>
+
+    <!-- Aladin Lite CSS style file -->
+    <link rel="stylesheet" href="https://aladin.u-strasbg.fr/AladinLite/api/v2/latest/aladin.min.css" />
+
+    <!-- Aladin Lite has a dependency on the jQuery library -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js" charset="utf-8"></script>
+
+    <!-- Aladin Lite container at requested dimensions -->
+    <div style="text-align: center;">
+
+        <div id="aladin-lite-div" style="margin:0 auto;width:500px;height:500px;"></div>
+    
+    
+        <input id="DSS" type="radio" name="survey" value="P/DSS2/color" checked><label for="DSS">DSS color<label>
+        <input id="SDSS9 color" type="radio" name="survey" value="P/SDSS9/color"><label for="SDSS9 color">SDSS9 color<label>
+        <input id="2MASS" type="radio" name="survey" value="P/2MASS/color"><label for="2MASS">2MASS<label>
+        <input id="allwise" type="radio" name="survey" value="P/allWISE/color"><label for="allwise">AllWISE<label>
+        <input id="ps1" type="radio" name="survey" value="P/PanSTARRS/DR1/color-z-zg-g"><label for="ps1">PS1 color<label>
+    </div>
+
+    <div style="text-align: center;">
+        <input id='ra' placeholder="赤经：度">
+        <input id='dec' placeholder="赤经：度">
+        <button id='goto'>确认</button>
+        <h1>证认图png</h1>
+
+        <img id="image" style="margin:0 auto;width:500px;height:500px;"></img>
+        <button id="download" style="display: block;margin: 10 auto 20 auto;">下载证认图</button>
+    </div>
+
+    <div id='test'></div>
+
+
+    <!-- Aladin Lite JS code -->
+        <script type="text/javascript" src="https://aladin.u-strasbg.fr/AladinLite/api/v2/latest/aladin.min.js" charset="utf-8"></script>
+
+    <!-- Creation of Aladin Lite instance with initial parameters -->
+    <!-- Creation of Aladin Lite instance with initial parameters -->
+        <script type="text/javascript">
+
+        // var aladin = A.aladin('#aladin-lite-div', {target: '02 14 05.568 +32 20 49.805',survey: "P/PanSTARRS/DR1/color-z-zg-g", fov:0.04});
+        var aladin = A.aladin('#aladin-lite-div', {target: '02 14 05.568 +32 20 49.805',survey: "P/PanSTARRS/DR1/color-z-zg-g", fov:0.2});
+        $('input[name=survey]').change(function() {
+            aladin.setImageSurvey($(this).val());
+        });
+
+        // var marker1 = A.marker(336.53, 42.5, {popupTitle: '25_1', popupDesc: 'Object1'});
+        // var marker2 = A.marker(336.53, 42.5, {popupTitle: '45_1', popupDesc: 'Object1'});
+        // var marker3 = A.marker(310.57, 25.5, {popupTitle: '25_2', popupDesc: 'Object2'});
+        // var marker4 = A.marker(10.86, 42.5, {popupTitle: '45_2', popupDesc: 'Object3'});
+        // var marker5 = A.marker(9.41, 25.5,  {popupTitle: '25_3', popupDesc: 'Object3'});
+        // var marker6 = A.marker(10.86, 42.5, {popupTitle: '25_4', popupDesc: 'Object3'});
+        // var marker7 = A.marker(32.57, 42.5, {popupTitle: '25_5', popupDesc: 'Object3'});
+        // var marker8 = A.marker(8.23, 25.5, {popupTitle: '45_3', popupDesc: 'Object3'});
+        // var marker9 = A.marker(65.88, 25.5, {popupTitle: '25_6', popupDesc: 'Object3'});
+        // var marker10 = A.marker(47.06, 25.5, {popupTitle: '45_4', popupDesc: 'Object3'});
+        // var marker11 = A.marker(97.7, 42.5, {popupTitle: '25_7', popupDesc: 'Object3'});
+        // var marker12 = A.marker(100.11, 59.5, {popupTitle: '45_5', popupDesc: 'Object3'});
+        // var marker13 = A.marker(119.42, 45.5, {popupTitle: '25_8', popupDesc: 'Object3'});
+        // var marker14= A.marker(103.52, 25.5, {popupTitle: '45_6', popupDesc: 'Object3'});
+        // var marker15 = A.marker(141.13, 42.5, {popupTitle: '25_9', popupDesc: 'Object3'});
+        // var marker16 = A.marker(122.35, 25.5, {popupTitle: '45_7', popupDesc: 'Object3'});
+        // var markerLayer = A.catalog({color: '#800080'});
+    
+        // aladin.addCatalog(markerLayer);
+        // markerLayer.addSources([marker1, marker2, marker3,marker4, marker5, marker6,marker7, marker8, marker9,marker10, marker11, marker12,marker13, marker14, marker15,marker16]);
+
+        var img_old = aladin.getViewDataURL();
+        setInterval(()=>{
+            let img = aladin.getViewDataURL();
+            if (img !== img_old) {
+                $("#image").attr('src', img);
+                img_old = img;
+            }
+            
+        }, 2000);
+        $("#download").click(downloadStack);
+
+        
+        function downloadStack() {
+            let img = aladin.getViewDataURL();
+            filename = "证认图.png";
+            download(filename, img);
+        }
+        
+        function download(filename, img) {
+        var element = document.createElement('a');
+        element.setAttribute('href', img);
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+        }
+
+        $("#goto").click(gotoStack);
+        
+        function gotoStack() {
+            let ra = $("#ra").val(),
+            dec = $("#dec").val();
+            aladin.gotoRaDec(ra, dec);
+        }
+
+        let params = getUrlVars();
+        if (params.includes("ra") && params.includes("dec")) {
+            let ra = params.ra,
+            dec = params.dec;
+            aladin.gotoRaDec(ra, dec);
+            $("#ra").val(ra);
+            $("#dec").val(dec);
+        }
+
+        function getUrlVars() {
+            let vars = [], hash;
+            let hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (let i = 0; i < hashes.length; i++)
+            {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        }
+
+        </script>
+</body>
+</html>

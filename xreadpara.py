@@ -103,7 +103,10 @@ def xplot(OTname):
     print(AbsoMag)
     
     DwarfnovaC = ply_a * bprp + ply_b
-    if AbsoMag > DwarfnovaC : 
+    
+    if bprp > 2.0 and AbsoMag > 5.0 :
+        DwarfnovaFlag = "Flare"
+    elif AbsoMag > DwarfnovaC : 
         DwarfnovaFlag = "YES"       
     else:
         DwarfnovaFlag = "NO" 

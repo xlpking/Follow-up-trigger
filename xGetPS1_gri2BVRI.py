@@ -233,7 +233,7 @@ if __name__=='__main__':
     constraints = {'nDetections.gt':1}
 
     # strip blanks and weed out blank and commented-out values
-    columns = """raMean,decMean,rMeanPSFMag,iMeanPSFMag""".split(',')
+    columns = """raMean,decMean,gMeanPSFMag,rMeanPSFMag,iMeanPSFMag""".split(',')
     #columns = """objID,raMean,decMean,nDetections,ng,nr,ni,nz,ny,
     #    gMeanPSFMag,rMeanPSFMag,iMeanPSFMag,zMeanPSFMag,yMeanPSFMag""".split(',')
     columns = [x.strip() for x in columns]
