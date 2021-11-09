@@ -1,52 +1,221 @@
-2019-02-18 02:14:51,309 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
-2019-02-18 02:14:51,933 DEBUG http://10.0.10.236:9995 "GET /gwebend/sendTrigger2WChart.action?chatId=gwac003&triggerMsg=Restart%20the%20code HTTP/1.1" 200 27
-2019-02-18 02:14:51,939 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
-2019-02-18 02:14:52,338 DEBUG http://10.0.10.236:9995 "GET /gwebend/sendTrigger2WChart.action?chatId=gwac005&triggerMsg=Beijing%20time%20(hour)%20is%2010,%20working%20time,%20%20next%20alive%20msg%20will%20be%20one%20hour%20later HTTP/1.1" 200 27
-2019-02-18 02:14:52,509 DEBUG found 1 sciObjs
-2019-02-18 02:14:52,663 DEBUG ot2: G190217_C01143, status: 1, triggerStatus: 1
-2019-02-18 02:14:52,665 DEBUG New Auto Trigger 60CM Telescope:
-G190217_C01143 CATAS01 Stage1.
- 
-gwacMag: 12.80
-60cmfirstObsMag: 12.61
- 
-usno R2 : 13.61
-usno B-R: 0.34
- 
-RA : 65.875313
-DEC: 80.219269
- 
-The amplitude is more than -1.00  relative to USNO 
-This is one Flaring Candidate 
-The link is  http://www.gwac.top/gwac/gwac/pgwac-ot-detail2.action?otName=G190217_C01143
-2019-02-18 02:14:52,670 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
-2019-02-18 02:14:54,103 DEBUG http://10.0.10.236:9995 "GET /gwebend/sendTrigger2WChart.action?chatId=gwac003&triggerMsg=New%20Auto%20Trigger%2060CM%20Telescope:%0AG190217_C01143%20CATAS01%20Stage1.%0A%20%0AgwacMag:%2012.80%0A60cmfirstObsMag:%2012.61%0A%20%0Ausno%20R2%20:%2013.61%0Ausno%20B-R:%200.34%0A%20%0ARA%20:%2065.875313%0ADEC:%2080.219269%0A%20%0AThe%20amplitude%20is%20more%20than%20-1.00%20%20relative%20to%20USNO%20%0AThis%20is%20one%20Flaring%20Candidate%20%0AThe%20link%20is%20%20http://www.gwac.top/gwac/gwac/pgwac-ot-detail2.action?otName=G190217_C01143 HTTP/1.1" 200 27
-2019-02-18 02:14:54,285 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
-2019-02-18 02:14:54,682 DEBUG http://10.0.10.236:9995 "GET /gwebend/sendTrigger2WChart.action?chatId=gwac005&triggerMsg=The%20delay%20time%20for%20the%20next%20request%20of%20follow-up%20is%202.0%20minutes HTTP/1.1" 200 27
-2019-02-18 02:14:54,739 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
-2019-02-18 02:14:55,131 DEBUG http://10.0.10.236:9995 "GET /gwebend/sendTrigger2WChart.action?chatId=gwac003&triggerMsg=Can%20not%20get%20the%20data%20from%20Gaia%20dr2,%20G190217_C01143_newtemp.txt%20is%20not%20exist HTTP/1.1" 200 27
-2019-02-18 02:14:55,133 DEBUG [{'filter': ['B', 'R'], 'expTime': 30, 'frameCount': 1}]
-2019-02-18 02:14:55,135 DEBUG append_plan gwac 0
-append_object G190217_C01143 65.875313 80.219269 2000 LIGHT 30 1 B 41   1
+2021-11-09 05:53:05,045 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
+2021-11-09 05:53:15,047 ERROR  send trigger msg error 
+2021-11-09 05:53:15,047 ERROR HTTPConnectionPool(host='10.0.10.236', port=9995): Max retries exceeded with url: /gwebend/sendTrigger2WChart.action?chatId=gwac003&triggerMsg=Restart%20the%20code (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x7fe25290d750>, 'Connection to 10.0.10.236 timed out. (connect timeout=10)'))
+2021-11-09 05:53:15,057 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
+2021-11-09 05:53:25,063 ERROR  send trigger msg error 
+2021-11-09 05:53:25,063 ERROR HTTPConnectionPool(host='10.0.10.236', port=9995): Max retries exceeded with url: /gwebend/sendTrigger2WChart.action?chatId=gwac005&triggerMsg=Beijing%20time%20(hour)%20is%2013,%20working%20time,%20%20next%20alive%20msg%20will%20be%20one%20hour%20later (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x7fe25290d350>, 'Connection to 10.0.10.236 timed out. (connect timeout=10)'))
+2021-11-09 05:53:25,301 DEBUG found 2 sciObjs
+2021-11-09 05:53:25,471 DEBUG ot2: G211108_C06797, status: 2, triggerStatus: 2
+2021-11-09 05:53:25,677 DEBUG cannot find fupObserves G211108_C06797
+2021-11-09 05:53:25,849 DEBUG ot2: G211108_C03749, status: 1, triggerStatus: 1
+2021-11-09 05:53:25,849 DEBUG [{'filter': ['R'], 'expTime': 20, 'frameCount': 2}]
+2021-11-09 05:53:25,849 DEBUG append_plan gwac 0
+append_object G211108_C03749 36.186920 31.454180 2000 LIGHT 20 1 R 41   1
 
-2019-02-18 02:14:55,139 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
-2019-02-18 02:14:55,213 DEBUG http://10.0.10.236:9995 "POST /gwebend/otFollowUp.action HTTP/1.1" 200 437
-2019-02-18 02:14:55,219 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
-2019-02-18 02:14:55,607 DEBUG http://10.0.10.236:9995 "GET /gwebend/sendTrigger2WChart.action?chatId=gwac005&triggerMsg=Followup%20request:%20status=1%20RA=65.87531%20DEC=80.21927%20exptime=30%20filter=B%20frameCount=1%20OTname=G190217_C01143,%20telescope=1,%20priority=41%0A HTTP/1.1" 200 27
-2019-02-18 02:14:55,610 DEBUG append_plan gwac 0
-append_object G190217_C01143 65.875313 80.219269 2000 LIGHT 30 1 R 41   1
+2021-11-09 05:53:25,851 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
+2021-11-09 05:53:35,855 ERROR sendObservationCommand error
+2021-11-09 05:53:35,855 ERROR HTTPConnectionPool(host='10.0.10.236', port=9995): Max retries exceeded with url: /gwebend/otFollowUp.action (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x7fe25292a950>, 'Connection to 10.0.10.236 timed out. (connect timeout=10)'))
+2021-11-09 05:53:36,063 DEBUG New Auto Trigger 60CM Telescope:
+G211108_C03749 miniOT01 Stage1.
+ 
+gwacDiscoveryTime: 2021-11-08 13:23:41 UT
+60cmfirstobsTime: 2021-11-08 13:26:06 UT
 
-2019-02-18 02:14:55,614 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
-2019-02-18 02:14:55,675 DEBUG http://10.0.10.236:9995 "POST /gwebend/otFollowUp.action HTTP/1.1" 200 437
-2019-02-18 02:14:55,680 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
-2019-02-18 02:14:56,080 DEBUG http://10.0.10.236:9995 "GET /gwebend/sendTrigger2WChart.action?chatId=gwac005&triggerMsg=Followup%20request:%20status=1%20RA=65.87531%20DEC=80.21927%20exptime=30%20filter=R%20frameCount=1%20OTname=G190217_C01143,%20telescope=1,%20priority=41%0A HTTP/1.1" 200 27
-2019-02-18 02:14:56,260 DEBUG 
+gwacMag: 13.50
+60cmfirstObsMag: 12.73
+ 
+usno R2 : 99.00
+usno B-R: 0.00
+ 
+RA(deg): 36.186920 
+DEC(deg): 31.454180 
+RA(J2000): 02:24:44.861 
+DEC(J2000): 31:27:15.047 
+ 
+The amplitude is more than -6.27  relative to USNO 
+This is one OT Candidate 
+The link is  http://www.gwac.top/gwac/gwac/pgwac-ot-detail2.action?otName=G211108_C03749
+2021-11-09 05:53:36,067 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
+2021-11-09 05:53:46,073 ERROR  send trigger msg error 
+2021-11-09 05:53:46,073 ERROR HTTPConnectionPool(host='10.0.10.236', port=9995): Max retries exceeded with url: /gwebend/sendTrigger2WChart.action?chatId=gwac003&triggerMsg=New%20Auto%20Trigger%2060CM%20Telescope:%0AG211108_C03749%20miniOT01%20Stage1.%0A%20%0AgwacDiscoveryTime:%202021-11-08%2013:23:41%20UT%0A60cmfirstobsTime:%202021-11-08%2013:26:06%20UT%0A%0AgwacMag:%2013.50%0A60cmfirstObsMag:%2012.73%0A%20%0Ausno%20R2%20:%2099.00%0Ausno%20B-R:%200.00%0A%20%0ARA(deg):%2036.186920%20%0ADEC(deg):%2031.454180%20%0ARA(J2000):%2002:24:44.861%20%0ADEC(J2000):%2031:27:15.047%20%0A%20%0AThe%20amplitude%20is%20more%20than%20-6.27%20%20relative%20to%20USNO%20%0AThis%20is%20one%20OT%20Candidate%20%0AThe%20link%20is%20%20http://www.gwac.top/gwac/gwac/pgwac-ot-detail2.action?otName=G211108_C03749 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x7fe252931a10>, 'Connection to 10.0.10.236 timed out. (connect timeout=10)'))
+2021-11-09 05:53:46,307 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
+2021-11-09 05:53:56,307 ERROR  send trigger msg error 
+2021-11-09 05:53:56,308 ERROR HTTPConnectionPool(host='10.0.10.236', port=9995): Max retries exceeded with url: /gwebend/sendTrigger2WChart.action?chatId=gwac005&triggerMsg=The%20delay%20time%20for%20the%20next%20request%20of%20follow-up%20is%200.0%20minutes (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x7fe2529399d0>, 'Connection to 10.0.10.236 timed out. (connect timeout=10)'))
+2021-11-09 05:53:56,310 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
+2021-11-09 05:54:06,311 ERROR  send trigger msg error 
+2021-11-09 05:54:06,313 ERROR HTTPConnectionPool(host='10.0.10.236', port=9995): Max retries exceeded with url: /gwebend/sendTrigger2WChart.action?chatId=gwac003&triggerMsg=For%20216obs:%20G211108_C03749,%20RA=02:24:44.861,%20DEC=31:27:15.047,%20error=0.5arcsec,%20J2000,%20Rmag=12.730000,%20BFOSC,%20G8,%20exptime=5min%20for%20each,%201.8arcsec%20slit (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x7fe252940990>, 'Connection to 10.0.10.236 timed out. (connect timeout=10)'))
+2021-11-09 05:54:06,369 DEBUG Starting new HTTP connection (1): 10.0.10.236:9995
+2021-11-09 05:54:16,374 ERROR  send trigger msg error 
+2021-11-09 05:54:16,374 ERROR HTTPConnectionPool(host='10.0.10.236', port=9995): Max retries exceeded with url: /gwebend/sendTrigger2WChart.action?chatId=gwac003&triggerMsg=Can%20not%20get%20the%20data%20from%20Gaia%20dr2,%20G211108_C03749_newtemp.txt%20is%20not%20exist (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x7fe252940350>, 'Connection to 10.0.10.236 timed out. (connect timeout=10)'))
+2021-11-09 05:54:16,374 DEBUG 
 
 *************00001 run, sleep 10 seconds...
 
-2019-02-18 02:15:06,415 DEBUG found 1 sciObjs
-2019-02-18 02:15:06,568 DEBUG ot2: G190217_C01143, status: 2, triggerStatus: 2
-2019-02-18 02:15:06,727 DEBUG 
+2021-11-09 05:54:26,718 DEBUG found 2 sciObjs
+2021-11-09 05:54:26,890 DEBUG ot2: G211108_C06797, status: 2, triggerStatus: 2
+2021-11-09 05:54:27,134 DEBUG cannot find fupObserves G211108_C06797
+2021-11-09 05:54:27,312 DEBUG ot2: G211108_C03749, status: 2, triggerStatus: 2
+2021-11-09 05:54:27,933 DEBUG 
 
 *************00002 run, sleep 10 seconds...
+
+2021-11-09 05:54:38,112 DEBUG found 2 sciObjs
+2021-11-09 05:54:38,278 DEBUG ot2: G211108_C06797, status: 2, triggerStatus: 2
+2021-11-09 05:54:38,462 DEBUG cannot find fupObserves G211108_C06797
+2021-11-09 05:54:38,627 DEBUG ot2: G211108_C03749, status: 2, triggerStatus: 2
+2021-11-09 05:54:39,249 DEBUG 
+
+*************00003 run, sleep 10 seconds...
+
+2021-11-09 05:54:49,430 DEBUG found 2 sciObjs
+2021-11-09 05:54:49,617 DEBUG ot2: G211108_C06797, status: 2, triggerStatus: 2
+2021-11-09 05:54:49,802 DEBUG cannot find fupObserves G211108_C06797
+2021-11-09 05:54:49,979 DEBUG ot2: G211108_C03749, status: 2, triggerStatus: 2
+2021-11-09 05:54:50,603 DEBUG 
+
+*************00004 run, sleep 10 seconds...
+
+2021-11-09 05:55:00,782 DEBUG found 2 sciObjs
+2021-11-09 05:55:00,981 DEBUG ot2: G211108_C06797, status: 2, triggerStatus: 2
+2021-11-09 05:55:01,230 DEBUG cannot find fupObserves G211108_C06797
+2021-11-09 05:55:01,412 DEBUG ot2: G211108_C03749, status: 2, triggerStatus: 2
+2021-11-09 05:55:02,047 DEBUG 
+
+*************00005 run, sleep 10 seconds...
+
+2021-11-09 05:55:12,224 DEBUG found 2 sciObjs
+2021-11-09 05:55:12,391 DEBUG ot2: G211108_C06797, status: 2, triggerStatus: 2
+2021-11-09 05:55:12,575 DEBUG cannot find fupObserves G211108_C06797
+2021-11-09 05:55:12,741 DEBUG ot2: G211108_C03749, status: 2, triggerStatus: 2
+2021-11-09 05:55:13,369 DEBUG 
+
+*************00006 run, sleep 10 seconds...
+
+2021-11-09 05:55:23,549 DEBUG found 2 sciObjs
+2021-11-09 05:55:23,728 DEBUG ot2: G211108_C06797, status: 2, triggerStatus: 2
+2021-11-09 05:55:23,932 DEBUG cannot find fupObserves G211108_C06797
+2021-11-09 05:55:24,119 DEBUG ot2: G211108_C03749, status: 2, triggerStatus: 2
+2021-11-09 05:55:25,782 DEBUG 
+
+*************00007 run, sleep 10 seconds...
+
+2021-11-09 05:55:35,972 DEBUG found 2 sciObjs
+2021-11-09 05:55:36,246 DEBUG ot2: G211108_C06797, status: 2, triggerStatus: 2
+2021-11-09 05:55:36,430 DEBUG cannot find fupObserves G211108_C06797
+2021-11-09 05:55:36,598 DEBUG ot2: G211108_C03749, status: 2, triggerStatus: 2
+2021-11-09 05:55:37,255 DEBUG 
+
+*************00008 run, sleep 10 seconds...
+
+2021-11-09 05:55:47,466 DEBUG found 2 sciObjs
+2021-11-09 05:55:47,640 DEBUG ot2: G211108_C06797, status: 2, triggerStatus: 2
+2021-11-09 05:55:47,832 DEBUG cannot find fupObserves G211108_C06797
+2021-11-09 05:55:48,002 DEBUG ot2: G211108_C03749, status: 2, triggerStatus: 2
+2021-11-09 05:55:48,676 DEBUG 
+
+*************00009 run, sleep 10 seconds...
+
+2021-11-09 05:55:58,849 DEBUG found 2 sciObjs
+2021-11-09 05:55:59,055 DEBUG ot2: G211108_C06797, status: 2, triggerStatus: 2
+2021-11-09 05:55:59,299 DEBUG cannot find fupObserves G211108_C06797
+2021-11-09 05:55:59,476 DEBUG ot2: G211108_C03749, status: 2, triggerStatus: 2
+2021-11-09 05:56:00,136 DEBUG 
+
+*************00010 run, sleep 10 seconds...
+
+2021-11-09 05:56:10,308 DEBUG found 2 sciObjs
+2021-11-09 05:56:10,483 DEBUG ot2: G211108_C06797, status: 2, triggerStatus: 2
+2021-11-09 05:56:10,680 DEBUG cannot find fupObserves G211108_C06797
+2021-11-09 05:56:10,855 DEBUG ot2: G211108_C03749, status: 2, triggerStatus: 2
+2021-11-09 05:56:11,527 DEBUG 
+
+*************00011 run, sleep 10 seconds...
+
+2021-11-09 05:56:21,711 DEBUG found 2 sciObjs
+2021-11-09 05:56:21,884 DEBUG ot2: G211108_C06797, status: 2, triggerStatus: 2
+2021-11-09 05:56:22,089 DEBUG cannot find fupObserves G211108_C06797
+2021-11-09 05:56:22,269 DEBUG ot2: G211108_C03749, status: 2, triggerStatus: 2
+2021-11-09 05:56:22,909 DEBUG 
+
+*************00012 run, sleep 10 seconds...
+
+2021-11-09 05:56:33,102 DEBUG found 2 sciObjs
+2021-11-09 05:56:33,273 DEBUG ot2: G211108_C06797, status: 2, triggerStatus: 2
+2021-11-09 05:56:33,530 DEBUG cannot find fupObserves G211108_C06797
+2021-11-09 05:56:33,703 DEBUG ot2: G211108_C03749, status: 2, triggerStatus: 2
+2021-11-09 05:56:34,381 DEBUG 
+
+*************00013 run, sleep 10 seconds...
+
+2021-11-09 05:56:44,562 DEBUG found 2 sciObjs
+2021-11-09 05:56:44,741 DEBUG ot2: G211108_C06797, status: 2, triggerStatus: 2
+2021-11-09 05:56:45,000 DEBUG cannot find fupObserves G211108_C06797
+2021-11-09 05:56:45,177 DEBUG ot2: G211108_C03749, status: 2, triggerStatus: 2
+2021-11-09 05:56:45,846 DEBUG 
+
+*************00014 run, sleep 10 seconds...
+
+2021-11-09 05:56:56,039 DEBUG found 2 sciObjs
+2021-11-09 05:56:56,211 DEBUG ot2: G211108_C06797, status: 2, triggerStatus: 2
+2021-11-09 05:56:56,411 DEBUG cannot find fupObserves G211108_C06797
+2021-11-09 05:56:56,586 DEBUG ot2: G211108_C03749, status: 2, triggerStatus: 2
+2021-11-09 05:56:57,225 DEBUG 
+
+*************00015 run, sleep 10 seconds...
+
+2021-11-09 05:57:07,413 DEBUG found 2 sciObjs
+2021-11-09 05:57:07,586 DEBUG ot2: G211108_C06797, status: 2, triggerStatus: 2
+2021-11-09 05:57:07,773 DEBUG cannot find fupObserves G211108_C06797
+2021-11-09 05:57:07,964 DEBUG ot2: G211108_C03749, status: 2, triggerStatus: 2
+2021-11-09 05:57:08,718 DEBUG 
+
+*************00016 run, sleep 10 seconds...
+
+2021-11-09 05:57:18,891 DEBUG found 2 sciObjs
+2021-11-09 05:57:19,086 DEBUG ot2: G211108_C06797, status: 2, triggerStatus: 2
+2021-11-09 05:57:19,291 DEBUG cannot find fupObserves G211108_C06797
+2021-11-09 05:57:19,463 DEBUG ot2: G211108_C03749, status: 2, triggerStatus: 2
+2021-11-09 05:57:20,150 DEBUG 
+
+*************00017 run, sleep 10 seconds...
+
+2021-11-09 05:57:30,337 DEBUG found 2 sciObjs
+2021-11-09 05:57:30,506 DEBUG ot2: G211108_C06797, status: 2, triggerStatus: 2
+2021-11-09 05:57:30,700 DEBUG cannot find fupObserves G211108_C06797
+2021-11-09 05:57:30,923 DEBUG ot2: G211108_C03749, status: 2, triggerStatus: 2
+2021-11-09 05:57:31,607 DEBUG 
+
+*************00018 run, sleep 10 seconds...
+
+2021-11-09 05:57:41,781 DEBUG found 2 sciObjs
+2021-11-09 05:57:41,954 DEBUG ot2: G211108_C06797, status: 2, triggerStatus: 2
+2021-11-09 05:57:42,150 DEBUG cannot find fupObserves G211108_C06797
+2021-11-09 05:57:42,323 DEBUG ot2: G211108_C03749, status: 2, triggerStatus: 2
+2021-11-09 05:57:42,996 DEBUG 
+
+*************00019 run, sleep 10 seconds...
+
+2021-11-09 05:57:53,171 DEBUG found 2 sciObjs
+2021-11-09 05:57:53,342 DEBUG ot2: G211108_C06797, status: 2, triggerStatus: 2
+2021-11-09 05:57:53,538 DEBUG cannot find fupObserves G211108_C06797
+2021-11-09 05:57:53,723 DEBUG ot2: G211108_C03749, status: 2, triggerStatus: 2
+2021-11-09 05:57:54,391 DEBUG 
+
+*************00020 run, sleep 10 seconds...
+
+2021-11-09 05:58:04,592 DEBUG found 2 sciObjs
+2021-11-09 05:58:04,773 DEBUG ot2: G211108_C06797, status: 2, triggerStatus: 2
+2021-11-09 05:58:04,988 DEBUG cannot find fupObserves G211108_C06797
+2021-11-09 05:58:05,161 DEBUG ot2: G211108_C03749, status: 2, triggerStatus: 2
+2021-11-09 05:58:05,819 DEBUG 
+
+*************00021 run, sleep 10 seconds...
+
+2021-11-09 05:58:16,013 DEBUG found 2 sciObjs
+2021-11-09 05:58:16,213 DEBUG ot2: G211108_C06797, status: 2, triggerStatus: 2
+2021-11-09 05:58:16,427 DEBUG cannot find fupObserves G211108_C06797
+2021-11-09 05:58:16,593 DEBUG ot2: G211108_C03749, status: 2, triggerStatus: 2
+2021-11-09 05:58:17,245 DEBUG 
+
+*************00022 run, sleep 10 seconds...
 

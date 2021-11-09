@@ -78,8 +78,8 @@ class GWACAutoFollowup:
     maxExpTimeFilter = 80
     maxExpTimeFilter2 = 110
     #maxMonitorTime = 100 #minute, max is 5 hours
-    maxMonitorTime = 180 #180 #minute, max is 5 hours
-    #maxMonitorTime = 700 #180 #minute, max is 5 hours
+    maxMonitorTime = 300 #180 #minute, max is 5 hours
+    #maxMonitorTime = 1000 #180 #minute, max is 5 hours
     BjtimeStart = 8
     BjtimeEnd = 16
     
@@ -110,8 +110,8 @@ class GWACAutoFollowup:
     #delayTime_max = 40
     delayTime_max = 100
     
-    dirHRDImage = "/home/gwac/software/"
-    #dirHRDImage = "/Volumes/Data/Documents/GitHub/Follow-up-trigger"
+    #dirHRDImage = "/home/gwac/software/"
+    dirHRDImage = "/Volumes/Data/Documents/GitHub/Follow-up-trigger"
     
     def __init__(self):
         
@@ -443,16 +443,46 @@ class GWACAutoFollowup:
     
     
     def dec2hour(self, DEC):
-        dd = math.floor(DEC)
-        MMSS = (DEC - dd) * 60
-        MM = math.floor(MMSS)
-        SS = (MMSS - MM) * 60
-        if SS < 10:
-            DEC_Hour="%.2d:%.2d:0%.3f"%(dd,MM,SS)
+        if DEC >= 0:
+            print("positive")
+            dd = math.floor(DEC)
+            print(dd)
+            MMSS = (DEC - dd) * 60
+            MM = math.floor(MMSS)
+            SS = (MMSS - MM) * 60
+            if SS < 10:
+                print('SS<10')
+                DEC_Hour="%.2d:%.2d:0%.3f"%(dd,MM,SS)
+            else:
+            	print("SS>=10")
+            	DEC_Hour="%.2d:%.2d:%.3f"%(dd,MM,SS)
+            	print("DEC=%s"%(DEC_Hour))
         else:
-            DEC_Hour="%.2d:%.2d:%.3f"%(dd,MM,SS)
-        print("DEC=%s"%(DEC_Hour))
+            print("negtive")
+            dd = math.ceil(DEC)
+            print(dd)
+            MMSS = (dd - DEC) * 60
+            MM = math.floor(MMSS)
+            SS = (MMSS - MM) * 60
+            if SS < 10:
+            	print('SS<10')
+            	DEC_Hour="-%.2d:%.2d:0%.3f"%(dd,MM,SS)
+            else:
+            	print("SS>=10")
+            	DEC_Hour="-%.2d:%.2d:%.3f"%(dd,MM,SS)
+            	print("DEC=%s"%(DEC_Hour))
+    
         return DEC_Hour
+        #dd = math.floor(DEC)
+        #MMSS = (DEC - dd) * 60
+        #MM = math.floor(MMSS)
+        #SS = (MMSS - MM) * 60
+        #if SS < 10:
+        #    DEC_Hour="%.2d:%.2d:0%.3f"%(dd,MM,SS)
+        #else:
+        #    DEC_Hour="%.2d:%.2d:%.3f"%(dd,MM,SS)
+        #print("DEC=%s"%(DEC_Hour))
+        #return DEC_Hour
             #==================================
 
 
@@ -716,7 +746,7 @@ class GWACAutoFollowup:
                                             tmsg="%s is a %s\n"%(sciObj[1],OTFlag)
                                             self.sendTriggerMsg007(tmsg1)
                                             self.sendTriggerMsg007(tmsg)
-                                            self.xgetps1img007(RAD, DEC, 240, sciObj[1])
+                                            self.xgetps1img005(RAD, DEC, 240, sciObj[1])
                                             tmsgaladin="http://www.gwac.top/fc/finding-chart.html?ra=%f+dec=%f"%(RAD,DEC)
                                             print("========tmsgaladin======")
                                             print(tmsgaladin)
@@ -858,18 +888,23 @@ class GWACAutoFollowup:
                     tsql = self.QFupRec%(fuoId)
                     print(tsql)
                     #auto_loop, mag_cal_usno, date_utc
-                    fupRecords = self.getDataFromDB(tsql)
-                    print(fupRecords)
-                    fupRecords = np.array(fupRecords)
-                    print(" to print funRecords ")
-                    print(fupRecords)
-                    print(fupRecords.shape)
-                    print(fupRecords[:5])
-                    #break
-                #    status = 2
-                    fupRecordN = fupRecords[fupRecords[:,0]==status]
-                    fupRecordN1 = fupRecords[fupRecords[:,0]==(status-1)]             
-                    
+                    # 请求失败
+                    try:
+                        fupRecords = self.getDataFromDB(tsql)
+                        print(fupRecords)
+                        fupRecords = np.array(fupRecords)
+                        print(" to print funRecords ")
+                        print(fupRecords)
+                        print(fupRecords.shape)
+                        print(fupRecords[:5])
+                        #break
+                    #    status = 2
+
+                        fupRecordN = fupRecords[fupRecords[:,0]==status]
+                        fupRecordN1 = fupRecords[fupRecords[:,0]==(status-1)]
+                    except :
+                        return sciObj[0]
+
                     print("To print fupRecordN")
                     print(fupRecordN)
                     print("To print fupRecordN1")
@@ -1255,8 +1290,8 @@ class GWACAutoFollowup:
         #self.initSciObj(ot2Name)
         #ot2Name = 'G190131_C06547'
         #self.initSciObj(ot2Name)        
-        ot2Name = 'G210111_C23283'
-        self.initSciObj(ot2Name)
+        #ot2Name = 'G211108_C03749'
+        #self.initSciObj(ot2Name)
     
         tmsg = "Restart the code"
         self.sendTriggerMsg(tmsg)
@@ -1270,23 +1305,24 @@ class GWACAutoFollowup:
         os.system(bb)
         
         idx = 1
-        try:
-            while True:
-                
-                self.autoFollowUp()
+
+        while True:
+            try:
+                objnameerror = self.autoFollowUp()
                 
                 sleepTime = 10
                 self.log.debug("\n\n*************%05d run, sleep %d seconds...\n"%(idx, sleepTime))
                 #print("\n*************%05d run, sleep %d seconds...\n"%(idx, sleepTime))
                 time.sleep(sleepTime)
                 idx = idx + 1
-                #if idx >2:
+                #if idx >5:
                 #    break
              
-        except Exception as err:
-            self.log.error(" gwacAutoFollowUp error ")
-            print(err)
-            self.sendTriggerMsg(" The code for the auto follow-up observations is down")
+            except Exception as err:
+                self.log.error(" gwacAutoFollowUp error ")
+                print(err)
+                self.closeSciObjAutoObservation(objnameerror)
+                self.sendTriggerMsg(" The code for the auto follow-up observations is down")
             
 
 if __name__ == '__main__':

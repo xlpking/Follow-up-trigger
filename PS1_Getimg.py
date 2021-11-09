@@ -174,16 +174,37 @@ def ra2hour(RAD):
     
     
 def dec2hour(DEC):
-    dd = math.floor(DEC)
-    MMSS = (DEC - dd) * 60
-    MM = math.floor(MMSS)
-    SS = (MMSS - MM) * 60
-    if SS < 10:
-        DEC_Hour="%.2d:%.2d:0%.3f"%(dd,MM,SS)
+    if DEC >= 0:
+        print("positive")
+        dd = math.floor(DEC)
+        print(dd)
+        MMSS = (DEC - dd) * 60
+        MM = math.floor(MMSS)
+        SS = (MMSS - MM) * 60
+        if SS < 10:
+            print('SS<10')
+            DEC_Hour="%.2d:%.2d:0%.3f"%(dd,MM,SS)
+        else:
+            print("SS>=10")
+            DEC_Hour="%.2d:%.2d:%.3f"%(dd,MM,SS)
+            print("DEC=%s"%(DEC_Hour))
     else:
-        DEC_Hour="%.2d:%.2d:%.3f"%(dd,MM,SS)
-    print("DEC=%s"%(DEC_Hour))
+        print("negtive")
+        dd = math.ceil(DEC)
+        print(dd)
+        MMSS = (dd - DEC) * 60
+        MM = math.floor(MMSS)
+        SS = (MMSS - MM) * 60
+        if SS < 10:
+            print('SS<10')
+            DEC_Hour="-%.2d:%.2d:0%.3f"%(dd,MM,SS)
+        else:
+            print("SS>=10")
+            DEC_Hour="-%.2d:%.2d:%.3f"%(dd,MM,SS)
+            print("DEC=%s"%(DEC_Hour))
+    
     return DEC_Hour
+
 #==================================
 
 
@@ -229,7 +250,7 @@ def xgetps10arcmin(ra, dec, size1, otname):
         plt.text(1600, 2200, textc, color="w")
         #plt.show()
         pngfilename = "%s_ps1.png"%(otname)
-        plt.savefig(pngfilename, dpi=100)
+        plt.savefig(pngfilename, dpi=50)
         return pngfilename
     else:
         print("no ps1 image ")
@@ -238,7 +259,7 @@ def xgetps10arcmin(ra, dec, size1, otname):
 if __name__=='__main__':
     ra = sys.argv[1]
     dec = sys.argv[2]
-    size1 = sys.argv[3]
+    size1 = float(sys.argv[3])
     otname = sys.argv[4]
     # Crab Nebula position
     print(datetime.datetime.now())
